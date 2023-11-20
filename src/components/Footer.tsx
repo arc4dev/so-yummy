@@ -1,8 +1,9 @@
 import styled from 'styled-components';
-import Logo from './Logo';
 import AppNav from './AppNav';
 import Button from './Button';
 import SocialLinks from './SocialLinks';
+import LogoContainer from './LogoContainer';
+import Input from './Input';
 
 const MainFooter = styled.div`
   background-color: var(--color-black);
@@ -12,19 +13,6 @@ const MainFooter = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2.2em;
-`;
-
-const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
-  color: var(--color-white);
-  gap: 0.5em;
-`;
-
-const LogoHeader = styled.h3`
-  font-weight: 600;
-  font-size: 1.28rem;
-  letter-spacing: 0.27px;
 `;
 
 const LowFooter = styled.div`
@@ -49,15 +37,12 @@ const Footer = () => {
   return (
     <footer>
       <MainFooter>
-        <LogoContainer>
-          <Logo />
-          <LogoHeader>So Yummy</LogoHeader>
-        </LogoContainer>
+        <LogoContainer />
 
         <AppNav orientation="vertical" />
 
         <div>
-          <input type="email" />
+          <Input type="Newsletter" />
           <Button>Subscribe</Button>
         </div>
 

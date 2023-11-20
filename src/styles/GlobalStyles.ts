@@ -83,7 +83,7 @@ h6 {
 }
 
 img {
-  /* max-width: 100%; */
+  max-width: 100%;
 }
 
 ` as React.NamedExoticComponent<ExecutionProps & object>;
