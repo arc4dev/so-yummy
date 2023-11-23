@@ -7,6 +7,7 @@ const StyledButton = styled.button`
   line-height: 1.14;
   background: var(--color-action);
   color: var(--color-white-2);
+  font-weight: 300;
 `;
 
 type Props = {

@@ -1,9 +1,12 @@
-import { Link, NavLink } from 'react-router-dom';
+import { FiSearch } from 'react-icons/fi';
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
   display: flex;
   align-items: center;
+  justify-content: center;
+  grid-area: nav;
 `;
 
 const NavList = styled.ul<{ orientation: OrientationType }>`
@@ -11,17 +14,18 @@ const NavList = styled.ul<{ orientation: OrientationType }>`
   align-items: center;
 
   color: ${(props) =>
-    props.orientation === 'vertical'
-      ? 'var(--color-primary)'
-      : 'var(--color-white)'};
+    props.orientation === 'vertical' ? 'var(--color-white-2)' : 'inherit'};
   gap: ${(props) => (props.orientation === 'vertical' ? '1em' : '2em')};
   flex-direction: ${(props) =>
     props.orientation === 'vertical' ? 'column' : 'row'};
+
+  li:last-child {
+    display: ${(props) =>
+      props.orientation === 'vertical' ? 'none' : 'block'};
+  }
 `;
 
 const StyledNavLink = styled(NavLink)`
-  color: var(--color-white);
-
   line-height: 1.28;
   letter-spacing: -0.28px;
 `;
@@ -52,29 +56,9 @@ const AppNav = ({ orientation = 'horizontal' }: Props) => {
           <StyledNavLink to="cart">Shopping List</StyledNavLink>
         </li>
         <li>
-          <Link to="search">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none">
-              <path
-                d="M11 19C15.4183 19 19 15.4183 19 11C19 6.58172 15.4183 3 11 3C6.58172 3 3 6.58172 3 11C3 15.4183 6.58172 19 11 19Z"
-                stroke="#22252A"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-              <path
-                d="M20.9999 21L16.6499 16.65"
-                stroke="#22252A"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </Link>
+          <StyledNavLink to="search">
+            <FiSearch />
+          </StyledNavLink>
         </li>
       </NavList>
     </Nav>

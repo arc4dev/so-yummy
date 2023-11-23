@@ -2,8 +2,10 @@ import styled from 'styled-components';
 import Logo from './Logo';
 
 const StyledLogoContainer = styled.div`
+  grid-area: logoContainer;
   display: flex;
   align-items: center;
+  justify-content: center;
   color: var(--color-white);
   gap: 0.5em;
 `;

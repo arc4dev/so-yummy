@@ -8,11 +8,30 @@ import Input from './Input';
 const MainFooter = styled.div`
   background-color: var(--color-black);
   padding: 2em 0px 1.6em 0px;
+  gap: 2.2em;
+
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto auto auto auto;
+  grid-template-areas: 'logoContainer' 'nav' 'newsletter' 'socialLinks';
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 'logoContainer nav' 'newsletter newsletter' 'socialLinks socialLinks';
+  }
+`;
+
+const NewsletterForm = styled.form`
+  grid-area: newsletter;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2.2em;
+  gap: 0.5em;
+  width: max-content;
+  margin: 0 auto;
+
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+  }
 `;
 
 const LowFooter = styled.div`
@@ -41,10 +60,10 @@ const Footer = () => {
 
         <AppNav orientation="vertical" />
 
-        <div>
+        <NewsletterForm>
           <Input type="Newsletter" />
           <Button>Subscribe</Button>
-        </div>
+        </NewsletterForm>
 
         <SocialLinks />
       </MainFooter>
