@@ -8,6 +8,18 @@ const StyledButton = styled.button`
   background: var(--color-action);
   color: var(--color-white-2);
   font-weight: 300;
+  line-height: 1.12;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.15rem;
+    padding-left: 3.5em;
+    padding-right: 3.5em;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding-top: 1.3em;
+    padding-bottom: 1.3em;
+  }
 `;
 
 type Props = {

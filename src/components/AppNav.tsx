@@ -28,6 +28,12 @@ const NavList = styled.ul<{ orientation: OrientationType }>`
 const StyledNavLink = styled(NavLink)`
   line-height: 1.28;
   letter-spacing: -0.28px;
+  display: flex;
+  align-items: center;
+
+  &.active {
+    color: var(--color-action);
+  }
 `;
 
 type OrientationType = 'vertical' | 'horizontal';
@@ -44,10 +50,14 @@ const AppNav = ({ orientation = 'horizontal' }: Props) => {
           <StyledNavLink to="categories">Categories</StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="recipes/new">Add recipes</StyledNavLink>
+          <StyledNavLink end to="recipes/new">
+            Add recipes
+          </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="recipes">My recipes</StyledNavLink>
+          <StyledNavLink end to="recipes/all">
+            My recipes
+          </StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="favourites">Favourites</StyledNavLink>
@@ -57,7 +67,7 @@ const AppNav = ({ orientation = 'horizontal' }: Props) => {
         </li>
         <li>
           <StyledNavLink to="search">
-            <FiSearch />
+            <FiSearch size={20} />
           </StyledNavLink>
         </li>
       </NavList>

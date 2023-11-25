@@ -8,6 +8,14 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   padding: 18px 16px 0px 16px;
+
+  @media screen and (min-width: 768px) {
+    padding: 18px 32px 0px 32px;
+  }
+
+  @media screen and (min-width: 1280px) {
+    padding: 14px 100px 0 100px;
+  }
 `;
 
 const UserImage = styled.div`
@@ -34,6 +42,7 @@ const UserInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8em;
+  font-weight: 500;
 `;
 
 const UserName = styled.span``;

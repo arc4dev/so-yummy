@@ -3,6 +3,12 @@ import styled from 'styled-components';
 
 import Header from './Header';
 import Footer from './Footer';
+import PageContainer from './PageContainer';
+
+const Main = styled.main`
+  background: url('/spinach.png');
+  background-repeat: no-repeat;
+`;
 
 const StyledAppLayout = styled.div`
   display: grid;
@@ -15,9 +21,11 @@ const AppLayout = () => {
     <StyledAppLayout>
       <Header />
 
-      <main>
-        <Outlet />
-      </main>
+      <Main>
+        <PageContainer>
+          <Outlet />
+        </PageContainer>
+      </Main>
 
       <Footer />
     </StyledAppLayout>
