@@ -13,24 +13,20 @@ const MainFooter = styled.div`
   max-width: 1280px;
   margin: 0 auto;
   padding: 28px 16px 20px 16px;
-  grid-gap: 2.2em;
 
   display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  grid-template-rows: repeat(3, auto);
+  grid-auto-columns: 1fr;
   grid-template-areas: 'logoContainer' 'nav' 'newsletter' 'socialLinks';
+  justify-items: center;
+  grid-gap: 2.2em;
 
   @media screen and (min-width: 768px) {
-    grid-template-columns: 2fr 1fr;
     grid-template-areas: 'logoContainer nav' 'newsletter newsletter' 'socialLinks socialLinks';
 
     padding: 50px 32px 26px 32px;
   }
 
   @media screen and (min-width: 1280px) {
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: auto auto;
     grid-template-areas: 'logoContainer nav newsletter' 'socialLinks socialLinks socialLinks';
 
     padding: 64px 100px 52px 100px;

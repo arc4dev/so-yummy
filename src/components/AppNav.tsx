@@ -60,7 +60,7 @@ const AppNav = ({ orientation = 'horizontal' }: Props) => {
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="favourites">Favourites</StyledNavLink>
+          <StyledNavLink to="recipes/favourites">Favourites</StyledNavLink>
         </li>
         <li>
           <StyledNavLink to="cart">Shopping List</StyledNavLink>

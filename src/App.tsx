@@ -25,13 +25,13 @@ function App() {
 
             <Route path="home" element={<HomePage />} />
             <Route path="categories" element={<CategoriesPage />} />
-            <Route path="favourites" element={<FavouritesPage />} />
             <Route path="search" element={<SearchPage />} />
             <Route path="cart" element={<ShoppingListPage />} />
 
             <Route path="recipes">
               <Route index element={<Navigate replace to="all" />} />
               <Route path="all" element={<MyRecipesPage />} />
+              <Route path="favourites" element={<FavouritesPage />} />
               <Route path="new" element={<AddRecipePage />} />
               <Route path=":id" element={<RecipePage />} />R
             </Route>
