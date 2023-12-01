@@ -5,7 +5,7 @@ import SearchInput from '../components/SearchInput';
 import { useMediaQuery } from 'react-responsive';
 
 const HeroBackground = styled.div`
-  position: absolute;
+  position: fixed;
   z-index: -1;
   top: 10%;
   right: -400px;
