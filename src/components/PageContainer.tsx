@@ -6,11 +6,11 @@ const Container = styled.div`
   padding: 50px 16px;
 
   @media screen and (min-width: 768px) {
-    padding: 0 32px;
+    padding: 72px 32px;
   }
 
   @media screen and (min-width: 1024px) {
-    padding: 0 100px;
+    padding: 100px 100px;
   }
 `;
 
