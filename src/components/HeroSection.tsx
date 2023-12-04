@@ -61,7 +61,7 @@ const HomeImage = styled.img`
     width: 378px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     width: 578px;
   }
 `;
@@ -92,7 +92,7 @@ const HomeImageDescriptionBox = styled.div`
     right: 10%;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     padding: 16px;
     line-height: 1.42;
     width: 290px;
@@ -112,7 +112,7 @@ const HeroHeader = styled.h1`
     font-size: 5.15rem;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     font-size: 7.2rem;
   }
 `;
@@ -130,7 +130,7 @@ const HeroDescription = styled.p`
     text-align: start;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     font-size: 1.3rem;
     line-height: 1.33;
   }

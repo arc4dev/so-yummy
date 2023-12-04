@@ -10,7 +10,7 @@ const StyledFooter = styled.footer`
 `;
 
 const MainFooter = styled.div`
-  max-width: 1280px;
+  max-width: 1440px;
   margin: 0 auto;
   padding: 28px 16px 20px 16px;
 
@@ -26,7 +26,7 @@ const MainFooter = styled.div`
     padding: 50px 32px 26px 32px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     grid-template-areas: 'logoContainer nav newsletter' 'socialLinks socialLinks socialLinks';
 
     padding: 64px 100px 52px 100px;
@@ -58,7 +58,7 @@ const StyledFooterList = styled.ul`
     display: block;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     font-size: 1.1rem;
   }
 `;
@@ -71,7 +71,7 @@ const NewsletterForm = styled.form`
 
   color: var(--color-white);
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     justify-self: end;
     flex-direction: column;
     width: 338px;
@@ -88,7 +88,7 @@ const NewsletterContainer = styled.div`
     flex-direction: row;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     flex-direction: column;
     width: 338px;
     gap: 0.8em;
@@ -100,7 +100,7 @@ const NewsletterHeader = styled.h4`
   display: none;
   font-size: 1.28rem;
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     display: block;
   }
 `;
@@ -112,7 +112,7 @@ const NewsletterDescription = styled.p`
   letter-spacing: -0.28px;
   margin-bottom: 0.4em;
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     display: block;
   }
 `;
@@ -129,7 +129,7 @@ const LowFooter = styled.div`
     padding: 32px 0px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     padding: 50px 0px;
   }
 `;
@@ -183,7 +183,7 @@ const Footer = () => {
 
           <NewsletterContainer>
             <Input type="Newsletter" />
-            <Button>Subscribe</Button>
+            <Button size="primary">Subscribe</Button>
           </NewsletterContainer>
         </NewsletterForm>
 

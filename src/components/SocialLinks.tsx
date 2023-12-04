@@ -22,19 +22,21 @@ const SocialItem = styled.li`
 `;
 
 const SocialLinks = () => {
+  const iconStyle = { width: '20px', height: '20px' };
+
   return (
     <SocialsList>
       <SocialItem>
-        <FaFacebook style={{ width: '20px', height: '20px' }} />
+        <FaFacebook style={iconStyle} />
       </SocialItem>
       <SocialItem>
-        <FaYoutube style={{ width: '20px', height: '20px' }} />
+        <FaYoutube style={iconStyle} />
       </SocialItem>
       <SocialItem>
-        <FaTwitter style={{ width: '20px', height: '20px' }} />
+        <FaTwitter style={iconStyle} />
       </SocialItem>
       <SocialItem>
-        <FaInstagram style={{ width: '20px', height: '20px' }} />
+        <FaInstagram style={iconStyle} />
       </SocialItem>
     </SocialsList>
   );

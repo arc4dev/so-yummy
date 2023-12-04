@@ -12,10 +12,21 @@ import MyRecipesPage from './pages/MyRecipesPage';
 import RecipePage from './pages/RecipePage';
 import NotFoundPage from './pages/NotFoundPage';
 import ShoppingListPage from './pages/ShoppingListPage';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60, // 60 seconds
+    },
+  },
+});
 
 function App() {
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
 
       <BrowserRouter>
@@ -39,7 +50,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </>
+    </QueryClientProvider>
   );
 }
 

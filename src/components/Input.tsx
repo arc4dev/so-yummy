@@ -19,7 +19,7 @@ const Icon = styled.div`
     width: 20px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     top: 1.47em;
     left: 1.5em;
   }
@@ -39,16 +39,24 @@ const StyledInput = styled.input`
 
   transition: all 200ms ease-in-out;
 
+  &:hover {
+    border-color: var(--color-white);
+
+    + ${Icon} {
+      color: var(--color-white);
+    }
+  }
+
   &::placeholder {
     color: rgba(255, 255, 255, 0.7);
   }
 
   &:focus {
     border-color: var(--color-white);
-  }
 
-  &:focus + ${Icon} {
-    color: var(--color-white);
+    + ${Icon} {
+      color: var(--color-white);
+    }
   }
 
   @media screen and (min-width: 768px) {
@@ -56,7 +64,7 @@ const StyledInput = styled.input`
     min-width: 260px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     font-size: 1.17rem;
     min-width: 338px;
   }
@@ -74,14 +82,16 @@ const Input = ({ type }: Props) => {
   let icon: JSX.Element | null = null;
   let inputType: HTMLInputTypeAttribute = 'text';
 
+  const iconStyle = { width: '100%', height: '100%' };
+
   if (type === 'Email' || type === 'Newsletter') {
-    icon = <FiMail style={{ width: '100%', height: ' 100%' }} />;
+    icon = <FiMail style={iconStyle} />;
     inputType = 'email';
   } else if (type === 'Password') {
-    icon = <FiLock style={{ width: '100%', height: ' 100%' }} />;
+    icon = <FiLock style={iconStyle} />;
     inputType = 'password';
   } else if (type === 'Name') {
-    icon = <FiUser style={{ width: '100%', height: ' 100%' }} />;
+    icon = <FiUser style={iconStyle} />;
     inputType = 'text';
   }
 

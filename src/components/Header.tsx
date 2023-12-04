@@ -13,7 +13,7 @@ const StyledHeader = styled.header`
     padding: 18px 32px 0px 32px;
   }
 
-  @media screen and (min-width: 1280px) {
+  @media screen and (min-width: 1440px) {
     padding: 14px 100px 0 100px;
   }
 `;
@@ -48,8 +48,8 @@ const UserInfo = styled.div`
 const UserName = styled.span``;
 
 const Header = () => {
-  const isMobileAndHigher = useMediaQuery({ query: '(max-width: 1279px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1280px)' });
+  const isMobileAndHigher = useMediaQuery({ query: '(max-width: 1439px)' });
+  const isDesktop = useMediaQuery({ query: '(min-width: 1440px)' });
 
   return (
     <StyledHeader>

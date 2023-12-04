@@ -34,6 +34,10 @@ const StyledNavLink = styled(NavLink)`
   &.active {
     color: var(--color-action);
   }
+
+  &:hover {
+    color: var(--color-action);
+  }
 `;
 
 type OrientationType = 'vertical' | 'horizontal';

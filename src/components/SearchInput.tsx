@@ -11,8 +11,8 @@ const StyledInput = styled.input`
   width: 75%;
   font-size: 0.86rem;
   padding: 1.21em 2.28em;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 45px;
+  border-top-left-radius: 24px;
+  border-bottom-left-radius: 44px;
   outline: none;
   border: 1px solid #f0f0f0;
   transition: all 200ms ease-in-out;
@@ -37,14 +37,15 @@ const StyledInput = styled.input`
 
 const StyledButton = styled.button`
   position: absolute;
-  top: 0;
+  top: -3px;
   right: 0;
   padding: 1.21em 2.28em;
-  border-radius: 20px 45px;
+  border-radius: 24px 44px;
   background-color: var(--color-black);
   color: var(--color-white-2);
 
   @media screen and (min-width: 768px) {
+    top: 0;
     font-size: 1rem;
   }
 
