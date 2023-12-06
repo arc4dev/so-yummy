@@ -10,10 +10,11 @@ const SocialsList = styled.ul`
 `;
 
 const SocialItem = styled.li`
+  cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease-in-out;
+  transition: all 200ms ease-in-out;
   color: var(--color-action);
 
   &:hover {

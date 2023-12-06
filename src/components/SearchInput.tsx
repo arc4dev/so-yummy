@@ -1,10 +1,18 @@
 import styled from 'styled-components';
 
 const InputContainer = styled.div`
-  min-width: 305px;
+  max-width: 295px;
   position: relative;
   display: flex;
   filter: drop-shadow(0px 4px 97px rgba(34, 37, 42, 0.03));
+
+  @media screen and (min-width: 768px) {
+    max-width: 362px;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 510px;
+  }
 `;
 
 const StyledInput = styled.input`

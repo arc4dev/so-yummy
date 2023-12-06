@@ -9,6 +9,7 @@ const GlobalStyles = createGlobalStyle`
 
   --color-black-08: rgba(0, 0, 0, 0.80); // recipe
   --color-black-50: rgba(0, 0, 0, 0.50); // recipe
+  --color-shadow: rgba(0, 0, 0, 0.1);
 
   --color-secondary: #7E7E7E; // text secondary
   --color-gray: #a9a9a9ba; // pagination arrow

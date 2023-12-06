@@ -5,7 +5,9 @@ import SectionHeading from './SectionHeading';
 import Button from './Button';
 import RecipePreviewCard from './RecipePreviewCard';
 import styled from 'styled-components';
-import { useMediaQuery } from 'react-responsive';
+import useBreakpoints from '../hooks/useBreakpoints';
+import Loader from './Loader';
+import RecipesList from './RecipesList';
 
 const HomePageCategoriesSection = styled.section`
   display: flex;
@@ -44,28 +46,14 @@ const CategoriesListItem = styled.li`
   }
 `;
 
-const RecipesList = styled.ul`
-  display: flex;
-  gap: 32px;
-
-  @media screen and (min-width: 1440px) {
-    gap: 14px;
-  }
-`;
-
 const CategoriesSection = () => {
+  // TODO - ERROR HANDLING
   const { isLoading, data } = useQuery({
     queryKey: ['recipes'],
     queryFn: getRecipesByAllCategories,
   });
 
-  const isTablet = useMediaQuery({ query: '(min-width: 767px)' });
-  const isMobile = useMediaQuery({ query: '(max-width: 768px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1440px)' });
-
-  if (isLoading) return <div>Loading...</div>;
-
-  console.log(data);
+  const { isMobile, isTablet, isDesktop } = useBreakpoints();
 
   const displayedCategories = [
     'Breakfast',
@@ -73,6 +61,8 @@ const CategoriesSection = () => {
     'Chicken',
     'Dessert',
   ];
+
+  if (isLoading) return <Loader />;
 
   return (
     <HomePageCategoriesSection>
@@ -102,7 +92,7 @@ const CategoriesSection = () => {
 
               <div style={{ marginLeft: 'auto' }}>
                 <Button
-                  to={`/categories/${categorizedRecipe.category}`}
+                  to={`/categories?c=${categorizedRecipe.category}`}
                   size="small">
                   See all
                 </Button>

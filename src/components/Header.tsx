@@ -1,13 +1,17 @@
 import styled from 'styled-components';
 import Logo from './Logo';
-import { useMediaQuery } from 'react-responsive';
 import AppNav from './AppNav';
 import ThemeSwitch from './ThemeSwitch';
+import useBreakpoints from '../hooks/useBreakpoints';
 
 const StyledHeader = styled.header`
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(4px);
   display: flex;
   justify-content: space-between;
-  padding: 18px 16px 0px 16px;
+  padding: 18px 16px;
 
   @media screen and (min-width: 768px) {
     padding: 18px 32px 0px 32px;
@@ -45,53 +49,50 @@ const UserInfo = styled.div`
   font-weight: 500;
 `;
 
-const UserName = styled.span``;
-
 const Header = () => {
-  const isMobileAndHigher = useMediaQuery({ query: '(max-width: 1439px)' });
-  const isDesktop = useMediaQuery({ query: '(min-width: 1440px)' });
+  const { isDesktop } = useBreakpoints();
 
   return (
     <StyledHeader>
       <Logo />
 
-      {isMobileAndHigher && (
-        <>
-          <Container>
-            <UserInfo>
-              <UserImage />
-              <UserName>Olena</UserName>
-            </UserInfo>
-
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="28"
-              viewBox="0 0 28 28"
-              fill="none">
-              <path
-                d="M3.5 14H24.5M3.5 7H24.5M3.5 21H17.5"
-                stroke="#22252A"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </Container>
-        </>
-      )}
-
-      {isDesktop && (
+      {isDesktop ? (
         <>
           <AppNav />
 
           <Container>
             <UserInfo>
               <UserImage />
-              <UserName>Olena</UserName>
+              <span>Olena</span>
             </UserInfo>
 
             <ThemeSwitch />
+          </Container>
+        </>
+      ) : (
+        <>
+          <Container>
+            <UserInfo>
+              <UserImage />
+              <span>Olena</span>
+            </UserInfo>
+
+            <button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="28"
+                height="28"
+                viewBox="0 0 28 28"
+                fill="none">
+                <path
+                  d="M3.5 14H24.5M3.5 7H24.5M3.5 21H17.5"
+                  stroke="#22252A"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </button>
           </Container>
         </>
       )}

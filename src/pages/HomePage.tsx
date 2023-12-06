@@ -1,11 +1,11 @@
 import HeroSection from '../components/HeroSection';
-import CategoriesSection from '../components/CategoriesSection';
+import CategoriesSection from '../components/HomePageCategoriesSection';
 
 const HomePage = () => {
   return (
     <div>
       <HeroSection />
-      <CategoriesSection></CategoriesSection>
+      <CategoriesSection />
     </div>
   );
 };

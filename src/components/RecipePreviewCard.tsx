@@ -1,6 +1,12 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+const CardImage = styled.img`
+  width: 100%;
+  height: 100%;
+  transition: all 200ms ease-in-out;
+`;
+
 const Card = styled.li`
   overflow: hidden;
   width: 343px;
@@ -8,6 +14,16 @@ const Card = styled.li`
   border-radius: 8px;
   background-color: lightblue;
   position: relative;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    box-shadow: 0 10px 15px -3px var(--color-shadow),
+      0 4px 6px -4px var(--color-shadow);
+
+    ${CardImage} {
+      transform: scale(1.1);
+    }
+  }
 
   @media screen and (min-width: 768px) {
     width: 336px;
@@ -31,11 +47,6 @@ const CardTitle = styled.p`
   padding: 16px;
   line-height: 1.25;
   letter-spacing: -0.24px;
-`;
-
-const CardImage = styled.img`
-  width: 100%;
-  height: 100%;
 `;
 
 type Props = {
