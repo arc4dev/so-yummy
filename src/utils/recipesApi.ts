@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 
 axios.defaults.baseURL = 'https://www.themealdb.com/api/json/v1';
 
@@ -10,7 +10,7 @@ type CategoriesResponse = {
   meals: Category[];
 };
 
-type RecipeByCategoryResponse = {
+type RecipeResponse = {
   meals: Recipe[];
 };
 
@@ -20,16 +20,33 @@ type Recipe = {
   strMealThumb: string;
 };
 
-export const getRecipeByCategory = async (category: string) => {
+export const getRecipeByQuery = async (q: string, searchBy: string) => {
+  let query: Promise<AxiosResponse<RecipeResponse>> | null = null;
+
+  if (searchBy.toLowerCase() === 'title') {
+    const searchParam = q.length === 1 ? 'f' : 's';
+
+    query = axios.get(`/1/search.php?${searchParam}=${q}`);
+  } else if (searchBy.toLowerCase() === 'ingredient') {
+    query = axios.get(`/1/filter.php?i=${q}`);
+  } else return null;
+
   try {
-    const res = await axios.get<RecipeByCategoryResponse>(
-      `/1/filter.php?c=${category}`
-    );
+    const res = await query;
 
     return res.data.meals;
   } catch (err) {
     console.log(err);
-    throw err;
+  }
+};
+
+export const getRecipeByCategory = async (category: string) => {
+  try {
+    const res = await axios.get<RecipeResponse>(`/1/filter.php?c=${category}`);
+
+    return res.data.meals;
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -50,9 +67,7 @@ export const getRecipesByAllCategories = async () => {
 
     // Create an array of promises to fetch recipes by category
     const recipesPromiseArr = categories.map((category) =>
-      axios.get<RecipeByCategoryResponse>(
-        `/1/filter.php?c=${category.strCategory}`
-      )
+      axios.get<RecipeResponse>(`/1/filter.php?c=${category.strCategory}`)
     );
 
     // Resolve all promises to get an array of recipes by categories

@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 
-const InputContainer = styled.div`
-  max-width: 295px;
+const InputContainer = styled.form`
+  width: 295px;
   position: relative;
   display: flex;
   filter: drop-shadow(0px 4px 97px rgba(34, 37, 42, 0.03));
 
   @media screen and (min-width: 768px) {
-    max-width: 362px;
+    width: 362px;
   }
 
   @media screen and (min-width: 1440px) {
-    max-width: 510px;
+    width: 510px;
   }
 `;
 
@@ -43,13 +43,16 @@ const StyledInput = styled.input`
   }
 `;
 
-const StyledButton = styled.button`
+type ButtonBgColorTypes = 'primary' | 'secondary';
+
+const StyledButton = styled.button<{ bgColor: ButtonBgColorTypes }>`
   position: absolute;
   top: -3px;
   right: 0;
   padding: 1.21em 2.28em;
   border-radius: 24px 44px;
-  background-color: var(--color-black);
+  background-color: ${({ bgColor }) =>
+    bgColor === 'secondary' ? 'var(--color-action)' : 'var(--color-black)'};
   color: var(--color-white-2);
 
   @media screen and (min-width: 768px) {
@@ -62,12 +65,73 @@ const StyledButton = styled.button`
   }
 `;
 
-const SearchInput = () => {
+const FilterContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1.8rem;
+`;
+
+const StyledLabel = styled.label`
+  color: var(--color-black-2);
+  font-size: 0.9rem;
+  line-height: 1.33;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1rem;
+  }
+
+  @media screen and (min-width: 1280px) {
+    font-size: 1.28rem;
+  }
+`;
+
+const StyledSelect = styled.select`
+  opacity: 0.4;
+  width: 146px;
+  background-color: var(--color-gray-4);
+  border: none;
+  outline: none;
+  padding: 6px;
+`;
+
+type Props = {
+  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+  type: 'search' | 'searchWithFilter';
+  onChangeFilter?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  defaultFilterValue?: string;
+  btnColor: ButtonBgColorTypes;
+};
+
+const SearchInput = ({
+  onSubmit,
+  type,
+  onChangeFilter,
+  defaultFilterValue,
+  btnColor,
+}: Props) => {
   return (
-    <InputContainer>
-      <StyledInput type="text" placeholder="Beef |" />
-      <StyledButton>Search</StyledButton>
-    </InputContainer>
+    <div>
+      <InputContainer onSubmit={onSubmit}>
+        <StyledInput name="query" type="text" placeholder="Beef |" />
+        <StyledButton bgColor={btnColor}>Search</StyledButton>
+      </InputContainer>
+
+      {type === 'searchWithFilter' && (
+        <FilterContainer>
+          <StyledLabel htmlFor="searchBy">Search by: </StyledLabel>
+          <StyledSelect
+            onChange={onChangeFilter}
+            defaultValue={defaultFilterValue}
+            name="searchBy"
+            id="searchBy">
+            <option value="title">Title</option>
+            <option value="ingredient">Ingredient</option>
+          </StyledSelect>
+        </FilterContainer>
+      )}
+    </div>
   );
 };
 

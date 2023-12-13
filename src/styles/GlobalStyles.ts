@@ -15,6 +15,7 @@ const GlobalStyles = createGlobalStyle`
   --color-gray: #a9a9a9ba; // pagination arrow
   --color-gray-2: #E0E0E0; // categories;
   --color-gray-3: #3E4462; 
+  --color-gray-4: #D9D9D9;
 
   --color-white: #FFFFFF; // background
   --color-white-2: #FAFAFA; // text
@@ -85,6 +86,7 @@ h6 {
 
 img {
   max-width: 100%;
+  display: block;
 }
 
 ` as React.NamedExoticComponent<ExecutionProps & object>;

@@ -1,8 +1,8 @@
 import { FaArrowRight } from 'react-icons/fa6';
 import SearchInput from '../components/SearchInput';
-import { useMediaQuery } from 'react-responsive';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useBreakpoints from '../hooks/useBreakpoints';
 
 const HeroBackground = styled.div`
   position: fixed;
@@ -137,8 +137,9 @@ const HeroDescription = styled.p`
 `;
 
 const HeroSection = () => {
-  const isMobile = useMediaQuery({ query: '(max-width: 767px)' });
-  const isTablet = useMediaQuery({ query: '(min-width: 768px)' });
+  const navigate = useNavigate();
+
+  const { isMobile, isTablet } = useBreakpoints();
 
   return (
     <StyledHeroSection>
@@ -169,7 +170,18 @@ const HeroSection = () => {
             </HomeImageDescriptionBox>
           </HomeImageContainer>
 
-          <SearchInput />
+          <SearchInput
+            btnColor="primary"
+            type="search"
+            onSubmit={(e) => {
+              e.preventDefault();
+
+              const formData = new FormData(e.currentTarget);
+              const q = formData.get('query') as string;
+
+              navigate(`/search?q=${q}`);
+            }}
+          />
         </>
       )}
 
@@ -186,7 +198,16 @@ const HeroSection = () => {
               future.
             </HeroDescription>
 
-            <SearchInput />
+            <SearchInput
+              onSubmit={(e) => {
+                e.preventDefault();
+
+                const formData = new FormData(e.currentTarget);
+                const q = formData.get('query') as string;
+
+                navigate(`/search?q=${q}`);
+              }}
+            />
           </div>
 
           <HomeImageContainer>
