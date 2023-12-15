@@ -240,8 +240,6 @@ const RecipePage = () => {
     enabled: !!id,
   });
 
-  console.log(recipe?.strInstructions);
-
   if (isLoading) return <Loader />;
 
   return (
