@@ -20,8 +20,13 @@ const StyledCategoriesPage = styled.div`
 
 const CategoriesList = styled.ul`
   display: flex;
-  overflow: hidden;
+  scrollbar-width: none;
+  overflow-x: auto;
   margin-bottom: 32px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Category = styled.li<{ isActive: boolean }>`
