@@ -77,8 +77,6 @@ export const getRecipeById = async (id: string) => {
 
     const recipe = res.data.meals[0];
 
-    //recipe.strMeasure1
-
     const ingredients = Object.keys(recipe).reduce(
       (acc: Ingredients[], key) => {
         if (
@@ -96,7 +94,13 @@ export const getRecipeById = async (id: string) => {
       []
     );
 
-    return { ...res.data.meals[0], ingredients };
+    return {
+      idMeal: recipe.idMeal,
+      strMeal: recipe.strMeal,
+      strMealThumb: recipe.strMealThumb,
+      strInstructions: recipe.strInstructions,
+      ingredients,
+    };
   } catch (err) {
     console.log(err);
   }

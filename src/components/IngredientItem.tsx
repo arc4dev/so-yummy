@@ -76,7 +76,49 @@ const IngredientMeasure = styled.p`
   }
 `;
 
-const StyledCheckbox = styled.input``;
+const StyledCheckbox = styled.input`
+  appearance: none;
+  -webkit-appearance: none;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border: 1px solid var(--color-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    border-color: var(--color-action);
+  }
+
+  &:checked {
+    border-color: var(--color-action);
+
+    &::before {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  &::before {
+    transition: all 100ms ease-in-out;
+    --size: 1rem;
+
+    content: '';
+    width: var(--size);
+    height: var(--size);
+    transform: scale(0);
+    clip-path: polygon(28% 38%, 41% 53%, 75% 24%, 86% 38%, 40% 78%, 15% 50%);
+    transform: scale(0);
+    opacity: 0;
+    background-color: var(--color-action);
+
+    @media screen and (min-width: 768px) {
+      --size: 1.4rem;
+    }
+  }
+`;
 
 type Props = {
   name: string;

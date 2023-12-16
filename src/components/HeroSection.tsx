@@ -4,17 +4,6 @@ import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import useBreakpoints from '../hooks/useBreakpoints';
 
-const HeroBackground = styled.div`
-  position: fixed;
-  z-index: -1;
-  top: 10%;
-  right: -400px;
-  width: 506px;
-  height: 542px;
-  transform: rotate(32deg);
-  background: var(--color-action-light);
-`;
-
 const StyledRecipesLink = styled(Link)`
   justify-self: end;
   display: flex;
@@ -36,7 +25,10 @@ const StyledHeroSection = styled.section`
   align-items: center;
   flex-direction: column;
 
+  margin-bottom: 140px;
+
   @media screen and (min-width: 768px) {
+    margin-bottom: 170px;
     flex-direction: row;
     padding: 0;
     justify-content: space-between;
@@ -199,6 +191,8 @@ const HeroSection = () => {
             </HeroDescription>
 
             <SearchInput
+              type="search"
+              btnColor="primary"
               onSubmit={(e) => {
                 e.preventDefault();
 
@@ -227,8 +221,6 @@ const HeroSection = () => {
           </HomeImageContainer>
         </>
       )}
-
-      <HeroBackground />
     </StyledHeroSection>
   );
 };

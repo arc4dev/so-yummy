@@ -1,12 +1,14 @@
 import { useSearchParams } from 'react-router-dom';
-import SearchInput from '../components/SearchInput';
-import SectionHeading from '../components/SectionHeading';
 import { useQuery } from '@tanstack/react-query';
+import { getRecipeByQuery } from '../utils/recipesApi';
+import styled from 'styled-components';
+
+import SectionHeading from '../components/SectionHeading';
+import SearchInput from '../components/SearchInput';
 import Loader from '../components/Loader';
 import RecipePreviewCard from '../components/RecipePreviewCard';
 import RecipesList from '../components/RecipesList';
-import { getRecipeByQuery } from '../utils/recipesApi';
-import styled from 'styled-components';
+import PageContainer from '../components/PageContainer';
 
 const NotFoundQueryImage = styled.img`
   width: 208px;
@@ -63,43 +65,45 @@ const SearchPage = () => {
   });
 
   return (
-    <StyledSearchPage>
-      <SectionHeading style={{ justifySelf: 'start' }}>Search</SectionHeading>
+    <PageContainer>
+      <StyledSearchPage>
+        <SectionHeading style={{ justifySelf: 'start' }}>Search</SectionHeading>
 
-      <SearchInput
-        btnColor="secondary"
-        type="searchWithFilter"
-        defaultFilterValue={searchBy || 'title'}
-        onSubmit={handleSearchSubmit}
-        onChangeFilter={(e) =>
-          setSearchParams({
-            ...Object.fromEntries(searchParams),
-            s: e.target.value.toLowerCase(),
-          })
-        }
-      />
+        <SearchInput
+          btnColor="secondary"
+          type="searchWithFilter"
+          defaultFilterValue={searchBy || 'title'}
+          onSubmit={handleSearchSubmit}
+          onChangeFilter={(e) =>
+            setSearchParams({
+              ...Object.fromEntries(searchParams),
+              s: e.target.value.toLowerCase(),
+            })
+          }
+        />
 
-      <RecipesList>
-        {isLoading && <Loader />}
-        {(!isLoading || isError) && (!recipes || !recipes?.length) ? (
-          <div>
-            <NotFoundQueryImage src="/searchTry.png" alt="Vegetables cart" />
-            <NotFoundQueryText>
-              Try looking for something else..
-            </NotFoundQueryText>
-          </div>
-        ) : (
-          recipes?.map((recipe) => (
-            <RecipePreviewCard
-              key={recipe.idMeal}
-              title={recipe.strMeal}
-              img={recipe.strMealThumb}
-              mealId={recipe.idMeal}
-            />
-          ))
-        )}
-      </RecipesList>
-    </StyledSearchPage>
+        <RecipesList>
+          {isLoading && <Loader />}
+          {(!isLoading || isError) && (!recipes || !recipes?.length) ? (
+            <div>
+              <NotFoundQueryImage src="/searchTry.png" alt="Vegetables cart" />
+              <NotFoundQueryText>
+                Try looking for something else..
+              </NotFoundQueryText>
+            </div>
+          ) : (
+            recipes?.map((recipe) => (
+              <RecipePreviewCard
+                key={recipe.idMeal}
+                title={recipe.strMeal}
+                img={recipe.strMealThumb}
+                mealId={recipe.idMeal}
+              />
+            ))
+          )}
+        </RecipesList>
+      </StyledSearchPage>
+    </PageContainer>
   );
 };
 

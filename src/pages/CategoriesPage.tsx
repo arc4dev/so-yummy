@@ -12,6 +12,7 @@ import SectionHeading from '../components/SectionHeading';
 import RecipePreviewCard from '../components/RecipePreviewCard';
 import Loader from '../components/Loader';
 import RecipesList from '../components/RecipesList';
+import PageContainer from '../components/PageContainer';
 
 const StyledCategoriesPage = styled.div`
   display: grid;
@@ -19,8 +20,13 @@ const StyledCategoriesPage = styled.div`
 
 const CategoriesList = styled.ul`
   display: flex;
-  overflow: hidden;
+  scrollbar-width: none;
+  overflow-x: auto;
   margin-bottom: 32px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Category = styled.li<{ isActive: boolean }>`
@@ -75,37 +81,39 @@ const CategoriesPage = () => {
   if (isLoadingCategories) return <Loader />;
 
   return (
-    <StyledCategoriesPage>
-      <SectionHeading style={{ marginBottom: '52px' }}>
-        Categories
-      </SectionHeading>
+    <PageContainer>
+      <StyledCategoriesPage>
+        <SectionHeading style={{ marginBottom: '52px' }}>
+          Categories
+        </SectionHeading>
 
-      <CategoriesList>
-        {categories?.map((category) => (
-          <Category
-            key={category.strCategory}
-            isActive={categoryParam === category.strCategory}
-            onClick={() => setSearchParams({ c: category.strCategory })}>
-            {category.strCategory}
-          </Category>
-        ))}
-      </CategoriesList>
+        <CategoriesList>
+          {categories?.map((category) => (
+            <Category
+              key={category.strCategory}
+              isActive={categoryParam === category.strCategory}
+              onClick={() => setSearchParams({ c: category.strCategory })}>
+              {category.strCategory}
+            </Category>
+          ))}
+        </CategoriesList>
 
-      <RecipesList>
-        {isLoadingRecipes ? (
-          <Loader />
-        ) : (
-          recipes?.map((recipe) => (
-            <RecipePreviewCard
-              key={recipe.idMeal}
-              title={recipe.strMeal}
-              img={recipe.strMealThumb}
-              mealId={recipe.idMeal}
-            />
-          ))
-        )}
-      </RecipesList>
-    </StyledCategoriesPage>
+        <RecipesList>
+          {isLoadingRecipes ? (
+            <Loader />
+          ) : (
+            recipes?.map((recipe) => (
+              <RecipePreviewCard
+                key={recipe.idMeal}
+                title={recipe.strMeal}
+                img={recipe.strMealThumb}
+                mealId={recipe.idMeal}
+              />
+            ))
+          )}
+        </RecipesList>
+      </StyledCategoriesPage>
+    </PageContainer>
   );
 };
 

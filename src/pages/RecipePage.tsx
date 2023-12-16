@@ -1,10 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { useParams } from 'react-router-dom';
-import { getRecipeById } from '../utils/recipesApi';
-import Loader from '../components/Loader';
-import styled from 'styled-components';
 import { FiClock } from 'react-icons/fi';
+import styled from 'styled-components';
+
+import { getRecipeById } from '../utils/recipesApi';
+
+import Loader from '../components/Loader';
 import IngredientItem from '../components/IngredientItem';
+import PageContainer from '../components/PageContainer';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -14,7 +17,7 @@ const StyledRecipePage = styled.div`
   }
 `;
 
-const RecipeHeroContainer = styled.section`
+const RecipeHeroSection = styled.section`
   height: 455px;
   position: absolute;
   left: 0;
@@ -103,7 +106,9 @@ const RecipeTime = styled.span`
   }
 `;
 
-const IngredientsSection = styled.section``;
+const IngredientsSection = styled.section`
+  margin-bottom: 100px;
+`;
 
 const IngredientTable = styled.div`
   background-color: var(--color-action);
@@ -152,6 +157,80 @@ const IngredientsList = styled.ul`
   }
 `;
 
+const RecipePreparationSection = styled.section`
+  display: grid;
+  gap: 50px;
+
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: 1fr auto;
+  }
+`;
+
+const RecipePreparationTitle = styled.h2`
+  color: var(--color-gray-3);
+  font-size: 1.71rem;
+  font-weight: 600;
+  letter-spacing: -0.24px;
+  grid-column: span 2;
+  margin-bottom: 2.2rem;
+`;
+
+const RecipePreparationList = styled.ol`
+  grid-column: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  list-style: none;
+  counter-reset: list-counter;
+  padding-left: 38px;
+
+  @media screen and (min-width: 1440px) {
+  }
+`;
+
+const RecipePreparationItem = styled.li`
+  position: relative;
+  counter-increment: list-counter;
+  color: var(--color-black-08);
+  font-size: 0.85rem;
+  line-height: 1.16;
+  letter-spacing: -0.28px;
+
+  &::before {
+    --size: 28px;
+
+    position: absolute;
+    top: -5px;
+    left: calc(-1 * var(--size) - 10px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: counter(list-counter);
+    background-color: var(--color-action);
+    width: var(--size);
+    height: var(--size);
+    padding: 4px;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  @media screen and (min-width: 768px) {
+    line-height: 1.28;
+    font-size: 1rem;
+  }
+`;
+
+const RecipeImage = styled.img`
+  width: 343px;
+  border-radius: 8px;
+
+  @media screen and (min-width: 768px) {
+    width: 433px;
+  }
+`;
+
 const RecipePage = () => {
   const { id } = useParams();
 
@@ -164,43 +243,65 @@ const RecipePage = () => {
   if (isLoading) return <Loader />;
 
   return (
-    <StyledRecipePage>
-      <RecipeHeroContainer>
-        <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
-        <RecipeDescription>
-          Is a healthy salad recipe that’s big on nutrients and flavor. A moist,
-          pan seared salmon is layered on top of spinach, avocado, tomatoes, and
-          red onions. Then drizzled with a homemade lemon vinaigrette.
-        </RecipeDescription>
+    <PageContainer>
+      <StyledRecipePage>
+        <RecipeHeroSection>
+          <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
+          <RecipeDescription>
+            Is a healthy salad recipe that’s big on nutrients and flavor. A
+            moist, pan seared salmon is layered on top of spinach, avocado,
+            tomatoes, and red onions. Then drizzled with a homemade lemon
+            vinaigrette.
+          </RecipeDescription>
 
-        <RecipeAddToFavoriteButton>
-          Add to favorite recipes
-        </RecipeAddToFavoriteButton>
+          <RecipeAddToFavoriteButton>
+            Add to favorite recipes
+          </RecipeAddToFavoriteButton>
 
-        <RecipeTime>
-          <FiClock />
-          <p>2 min</p>
-        </RecipeTime>
-      </RecipeHeroContainer>
+          <RecipeTime>
+            <FiClock />
+            <p>2 min</p>
+          </RecipeTime>
+        </RecipeHeroSection>
 
-      <IngredientsSection>
-        <IngredientTable>
-          <span>Ingredients</span>
-          <span>Number</span>
-          <span>Add to list</span>
-        </IngredientTable>
+        <IngredientsSection>
+          <IngredientTable>
+            <span>Ingredients</span>
+            <span>Number</span>
+            <span>Add to list</span>
+          </IngredientTable>
 
-        <IngredientsList>
-          {recipe?.ingredients.map((item) => (
-            <IngredientItem
-              key={item.ingredientName}
-              name={item.ingredientName}
-              measure={item.ingredientMeasure}
-            />
-          ))}
-        </IngredientsList>
-      </IngredientsSection>
-    </StyledRecipePage>
+          <IngredientsList>
+            {recipe?.ingredients.map((item) => (
+              <IngredientItem
+                key={item.ingredientName}
+                name={item.ingredientName}
+                measure={item.ingredientMeasure}
+              />
+            ))}
+          </IngredientsList>
+        </IngredientsSection>
+
+        <RecipePreparationSection>
+          <div>
+            <RecipePreparationTitle>Recipe Preparation</RecipePreparationTitle>
+            <RecipePreparationList>
+              {recipe?.strInstructions
+                .split(/\d+\./g)
+                .filter(Boolean)
+                .map((item) => item.trim())
+                .map((step) => (
+                  <RecipePreparationItem key={step}>
+                    {step}.
+                  </RecipePreparationItem>
+                ))}
+            </RecipePreparationList>
+          </div>
+
+          <RecipeImage src={recipe?.strMealThumb} alt={recipe?.strMeal} />
+        </RecipePreparationSection>
+      </StyledRecipePage>
+    </PageContainer>
   );
 };
 
