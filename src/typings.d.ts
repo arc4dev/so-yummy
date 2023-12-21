@@ -16,6 +16,14 @@ type Recipe = {
   strMealThumb: string;
 };
 
+type OwnRecipePreview = {
+  id: string;
+  strMeal: string;
+  strDescription: string;
+  strMealThumb: string;
+  cookingTime: string;
+};
+
 type RecipeDetails = Recipe & {
   strInstructions: string;
   strIngredient1: string;

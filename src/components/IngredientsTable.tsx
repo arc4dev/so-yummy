@@ -58,7 +58,7 @@ const IngredientsTable = ({ ingredients, type }: Props) => {
   return (
     <div>
       <IngredientTable>
-        <span>Ingredients</span>
+        <span>{type === 'recipe' ? 'Ingredients' : 'Product'}</span>
         <span>Number</span>
         <span>{type === 'recipe' ? 'Add to list' : 'Remove'}</span>
       </IngredientTable>
