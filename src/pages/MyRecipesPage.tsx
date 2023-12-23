@@ -7,18 +7,18 @@ const data = [
     strMeal: 'Beef Asado',
     strMealThumb:
       'https://www.themealdb.com/images/media/meals/pkopc31683207947.jpg',
-    cookingTime: '120 min',
     strDescription:
-      'A delicious beef dish cooked with traditional spices and flavors.',
+      'Delicious beef asado recipe with a perfect blend of flavors. This Filipino dish is made with tender beef, soy sauce, calamansi juice, and spices. It is best served with steamed rice and a side of vegetables.',
+    cookingTime: '90 min',
   },
   {
     id: '1235',
     strMeal: 'Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber',
     strMealThumb:
       'https://www.themealdb.com/images/media/meals/z0ageb1583189517.jpg',
-    cookingTime: '30 min',
     strDescription:
-      'A flavorful bowl with beef, sriracha mayo, carrot, and pickled cucumber.',
+      'These beef banh mi bowls are packed with flavor and textures. Tender beef slices are marinated in a savory sauce, served with sriracha mayo, pickled cucumber, and carrot. It is a delicious and satisfying meal that can be prepared in under 30 minutes.',
+    cookingTime: '30 min',
   },
 ];
 
