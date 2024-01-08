@@ -67,14 +67,14 @@ const CategoriesPage = () => {
   // Get recipes by a category from the URL
   const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
     queryKey: ['recipes', categoryParam], // Include categoryParam in the queryKey
-    queryFn: () => getRecipesByCategory(categoryParam || 'beef'),
+    queryFn: () => getRecipesByCategory(categoryParam || 'Beef'),
     enabled: !!categoryParam, // Enable query only if categoryParam is present
   });
 
   useEffect(() => {
     // Set default query parameters if they don't exist in the URL
     if (!searchParams.get('c')) {
-      setSearchParams({ c: 'beef' });
+      setSearchParams({ c: 'Beef' });
     }
   }, [searchParams, setSearchParams]);
 

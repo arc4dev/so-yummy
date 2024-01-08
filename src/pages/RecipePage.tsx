@@ -186,7 +186,7 @@ const RecipeImage = styled.img`
 
 const RecipePage = () => {
   const { id } = useParams();
-  const [searchParamas, setSearchParams] = useSearchParams({
+  const [searchParamas] = useSearchParams({
     p: 'false',
   });
   const isPrivate = searchParamas.get('p') === 'true';
