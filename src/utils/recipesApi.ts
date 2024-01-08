@@ -5,8 +5,9 @@ axios.defaults.baseURL =
     ? import.meta.env.VITE_RECIPES_API_URL_DEV
     : import.meta.env.VITE_RECIPES_API_URL;
 
-axios.defaults.headers.common['Authorization'] =
-  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWFmMTNkYWJiNzViYzNiZGQ3YzIwOSIsInVzZXJuYW1lIjoia3J6YXFzMG5AZ21haWwuY29tIiwiaWF0IjoxNzA0NzIyNjc4LCJleHAiOjE3MDQ4MDkwNzh9.ZyrKLsPnF-QKs9-WOw1_YN2gnp3DFffEtAnsEUIUhIM';
+axios.defaults.headers.common['Authorization'] = `Bearer ${
+  import.meta.env.VITE_TEST_API_KEY
+}`;
 
 export const getRecipeById = async (id: string) => {
   try {
