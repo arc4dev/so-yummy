@@ -44,7 +44,6 @@ export const getRecipesByCategory = async (category: string) => {
       `/recipes?category=${category}`
     );
 
-    console.log(res.data);
     return res.data.data;
   } catch (err) {
     console.log(err);
