@@ -90,10 +90,10 @@ const CategoriesPage = () => {
         <CategoriesList>
           {categories?.map((category) => (
             <Category
-              key={category.strCategory}
-              isActive={categoryParam === category.strCategory}
-              onClick={() => setSearchParams({ c: category.strCategory })}>
-              {category.strCategory}
+              key={category}
+              isActive={categoryParam === category}
+              onClick={() => setSearchParams({ c: category })}>
+              {category}
             </Category>
           ))}
         </CategoriesList>
