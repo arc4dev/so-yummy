@@ -1,6 +1,12 @@
 import axios, { AxiosResponse } from 'axios';
 
-axios.defaults.baseURL = 'https://www.themealdb.com/api/json/v1';
+axios.defaults.baseURL =
+  import.meta.env.MODE === 'development'
+    ? import.meta.env.VITE_RECIPES_API_URL_DEV
+    : import.meta.env.VITE_RECIPES_API_URL;
+
+axios.defaults.headers.common['Authorization'] =
+  'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1OWFmMTNkYWJiNzViYzNiZGQ3YzIwOSIsInVzZXJuYW1lIjoia3J6YXFzMG5AZ21haWwuY29tIiwiaWF0IjoxNzA0NzIyNjc4LCJleHAiOjE3MDQ4MDkwNzh9.ZyrKLsPnF-QKs9-WOw1_YN2gnp3DFffEtAnsEUIUhIM';
 
 export const getRecipeById = async (id: string) => {
   try {
@@ -73,9 +79,9 @@ export const getRecipeByCategory = async (category: string) => {
 
 export const getAllRecipesCategories = async () => {
   try {
-    const res = await axios.get<CategoriesResponse>('/1/list.php?c=list');
+    const res = await axios.get<CategoriesResponse>('/recipes/categories');
 
-    return res.data.meals;
+    return res.data.data;
   } catch (err) {
     console.log(err);
     throw err;

@@ -1,9 +1,20 @@
-type Category = {
-  strCategory: string;
-};
+enum Category {
+  Beef = 'Beef',
+  Breakfast = 'Breakfast',
+  Chicken = 'Chicken',
+  Dessert = 'Dessert',
+  Lamb = 'Lamb',
+  Miscellaneous = 'Miscellaneous',
+  Pasta = 'Pasta',
+  Pork = 'Pork',
+  Seafood = 'Seafood',
+  Side = 'Side',
+  Starter = 'Starter',
+  Vegetarian = 'Vegetarian',
+}
 
 type CategoriesResponse = {
-  meals: Category[];
+  data: Category[];
 };
 
 type RecipeResponse<T> = {
