@@ -22,9 +22,9 @@ const SocialItem = styled.li`
   }
 `;
 
-const SocialLinks = () => {
-  const iconStyle = { width: '20px', height: '20px' };
+const iconStyle = { width: '20px', height: '20px' };
 
+const SocialLinks = () => {
   return (
     <SocialsList>
       <SocialItem>

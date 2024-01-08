@@ -1,3 +1,4 @@
+import { FaX } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 const StyledIngredientItem = styled.li`
@@ -11,7 +12,7 @@ const StyledIngredientItem = styled.li`
 
   @media screen and (min-width: 768px) {
     padding: 1rem 3rem;
-    padding-right: 5.5rem;
+    padding-right: 5rem;
   }
 `;
 
@@ -123,9 +124,10 @@ const StyledCheckbox = styled.input`
 type Props = {
   name: string;
   measure: string;
+  type: 'shopping-list' | 'recipe';
 };
 
-function IngredientItem({ name, measure }: Props) {
+function IngredientItem({ name, measure, type }: Props) {
   return (
     <StyledIngredientItem>
       <IngredientNameWrapper>
@@ -137,7 +139,13 @@ function IngredientItem({ name, measure }: Props) {
       </IngredientNameWrapper>
 
       <IngredientMeasure>{measure}</IngredientMeasure>
-      <StyledCheckbox type="checkbox" />
+      {type === 'recipe' ? (
+        <StyledCheckbox type="checkbox" />
+      ) : (
+        <button>
+          <FaX style={{ width: '20px', height: '20px' }} />
+        </button>
+      )}
     </StyledIngredientItem>
   );
 }

@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { getRecipeById } from '../utils/recipesApi';
 
 import Loader from '../components/Loader';
-import IngredientItem from '../components/IngredientItem';
 import PageContainer from '../components/PageContainer';
+import IngredientsTable from '../components/IngredientsTable';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -108,53 +108,6 @@ const RecipeTime = styled.span`
 
 const IngredientsSection = styled.section`
   margin-bottom: 100px;
-`;
-
-const IngredientTable = styled.div`
-  background-color: var(--color-action);
-  padding: 0.85rem 1rem;
-  border-radius: 8px;
-  margin-bottom: 1.6rem;
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-
-  @media screen and (min-width: 768px) {
-    padding: 1rem 3rem;
-  }
-  & > span {
-    color: var(--color-white-2);
-    font-size: 0.71rem;
-
-    &:nth-child(2) {
-      padding-right: 1.2rem;
-
-      @media screen and (min-width: 768px) {
-        padding-right: 2.7rem;
-      }
-
-      @media screen and (min-width: 1440px) {
-        padding-right: 6.8rem;
-      }
-    }
-
-    &:nth-child(2),
-    &:nth-child(3) {
-      justify-self: end;
-    }
-
-    @media screen and (min-width: 768px) {
-      font-size: 1.28rem;
-    }
-  }
-`;
-
-const IngredientsList = styled.ul`
-  display: grid;
-  gap: 1rem;
-
-  @media screen and (min-width: 768px) {
-    gap: 1.8rem;
-  }
 `;
 
 const RecipePreparationSection = styled.section`
@@ -265,21 +218,9 @@ const RecipePage = () => {
         </RecipeHeroSection>
 
         <IngredientsSection>
-          <IngredientTable>
-            <span>Ingredients</span>
-            <span>Number</span>
-            <span>Add to list</span>
-          </IngredientTable>
-
-          <IngredientsList>
-            {recipe?.ingredients.map((item) => (
-              <IngredientItem
-                key={item.ingredientName}
-                name={item.ingredientName}
-                measure={item.ingredientMeasure}
-              />
-            ))}
-          </IngredientsList>
+          {recipe && (
+            <IngredientsTable ingredients={recipe.ingredients} type="recipe" />
+          )}
         </IngredientsSection>
 
         <RecipePreparationSection>
