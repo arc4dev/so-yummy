@@ -13,8 +13,14 @@ enum Category {
   Vegetarian = 'Vegetarian',
 }
 
-type RecipeResponse<T> = {
+type DatabaseResponseMany<T> = {
   data: T[];
+  totalPages: number;
+  page: number;
+};
+
+type DatabaseResponse<T> = {
+  data: T;
 };
 
 type CategoriesResponse = {
@@ -22,7 +28,7 @@ type CategoriesResponse = {
 };
 
 type Recipe = {
-  id: string;
+  _id: string;
   strMeal: string;
   strMealThumb: string;
 };
@@ -35,29 +41,29 @@ type RecipeDetails = Recipe & {
   strInstructions: string;
   strDescription: string;
   cookingTime: number;
-  ingredients: IngredientRef[];
+  ingredients: IngredientItem[];
   category: Category;
 };
 
 type Ingredient = {
-  id: string;
+  _id: string;
   name: string;
   image: string;
 };
 
-type IngredientRef = {
+type IngredientItem = {
   ingredient: Ingredient;
   ingredientMeasure: IngredientMeasure;
 };
 
 type ShoppingListItem = {
-  id: string;
+  _id: string;
   quantity: string;
   ingredient: Ingredient;
 };
 
 type User = {
-  id: string;
+  _id: string;
   email: string;
   name: string;
 };

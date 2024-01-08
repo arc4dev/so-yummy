@@ -200,12 +200,7 @@ const RecipePage = () => {
       <StyledRecipePage>
         <RecipeHeroSection>
           <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
-          <RecipeDescription>
-            Is a healthy salad recipe that’s big on nutrients and flavor. A
-            moist, pan seared salmon is layered on top of spinach, avocado,
-            tomatoes, and red onions. Then drizzled with a homemade lemon
-            vinaigrette.
-          </RecipeDescription>
+          <RecipeDescription>{recipe?.strDescription}</RecipeDescription>
 
           <RecipeAddToFavoriteButton>
             Add to favorite recipes
@@ -213,7 +208,7 @@ const RecipePage = () => {
 
           <RecipeTime>
             <FiClock />
-            <p>2 min</p>
+            <span>{recipe?.cookingTime} min</span>
           </RecipeTime>
         </RecipeHeroSection>
 

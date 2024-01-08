@@ -50,7 +50,7 @@ const IngredientsList = styled.ul`
 `;
 
 type Props = {
-  ingredients: Ingredients[];
+  ingredients: IngredientItem[];
   type: 'shopping-list' | 'recipe';
 };
 
@@ -66,8 +66,8 @@ const IngredientsTable = ({ ingredients, type }: Props) => {
       <IngredientsList>
         {ingredients.map((item) => (
           <IngredientItem
-            key={item.ingredientName}
-            name={item.ingredientName}
+            key={item.ingredient._id}
+            name={item.ingredient.name}
             measure={item.ingredientMeasure}
             type={type}
           />

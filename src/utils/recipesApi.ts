@@ -10,56 +10,29 @@ axios.defaults.headers.common['Authorization'] =
 
 export const getRecipeById = async (id: string) => {
   try {
-    const res = await axios.get<RecipeResponse<RecipeDetails>>(
-      `/1/lookup.php?i=${id}`
+    const res = await axios.get<DatabaseResponse<RecipeDetails>>(
+      `/recipes/${id}`
     );
 
-    const recipe = res.data.meals[0];
-
-    const ingredients = Object.keys(recipe).reduce(
-      (acc: Ingredients[], key) => {
-        if (
-          key.startsWith('strIngredient') &&
-          recipe[key as keyof RecipeDetails]
-        ) {
-          const ingredientName = recipe[key as keyof RecipeDetails];
-          const ingredientMeasure =
-            recipe[`strMeasure${key.slice(13)}` as keyof RecipeDetails];
-
-          return [...acc, { ingredientName, ingredientMeasure }];
-        }
-        return acc;
-      },
-      []
-    );
-
-    return {
-      idMeal: recipe.idMeal,
-      strMeal: recipe.strMeal,
-      strMealThumb: recipe.strMealThumb,
-      strInstructions: recipe.strInstructions,
-      ingredients,
-    };
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }
 };
 
 export const getRecipeByQuery = async (q: string, searchBy: string) => {
-  let query: Promise<AxiosResponse<RecipeResponse<Recipe>>> | null = null;
+  let query: Promise<AxiosResponse<DatabaseResponseMany<Recipe>>> | null = null;
 
   if (searchBy.toLowerCase() === 'title') {
-    const searchParam = q.length === 1 ? 'f' : 's';
-
-    query = axios.get(`/1/search.php?${searchParam}=${q}`);
+    query = axios.get(`/recipes/${q}`);
   } else if (searchBy.toLowerCase() === 'ingredient') {
-    query = axios.get(`/1/filter.php?i=${q}`);
+    query = axios.get(`/recipes/ingredient/${q}`);
   } else return null;
 
   try {
     const res = await query;
 
-    return res.data.meals;
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }
@@ -67,11 +40,11 @@ export const getRecipeByQuery = async (q: string, searchBy: string) => {
 
 export const getRecipeByCategory = async (category: string) => {
   try {
-    const res = await axios.get<RecipeResponse<Recipe>>(
+    const res = await axios.get<DatabaseResponseMany<Recipe>>(
       `/1/filter.php?c=${category}`
     );
 
-    return res.data.meals;
+    return res.data.data;
   } catch (err) {
     console.log(err);
   }
@@ -94,7 +67,7 @@ export const getRecipesByAllCategories = async () => {
 
     // Create an array of promises to fetch recipes by category
     const recipesPromiseArr = categories.map((category) =>
-      axios.get<RecipeResponse<Recipe>>(`/recipes?category=${category}`)
+      axios.get<DatabaseResponseMany<Recipe>>(`/recipes?category=${category}`)
     );
 
     // Resolve all promises to get an array of recipes by categories
@@ -104,7 +77,7 @@ export const getRecipesByAllCategories = async () => {
     const categorizedRecipes = categories.map((category, index) => {
       return {
         category: category,
-        recipes: recipesByCategories[index].data.meals,
+        recipes: recipesByCategories[index].data.data,
       };
     });
 
