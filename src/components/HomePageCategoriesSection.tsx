@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getRecipesByAllCategories } from '../utils/recipesApi';
+import { getRecipesHomeCategories } from '../utils/recipesApi';
 import SectionHeading from './SectionHeading';
 import Button from './Button';
 import RecipePreviewCard from './RecipePreviewCard';
@@ -50,55 +50,46 @@ const CategoriesSection = () => {
   // TODO - ERROR HANDLING
   const { isLoading, data } = useQuery({
     queryKey: ['recipes'],
-    queryFn: getRecipesByAllCategories,
+    queryFn: getRecipesHomeCategories,
   });
 
   const { isMobile, isTablet, isDesktop } = useBreakpoints();
-
-  const displayedCategories = [
-    'Breakfast',
-    'Miscellaneous',
-    'Chicken',
-    'Dessert',
-  ];
 
   if (isLoading) return <Loader />;
 
   return (
     <HomePageCategoriesSection>
       <CategoriesList>
-        {data
-          ?.filter((item) => displayedCategories.includes(item.category))
-          .map((categorizedRecipe) => (
-            <CategoriesListItem key={categorizedRecipe.category}>
-              <SectionHeading>{categorizedRecipe.category}</SectionHeading>
-              <RecipesList>
-                {categorizedRecipe.recipes
-                  .filter(
-                    (_, i) =>
-                      (isMobile && i < 1) ||
-                      (isTablet && i < 2) ||
-                      (isDesktop && i < 4)
-                  )
-                  .map((recipe) => (
-                    <RecipePreviewCard
-                      key={recipe.idMeal}
-                      title={recipe.strMeal}
-                      img={recipe.strMealThumb}
-                      mealId={recipe.idMeal}
-                    />
-                  ))}
-              </RecipesList>
+        {data?.map((categorizedRecipe) => (
+          <CategoriesListItem key={categorizedRecipe.category}>
+            <SectionHeading>{categorizedRecipe.category}</SectionHeading>
+            <RecipesList>
+              {categorizedRecipe.recipes
+                .filter(
+                  (_, i) =>
+                    (isMobile && i < 1) ||
+                    (isTablet && i < 2) ||
+                    (isDesktop && i < 4)
+                )
+                .map((recipe) => (
+                  <RecipePreviewCard
+                    key={recipe._id}
+                    title={recipe.strMeal}
+                    img={recipe.strMealThumb}
+                    mealId={recipe._id}
+                  />
+                ))}
+            </RecipesList>
 
-              <div style={{ marginLeft: 'auto' }}>
-                <Button
-                  to={`/categories?c=${categorizedRecipe.category}`}
-                  size="small">
-                  See all
-                </Button>
-              </div>
-            </CategoriesListItem>
-          ))}
+            <div style={{ marginLeft: 'auto' }}>
+              <Button
+                to={`/categories?c=${categorizedRecipe.category}`}
+                size="small">
+                See all
+              </Button>
+            </div>
+          </CategoriesListItem>
+        ))}
       </CategoriesList>
 
       <Button to="/categories" size="primary">
