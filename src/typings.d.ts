@@ -14,9 +14,12 @@ enum Category {
 }
 
 type DatabaseResponseMany<T> = {
-  data: T[];
+  status: 'success' | 'fail';
+  page: number;
+  results: number;
   totalPages: number;
   page: number;
+  data: T[];
 };
 
 type DatabaseResponse<T> = {

@@ -5,7 +5,7 @@ import styled, { css } from 'styled-components';
 
 import {
   getAllRecipesCategories,
-  getRecipeByCategory,
+  getRecipesByCategory,
 } from '../utils/recipesApi';
 
 import SectionHeading from '../components/SectionHeading';
@@ -67,14 +67,14 @@ const CategoriesPage = () => {
   // Get recipes by a category from the URL
   const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
     queryKey: ['recipes', categoryParam], // Include categoryParam in the queryKey
-    queryFn: () => getRecipeByCategory(categoryParam || 'Beef'),
+    queryFn: () => getRecipesByCategory(categoryParam || 'beef'),
     enabled: !!categoryParam, // Enable query only if categoryParam is present
   });
 
   useEffect(() => {
     // Set default query parameters if they don't exist in the URL
     if (!searchParams.get('c')) {
-      setSearchParams({ c: 'Beef' });
+      setSearchParams({ c: 'beef' });
     }
   }, [searchParams, setSearchParams]);
 
@@ -104,10 +104,10 @@ const CategoriesPage = () => {
           ) : (
             recipes?.map((recipe) => (
               <RecipePreviewCard
-                key={recipe.idMeal}
+                key={recipe._id}
                 title={recipe.strMeal}
                 img={recipe.strMealThumb}
-                mealId={recipe.idMeal}
+                mealId={recipe._id}
               />
             ))
           )}

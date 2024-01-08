@@ -94,10 +94,10 @@ const SearchPage = () => {
           ) : (
             recipes?.map((recipe) => (
               <RecipePreviewCard
-                key={recipe.idMeal}
+                key={recipe._id}
                 title={recipe.strMeal}
                 img={recipe.strMealThumb}
-                mealId={recipe.idMeal}
+                mealId={recipe._id}
               />
             ))
           )}
