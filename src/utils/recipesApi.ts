@@ -94,9 +94,7 @@ export const getRecipesByAllCategories = async () => {
 
     // Create an array of promises to fetch recipes by category
     const recipesPromiseArr = categories.map((category) =>
-      axios.get<RecipeResponse<Recipe>>(
-        `/1/filter.php?c=${category.strCategory}`
-      )
+      axios.get<RecipeResponse<Recipe>>(`/recipes?category=${category}`)
     );
 
     // Resolve all promises to get an array of recipes by categories
@@ -105,7 +103,7 @@ export const getRecipesByAllCategories = async () => {
     // Create an array of objects with category name and recipes
     const categorizedRecipes = categories.map((category, index) => {
       return {
-        category: category.strCategory,
+        category: category,
         recipes: recipesByCategories[index].data.meals,
       };
     });
