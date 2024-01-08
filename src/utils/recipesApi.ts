@@ -9,10 +9,10 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${
   import.meta.env.VITE_TEST_API_KEY
 }`;
 
-export const getRecipeById = async (id: string) => {
+export const getRecipeById = async (id: string, isSearchPrivate: boolean) => {
   try {
     const res = await axios.get<DatabaseResponse<RecipeDetails>>(
-      `/recipes/${id}`
+      `/recipes/${id}${isSearchPrivate ? '?isPrivate=true' : ''}`
     );
 
     return res.data.data;
@@ -86,6 +86,18 @@ export const getRecipesHomeCategories = async () => {
     });
 
     return categorizedRecipes;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const getOwnRecipes = async () => {
+  try {
+    const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
+      '/users/my-recipes'
+    );
+
+    return res.data;
   } catch (err) {
     console.log(err);
   }
