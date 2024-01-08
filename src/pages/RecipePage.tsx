@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { FiClock } from 'react-icons/fi';
 import styled from 'styled-components';
 
@@ -186,10 +186,14 @@ const RecipeImage = styled.img`
 
 const RecipePage = () => {
   const { id } = useParams();
+  const [searchParamas, setSearchParams] = useSearchParams({
+    p: 'false',
+  });
+  const isPrivate = searchParamas.get('p') === 'true';
 
   const { data: recipe, isLoading } = useQuery({
     queryKey: ['recipe', id],
-    queryFn: () => getRecipeById(id!),
+    queryFn: () => getRecipeById(id!, isPrivate),
     enabled: !!id,
   });
 

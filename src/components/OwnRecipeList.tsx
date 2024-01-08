@@ -5,12 +5,10 @@ type Props = {
 };
 
 const OwnRecipeList = ({ recipes }: Props) => {
-  // TODO - typings
-
   return (
     <ul>
-      {recipes.map((recipe) => (
-        <OwnRecipeItem key={recipe.id} recipe={recipe} />
+      {recipes?.map((recipe) => (
+        <OwnRecipeItem key={recipe._id} recipe={recipe} />
       ))}
     </ul>
   );

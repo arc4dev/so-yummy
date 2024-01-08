@@ -9,7 +9,7 @@ type Props = {
 };
 
 const OwnRecipeItem = ({ recipe }: Props) => {
-  const { id, strMeal, strDescription, strMealThumb, cookingTime } = recipe;
+  const { _id, strMeal, strDescription, strMealThumb, cookingTime } = recipe;
 
   return (
     <StyledOwnRecipeItem>
@@ -20,7 +20,7 @@ const OwnRecipeItem = ({ recipe }: Props) => {
       </button>
       <p>{strDescription}</p>
       <span>{cookingTime}</span>
-      <Button size="primary" to={`/recipes/${id}`}>
+      <Button size="primary" to={`/recipes/${_id}?p=true`}>
         See recipe
       </Button>
     </StyledOwnRecipeItem>
