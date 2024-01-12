@@ -82,7 +82,7 @@ const AuthPageLayout = ({ children, type }: Props) => {
       <FormContainer>
         {children}
         <StyledLink to={type === 'login' ? '/register' : '/login'}>
-          {type === 'login' ? 'Sign in' : 'Register'}
+          {type === 'login' ? 'Register' : 'Sign in'}
         </StyledLink>
       </FormContainer>
     </StyledAuthPage>
