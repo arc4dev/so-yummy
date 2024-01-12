@@ -19,6 +19,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import RestrictedRoute from './components/RestrictedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
+import StartPage from './pages/StartPage';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -38,6 +39,12 @@ function App() {
         <BrowserRouter>
           <Routes>
             <Route
+              path="/"
+              element={
+                <RestrictedRoute redirectTo="/home" component={<StartPage />} />
+              }
+            />
+            <Route
               path="/login"
               element={
                 <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
@@ -55,7 +62,7 @@ function App() {
 
             <Route element={<ProtectedRoute />}>
               <Route element={<AppLayout />}>
-                <Route index element={<Navigate replace to="home" />} />
+                <Route element={<Navigate replace to="home" />} />
 
                 <Route path="home" element={<HomePage />} />
                 <Route path="categories" element={<CategoriesPage />} />
