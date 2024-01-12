@@ -6,6 +6,7 @@ const GlobalStyles = createGlobalStyle`
   --color-primary: #23262A; // text
   --color-black: #22252A; // button
   --color-black-2: #001833; // headings
+  --color-black-3: #2A2C36;
 
   --color-black-08: rgba(0, 0, 0, 0.80); // recipe
   --color-black-50: rgba(0, 0, 0, 0.50); // recipe

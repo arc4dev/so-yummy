@@ -2,6 +2,11 @@ import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
 const sizes = {
+  stretch: css`
+    padding: 20px 0;
+    font-size: 1.14rem;
+    width: 100%;
+  `,
   small: css`
     padding: 10px 24px;
   `,
@@ -30,7 +35,7 @@ const StyledButton = styled.button<{ size: ButtonSize }>`
   ${({ size }) => sizes[size]}
 `;
 
-type ButtonSize = 'small' | 'primary';
+type ButtonSize = 'small' | 'primary' | 'stretch';
 
 type Props = {
   children: React.ReactNode;
@@ -54,4 +59,4 @@ const Button = ({ children, size, to }: Props) => {
 export default Button;
 
 // width 100%
-// small
+// small yes

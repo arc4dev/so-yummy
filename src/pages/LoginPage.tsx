@@ -1,5 +1,12 @@
+import AuthPageLayout from '../components/AuthPageLayout';
+import LoginForm from '../components/LoginForm';
+
 const LoginPage = () => {
-  return <div>LoginPage</div>;
+  return (
+    <AuthPageLayout type="login">
+      <LoginForm />
+    </AuthPageLayout>
+  );
 };
 
 export default LoginPage;
