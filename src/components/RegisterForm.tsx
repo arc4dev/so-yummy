@@ -11,7 +11,7 @@ export const AuthForm = styled.form`
   background-color: var(--color-black-3);
   border-radius: 30px;
   padding: 32px 28px;
-  gap: 18px;
+  gap: 1.7rem;
   box-shadow: 0px 4px 48px 0px rgba(0, 0, 0, 0.1);
 
   @media screen and (min-width: 768px) {
@@ -36,7 +36,7 @@ export const AuthHeader = styled.h1`
 export const InputWrapper = styled.div`
   display: grid;
   width: 100%;
-  gap: 0.9rem;
+  gap: 1.2rem;
 `;
 
 const RegisterForm = () => {

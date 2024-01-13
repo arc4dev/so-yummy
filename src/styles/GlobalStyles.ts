@@ -23,6 +23,7 @@ const GlobalStyles = createGlobalStyle`
 
   --color-action: #8BAA36; 
   --color-action-light: #EBF3D4;
+  --color-wrong: #e74a3b;
 }
 
 html {
