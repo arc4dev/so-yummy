@@ -23,7 +23,7 @@ const LoginForm = () => {
 
   const { dispatch, user: usercon } = useAuth();
 
-  const { mutateAsync, isLoading, reset } = useMutation({
+  const { mutateAsync, isPending, reset } = useMutation({
     mutationFn: loginUser,
     onSuccess: () => toast.success('Login successful!'),
     onError: (error: AxiosError<ResponseError>) => {
@@ -63,6 +63,7 @@ const LoginForm = () => {
             },
           })}
           error={errors?.email}
+          disabled={isPending}
         />
 
         <Input
@@ -79,10 +80,13 @@ const LoginForm = () => {
             },
           })}
           error={errors?.password}
+          disabled={isPending}
         />
       </InputWrapper>
 
-      <Button size="stretch">Sign in</Button>
+      <Button disabled={isPending} size="stretch">
+        Sign in
+      </Button>
     </AuthForm>
   );
 };

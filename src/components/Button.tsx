@@ -41,9 +41,9 @@ type Props = {
   children: React.ReactNode;
   size: ButtonSize;
   to?: string;
-};
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({ children, size, to }: Props) => {
+const Button = ({ children, size, to, ...props }: Props) => {
   if (to)
     return (
       <Link to={to}>
@@ -53,7 +53,11 @@ const Button = ({ children, size, to }: Props) => {
       </Link>
     );
 
-  return <StyledButton size={size}>{children}</StyledButton>;
+  return (
+    <StyledButton size={size} {...props}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;
