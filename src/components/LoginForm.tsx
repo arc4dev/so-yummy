@@ -2,6 +2,11 @@ import Input from './Input';
 import Button from './Button';
 import { AuthForm, AuthHeader, InputWrapper } from './RegisterForm';
 import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import { loginUser } from '../utils/userApi';
+import toast from 'react-hot-toast';
+import { AxiosError } from 'axios';
+import { useAuth } from '../contexts/authContexts';
 
 const LoginForm = () => {
   const {
@@ -16,8 +21,31 @@ const LoginForm = () => {
     },
   });
 
+  const { dispatch, user: usercon } = useAuth();
+
+  const { mutateAsync, isLoading, reset } = useMutation({
+    mutationFn: loginUser,
+    onSuccess: () => toast.success('Login successful!'),
+    onError: (error: AxiosError<ResponseError>) => {
+      toast.error(error?.response?.data.message || error.message);
+      reset();
+    },
+  });
+
   const onSubmit = async (data: LoginFormData) => {
-    console.log(data);
+    const user = await mutateAsync({
+      email: data.email,
+      password: data.password,
+    });
+
+    dispatch({
+      type: 'LOGIN',
+      payload: {
+        user,
+      },
+    });
+
+    console.log(usercon);
   };
 
   return (
@@ -42,8 +70,8 @@ const LoginForm = () => {
           sizee="stretch"
           {...register('password', {
             minLength: {
-              value: 8,
-              message: 'Password must be at least 8 characters',
+              value: 6,
+              message: 'Password must be at least 6 characters',
             },
             maxLength: {
               value: 32,

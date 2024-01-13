@@ -47,7 +47,7 @@ function App() {
             duration: 3000,
           },
           style: {
-            fontSize: '1.2rem',
+            fontSize: '1.1rem',
             maxWidth: '500px',
             padding: '1.2rem 1.5rem',
             backgroundColor: 'var(--color-white)',

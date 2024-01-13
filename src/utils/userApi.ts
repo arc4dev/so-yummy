@@ -14,15 +14,11 @@ const clearAuthToken = () => {
 };
 
 export const loginUser = async ({ email, password }: LoginFormData) => {
-  try {
-    const res = await axios.post('/auth/sign-in', { email, password });
+  const res = await axios.post('/auth/sign-in', { email, password });
 
-    setAuthToken(res.data.token);
+  setAuthToken(res.data.token);
 
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  return res.data.data;
 };
 
 export const registerUser = async ({
@@ -30,21 +26,13 @@ export const registerUser = async ({
   name,
   password,
 }: RegisterFormData) => {
-  try {
-    const res = await axios.post('/auth/sign-up', { email, name, password });
+  const res = await axios.post('/auth/sign-up', { email, name, password });
 
-    return res.data.message;
-  } catch (err) {
-    return console.log(err);
-  }
+  return res.data.message;
 };
 
 export const logoutUser = async () => {
-  try {
-    await axios.post('/auth/sign-out');
+  await axios.post('/auth/sign-out');
 
-    clearAuthToken();
-  } catch (err) {
-    return console.log(err);
-  }
+  clearAuthToken();
 };

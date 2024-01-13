@@ -80,3 +80,8 @@ type LoginFormData = {
 type RegisterFormData = LoginFormData & {
   name: string;
 };
+
+type ResponseError = {
+  status: 'fail';
+  message: string;
+};
