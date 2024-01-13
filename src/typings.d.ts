@@ -71,3 +71,12 @@ type User = {
   email: string;
   name: string;
 };
+
+type LoginFormData = {
+  email: string;
+  password: string;
+};
+
+type RegisterFormData = LoginFormData & {
+  name: string;
+};

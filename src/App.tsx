@@ -14,6 +14,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import ShoppingListPage from './pages/ShoppingListPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
 import { AuthContextProvider } from './contexts/authContexts';
 import ProtectedRoute from './components/ProtectedRoute';
 import RestrictedRoute from './components/RestrictedRoute';
@@ -34,6 +35,26 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <GlobalStyles />
+      <Toaster
+        position="bottom-center"
+        gutter={12}
+        containerStyle={{ margin: '8px' }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 3000,
+          },
+          style: {
+            fontSize: '1.2rem',
+            maxWidth: '500px',
+            padding: '1.2rem 1.5rem',
+            backgroundColor: 'var(--color-white)',
+            color: 'var(--color-black)',
+          },
+        }}
+      />
 
       <AuthContextProvider>
         <BrowserRouter>

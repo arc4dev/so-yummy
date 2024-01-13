@@ -3,11 +3,6 @@ import Button from './Button';
 import { AuthForm, AuthHeader, InputWrapper } from './RegisterForm';
 import { useForm } from 'react-hook-form';
 
-type FormData = {
-  email: string;
-  password: string;
-};
-
 const LoginForm = () => {
   const {
     register,
@@ -21,7 +16,7 @@ const LoginForm = () => {
     },
   });
 
-  const onSubmit = async (data: FormData) => {
+  const onSubmit = async (data: LoginFormData) => {
     console.log(data);
   };
 
