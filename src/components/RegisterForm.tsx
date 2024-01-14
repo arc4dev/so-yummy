@@ -1,6 +1,13 @@
 import styled from 'styled-components';
 import Input from './Input';
 import Button from './Button';
+import toast from 'react-hot-toast';
+import { useMutation } from '@tanstack/react-query';
+import { useAuth } from '../contexts/authContexts';
+import { useForm } from 'react-hook-form';
+import { registerUser } from '../utils/userApi';
+import { AxiosError } from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export const AuthForm = styled.form`
   width: 335px;
@@ -40,17 +47,105 @@ export const InputWrapper = styled.div`
 `;
 
 const RegisterForm = () => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+      name: '',
+      password: '',
+    },
+  });
+
+  const navigate = useNavigate();
+  const { dispatch } = useAuth();
+
+  const { mutateAsync, isPending } = useMutation({
+    mutationFn: registerUser,
+    onSuccess: () => {
+      toast.success('Registration successful! Please very your email.');
+      reset();
+    },
+    onError: (error: AxiosError<ResponseError>) => {
+      toast.error(error?.response?.data.message || error.message);
+      reset();
+    },
+  });
+
+  const onSubmit = async (data: RegisterFormData) => {
+    await mutateAsync({
+      email: data.email,
+      password: data.password,
+      name: data.name,
+    });
+
+    dispatch({
+      type: 'REGISTER',
+    });
+
+    navigate('/login');
+  };
+
   return (
-    <AuthForm>
-      <AuthHeader>Registration</AuthHeader>
+    <AuthForm onSubmit={handleSubmit(onSubmit)} autoComplete="off" noValidate>
+      <AuthHeader>Register</AuthHeader>
 
       <InputWrapper>
-        <Input size="stretch" type="Name" />
-        <Input size="stretch" type="Email" />
-        <Input size="stretch" type="Password" />
+        <Input
+          variant="Email"
+          sizee="stretch"
+          {...register('email', {
+            pattern: {
+              value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+              message: 'Email is invalid',
+            },
+          })}
+          error={errors?.email}
+          disabled={isPending}
+        />
+
+        <Input
+          variant="Name"
+          sizee="stretch"
+          {...register('name', {
+            minLength: {
+              value: 3,
+              message: 'Name must be at least 3 characters',
+            },
+            maxLength: {
+              value: 24,
+              message: 'Name must be at most 24 characters',
+            },
+          })}
+          error={errors?.name}
+          disabled={isPending}
+        />
+
+        <Input
+          variant="Password"
+          sizee="stretch"
+          {...register('password', {
+            minLength: {
+              value: 8,
+              message: 'Password must be at least 8 characters',
+            },
+            maxLength: {
+              value: 32,
+              message: 'Password must be at most 32 characters',
+            },
+          })}
+          error={errors?.password}
+          disabled={isPending}
+        />
       </InputWrapper>
 
-      <Button size="stretch">Sign up</Button>
+      <Button disabled={isPending} size="stretch">
+        Register
+      </Button>
     </AuthForm>
   );
 };

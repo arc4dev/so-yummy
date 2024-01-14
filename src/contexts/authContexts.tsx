@@ -8,7 +8,7 @@ interface AuthState {
 }
 
 type AuthAction =
-  | { type: 'REGISTER'; payload: { user: User } }
+  | { type: 'REGISTER' }
   | { type: 'LOGIN'; payload: { user: User } }
   | { type: 'LOGOUT' };
 
@@ -23,7 +23,6 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
     case 'REGISTER':
       return {
         ...state,
-        user: action.payload.user,
       };
     case 'LOGIN':
       return {

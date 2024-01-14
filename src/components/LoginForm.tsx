@@ -21,7 +21,7 @@ const LoginForm = () => {
     },
   });
 
-  const { dispatch, user: usercon } = useAuth();
+  const { dispatch } = useAuth();
 
   const { mutateAsync, isPending, reset } = useMutation({
     mutationFn: loginUser,
@@ -37,6 +37,7 @@ const LoginForm = () => {
       email: data.email,
       password: data.password,
     });
+    console.log(user);
 
     dispatch({
       type: 'LOGIN',
@@ -44,8 +45,6 @@ const LoginForm = () => {
         user,
       },
     });
-
-    console.log(usercon);
   };
 
   return (
@@ -71,8 +70,8 @@ const LoginForm = () => {
           sizee="stretch"
           {...register('password', {
             minLength: {
-              value: 6,
-              message: 'Password must be at least 6 characters',
+              value: 8,
+              message: 'Password must be at least 8 characters',
             },
             maxLength: {
               value: 32,

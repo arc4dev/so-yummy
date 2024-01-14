@@ -3,6 +3,7 @@ import Logo from './Logo';
 import AppNav from './AppNav';
 import ThemeSwitch from './ThemeSwitch';
 import useBreakpoints from '../hooks/useBreakpoints';
+import { useAuth } from '../contexts/authContexts';
 
 const StyledHeader = styled.header`
   position: sticky;
@@ -22,7 +23,7 @@ const StyledHeader = styled.header`
   }
 `;
 
-const UserImage = styled.div`
+const UserImage = styled.img`
   width: 34px;
   height: 34px;
   border-radius: 100%;
@@ -51,6 +52,7 @@ const UserInfo = styled.div`
 
 const Header = () => {
   const { isDesktop } = useBreakpoints();
+  const { user } = useAuth();
 
   return (
     <StyledHeader>
@@ -63,7 +65,7 @@ const Header = () => {
           <Container>
             <UserInfo>
               <UserImage />
-              <span>Olena</span>
+              <span>{user?.name}</span>
             </UserInfo>
 
             <ThemeSwitch />
@@ -74,7 +76,7 @@ const Header = () => {
           <Container>
             <UserInfo>
               <UserImage />
-              <span>Olena</span>
+              <span>{user?.name}</span>
             </UserInfo>
 
             <button>
