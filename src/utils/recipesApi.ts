@@ -114,3 +114,37 @@ export const getShoppingCart = async () => {
     console.log(err);
   }
 };
+
+export const addShoppingCartItem = async ({
+  ingredientId,
+  ingredientMeasure,
+}: {
+  ingredientId: string;
+  ingredientMeasure: string;
+}) => {
+  try {
+    const res = await axios.post<DatabaseResponse<IngredientItem>>(
+      '/shopping-list',
+      {
+        ingredient: ingredientId,
+        ingredientMeasure,
+      }
+    );
+
+    return res.data.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const deleteShoppingCartItem = async (ingredientId: string) => {
+  try {
+    await axios.delete<DatabaseResponse<IngredientItem>>(
+      `/shopping-list/${ingredientId}`
+    );
+
+    return null;
+  } catch (err) {
+    console.log(err);
+  }
+};

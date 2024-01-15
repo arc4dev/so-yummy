@@ -1,5 +1,7 @@
-import { FaX } from 'react-icons/fa6';
+import { FaXmark } from 'react-icons/fa6';
 import styled from 'styled-components';
+
+import useShoppingCart from '../hooks/useShoppingCart';
 
 const StyledIngredientItem = styled.li`
   display: grid;
@@ -124,10 +126,34 @@ const StyledCheckbox = styled.input`
 type Props = {
   name: string;
   measure: string;
+  id: string;
   type: 'shopping-list' | 'recipe';
 };
 
-function IngredientItem({ name, measure, type }: Props) {
+function IngredientItem({ name, measure, id, type }: Props) {
+  const { addIngredientMutate, removeIngredientMutate, isPending } =
+    useShoppingCart();
+
+  const handleRemoveIngredient = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    id: string
+  ) => await removeIngredientMutate(id);
+
+  const handleCheckboxChange = async (
+    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    id: string,
+    ingredientMeasure: string
+  ) => {
+    if (e.currentTarget.checked) {
+      await addIngredientMutate({
+        ingredientId: id,
+        ingredientMeasure,
+      });
+    } else {
+      await removeIngredientMutate(id);
+    }
+  };
+
   return (
     <StyledIngredientItem>
       <IngredientNameWrapper>
@@ -140,10 +166,15 @@ function IngredientItem({ name, measure, type }: Props) {
 
       <IngredientMeasure>{measure}</IngredientMeasure>
       {type === 'recipe' ? (
-        <StyledCheckbox type="checkbox" />
+        <StyledCheckbox
+          onClick={(e) => handleCheckboxChange(e, id, measure)}
+          type="checkbox"
+        />
       ) : (
-        <button>
-          <FaX style={{ width: '20px', height: '20px' }} />
+        <button
+          onClick={(e) => handleRemoveIngredient(e, id)}
+          disabled={isPending}>
+          <FaXmark style={{ width: '18px', height: '18px' }} />
         </button>
       )}
     </StyledIngredientItem>

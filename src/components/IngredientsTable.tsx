@@ -55,8 +55,6 @@ type Props = {
 };
 
 const IngredientsTable = ({ ingredients, type }: Props) => {
-  console.log(ingredients);
-
   return (
     <div>
       <IngredientTable>
@@ -69,6 +67,7 @@ const IngredientsTable = ({ ingredients, type }: Props) => {
         {ingredients.map((item) => (
           <IngredientItem
             key={item.ingredient._id}
+            id={item.ingredient._id}
             name={item.ingredient.name}
             measure={item.ingredientMeasure}
             type={type}
