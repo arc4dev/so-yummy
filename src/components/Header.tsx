@@ -27,7 +27,6 @@ const UserImage = styled.img`
   width: 34px;
   height: 34px;
   border-radius: 100%;
-  background: url('/avatar.jpeg'), lightgray 50%; // TODO: replace with real image
   background-position: center;
   background-size: cover;
 
@@ -64,7 +63,7 @@ const Header = () => {
 
           <Container>
             <UserInfo>
-              <UserImage />
+              <UserImage src={user?.image} alt={`Image of ${user?.image}`} />
               <span>{user?.name}</span>
             </UserInfo>
 
@@ -75,7 +74,7 @@ const Header = () => {
         <>
           <Container>
             <UserInfo>
-              <UserImage />
+              <UserImage src={user?.image} alt={`Image of ${user?.image}`} />
               <span>{user?.name}</span>
             </UserInfo>
 

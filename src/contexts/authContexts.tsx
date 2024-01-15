@@ -10,6 +10,7 @@ interface AuthState {
 type AuthAction =
   | { type: 'REGISTER' }
   | { type: 'LOGIN'; payload: { user: User } }
+  | { type: 'REFRESH'; payload: { user: User } }
   | { type: 'LOGOUT' };
 
 interface AuthContextType {
@@ -25,6 +26,12 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         ...state,
       };
     case 'LOGIN':
+      return {
+        ...state,
+        user: action.payload.user,
+        isAuthenticated: true,
+      };
+    case 'REFRESH':
       return {
         ...state,
         user: action.payload.user,

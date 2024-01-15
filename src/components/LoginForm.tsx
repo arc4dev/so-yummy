@@ -37,7 +37,6 @@ const LoginForm = () => {
       email: data.email,
       password: data.password,
     });
-    console.log(user);
 
     dispatch({
       type: 'LOGIN',

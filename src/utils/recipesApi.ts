@@ -102,3 +102,15 @@ export const getOwnRecipes = async () => {
     console.log(err);
   }
 };
+
+export const getShoppingCart = async () => {
+  try {
+    const res = await axios.get<DatabaseResponseMany<IngredientItem>>(
+      '/shopping-list'
+    );
+
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

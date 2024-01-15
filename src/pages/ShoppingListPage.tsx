@@ -4,9 +4,15 @@ import PageContainer from '../components/PageContainer';
 const ShoppingListPage = () => {
   // TODO - Fetch own ingredients from API
   const data = [
-    { ingredientName: 'Salt', ingredientMeasure: '1 tsp' },
-    { ingredientName: 'Pepper', ingredientMeasure: '1 tsp' },
-  ];
+    { ingredient: { _id: '1', name: 'Salt' }, ingredientMeasure: '1 tsp' },
+    {
+      ingredient: {
+        _id: '2',
+        name: 'Pepper',
+      },
+      ingredientMeasure: '1 tsp',
+    },
+  ] as IngredientItem[];
 
   return (
     <PageContainer>

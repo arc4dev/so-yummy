@@ -56,20 +56,16 @@ type Ingredient = {
 };
 
 type IngredientItem = {
+  _id: string;
   ingredient: Ingredient;
   ingredientMeasure: IngredientMeasure;
-};
-
-type ShoppingListItem = {
-  _id: string;
-  quantity: string;
-  ingredient: Ingredient;
 };
 
 type User = {
   _id: string;
   email: string;
   name: string;
+  image: string;
 };
 
 type LoginFormData = {
