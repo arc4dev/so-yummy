@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import authFrame from '../assets/auth-frame.svg';
-import authBg from '../assets/auth-bg.svg';
-import authBgTablet from '../assets/auth-bg-tablet.svg';
-import authBgDesktop from '../assets/auth-bg-desktop.svg';
+import authFrame from '../../assets/auth-frame.svg';
+import authBg from '../../assets/auth-bg.svg';
+import authBgTablet from '../../assets/auth-bg-tablet.svg';
+import authBgDesktop from '../../assets/auth-bg-desktop.svg';
 
 const StyledAuthPage = styled.div`
   display: flex;

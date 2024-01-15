@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router-dom';
 import styled from 'styled-components';
 
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../ui/Header';
+import Footer from '../ui/Footer';
 
 const Main = styled.main`
   z-index: 1;

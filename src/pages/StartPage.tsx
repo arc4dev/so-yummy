@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import Button from '../components/Button';
-import Logo from '../components/Logo';
+import Button from '../components/common/Button';
+import Logo from '../components/common/Logo';
 import startBg from '../assets/images/start-bg.png';
 
 const StyledStartPage = styled.div`

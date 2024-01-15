@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import HeroSection from '../components/HeroSection';
-import CategoriesSection from '../components/HomePageCategoriesSection';
-import PageContainer from '../components/PageContainer';
+import HeroSection from '../components/ui/HeroSection';
+import CategoriesSection from '../components/ui/HomePageCategoriesSection';
+import PageContainer from '../components/common/PageContainer';
 
 const StyledHomePage = styled.div``;
 

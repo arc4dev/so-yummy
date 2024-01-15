@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getRecipesHomeCategories } from '../utils/recipesApi';
-import SectionHeading from './SectionHeading';
-import Button from './Button';
-import RecipePreviewCard from './RecipePreviewCard';
+import { getRecipesHomeCategories } from '../../utils/recipesApi';
+import SectionHeading from '../common/SectionHeading';
+import Button from '../common/Button';
+import RecipePreviewCard from '../recipes/RecipePreviewCard';
 import styled from 'styled-components';
-import useBreakpoints from '../hooks/useBreakpoints';
-import Loader from './Loader';
-import RecipesList from './RecipesList';
+import useBreakpoints from '../../hooks/useBreakpoints';
+import Loader from '../common/Loader';
+import RecipesList from '../recipes/RecipesList';
 
 const HomePageCategoriesSection = styled.section`
   display: flex;

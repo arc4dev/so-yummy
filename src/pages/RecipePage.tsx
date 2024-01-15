@@ -5,9 +5,9 @@ import styled from 'styled-components';
 
 import { getRecipeById } from '../utils/recipesApi';
 
-import Loader from '../components/Loader';
-import PageContainer from '../components/PageContainer';
-import IngredientsTable from '../components/IngredientsTable';
+import Loader from '../components/common/Loader';
+import PageContainer from '../components/common/PageContainer';
+import IngredientsTable from '../components/recipes/IngredientsTable';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -229,8 +229,8 @@ const RecipePage = () => {
               {recipe?.strInstructions
                 .split(/\d+\./g)
                 .filter(Boolean)
-                .map((item) => item.trim())
-                .map((step) => (
+                .map((item: string) => item.trim())
+                .map((step: string) => (
                   <RecipePreparationItem key={step}>
                     {step}.
                   </RecipePreparationItem>

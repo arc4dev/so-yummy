@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import Logo from './Logo';
-import AppNav from './AppNav';
-import ThemeSwitch from './ThemeSwitch';
-import useBreakpoints from '../hooks/useBreakpoints';
-import { useAuth } from '../contexts/authContexts';
+import Logo from '../common/Logo';
+import AppNav from '../common/AppNav';
+import ThemeSwitch from '../common/ThemeSwitch';
+import useBreakpoints from '../../hooks/useBreakpoints';
+import { useAuth } from '../../contexts/authContext';
 
 const StyledHeader = styled.header`
   position: sticky;

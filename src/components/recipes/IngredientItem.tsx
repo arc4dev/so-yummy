@@ -1,5 +1,8 @@
-import { FaX } from 'react-icons/fa6';
+import { FaXmark } from 'react-icons/fa6';
 import styled from 'styled-components';
+
+import useShoppingCart from '../../hooks/useShoppingCart';
+import { useState } from 'react';
 
 const StyledIngredientItem = styled.li`
   display: grid;
@@ -124,10 +127,39 @@ const StyledCheckbox = styled.input`
 type Props = {
   name: string;
   measure: string;
+  id: string;
   type: 'shopping-list' | 'recipe';
 };
 
-function IngredientItem({ name, measure, type }: Props) {
+function IngredientItem({ name, measure, id, type }: Props) {
+  const { addIngredientMutate, removeIngredientMutate, isPending } =
+    useShoppingCart();
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleRemoveIngredient = async (id: string) =>
+    await removeIngredientMutate(id);
+
+  const handleCheckboxChange = async (
+    e: React.ChangeEvent<HTMLInputElement>,
+    id: string,
+    ingredientMeasure: string
+  ) => {
+    try {
+      if (e.currentTarget.checked) {
+        setIsChecked(true);
+        await addIngredientMutate({
+          ingredientId: id,
+          ingredientMeasure,
+        });
+      } else {
+        setIsChecked(false);
+        await removeIngredientMutate(id);
+      }
+    } catch (err) {
+      setIsChecked((prev) => !prev);
+    }
+  };
+
   return (
     <StyledIngredientItem>
       <IngredientNameWrapper>
@@ -140,10 +172,15 @@ function IngredientItem({ name, measure, type }: Props) {
 
       <IngredientMeasure>{measure}</IngredientMeasure>
       {type === 'recipe' ? (
-        <StyledCheckbox type="checkbox" />
+        <StyledCheckbox
+          onChange={(e) => handleCheckboxChange(e, id, measure)}
+          checked={isChecked}
+          disabled={isPending}
+          type="checkbox"
+        />
       ) : (
-        <button>
-          <FaX style={{ width: '20px', height: '20px' }} />
+        <button onClick={() => handleRemoveIngredient(id)} disabled={isPending}>
+          <FaXmark style={{ width: '18px', height: '18px' }} />
         </button>
       )}
     </StyledIngredientItem>

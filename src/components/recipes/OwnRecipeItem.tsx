@@ -1,6 +1,6 @@
 import { FaTrash } from 'react-icons/fa';
 import styled from 'styled-components';
-import Button from './Button';
+import Button from '../common/Button';
 
 const StyledOwnRecipeItem = styled.li``;
 

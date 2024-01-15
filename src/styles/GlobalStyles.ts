@@ -61,7 +61,6 @@ button {
   cursor: not-allowed;
 }
 
-/* Parent selector, finally 😃 */
 button:has(svg) {
   line-height: 0;
 }

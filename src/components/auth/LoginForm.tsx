@@ -1,12 +1,12 @@
-import Input from './Input';
-import Button from './Button';
+import Input from '../common/Input';
+import Button from '../common/Button';
 import { AuthForm, AuthHeader, InputWrapper } from './RegisterForm';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { loginUser } from '../utils/userApi';
+import { loginUser } from '../../utils/userApi';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
-import { useAuth } from '../contexts/authContexts';
+import { useAuth } from '../../contexts/authContext';
 
 const LoginForm = () => {
   const {

@@ -1,8 +1,8 @@
 import { FaArrowRight } from 'react-icons/fa6';
-import SearchInput from '../components/SearchInput';
+import SearchInput from '../common/SearchInput';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import useBreakpoints from '../hooks/useBreakpoints';
+import useBreakpoints from '../../hooks/useBreakpoints';
 
 const StyledRecipesLink = styled(Link)`
   justify-self: end;

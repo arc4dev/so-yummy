@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import AppNav from './AppNav';
-import Button from './Button';
-import SocialLinks from './SocialLinks';
-import LogoContainer from './LogoContainer';
-import Input from './Input';
+import AppNav from '../common/AppNav';
+import Button from '../common/Button';
+import SocialLinks from '../common/SocialLinks';
+import LogoContainer from '../common/LogoContainer';
+import Input from '../common/Input';
 
 const StyledFooter = styled.footer`
   background-color: var(--color-black);

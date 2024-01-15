@@ -3,31 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getRecipeByQuery } from '../utils/recipesApi';
 import styled from 'styled-components';
 
-import SectionHeading from '../components/SectionHeading';
-import SearchInput from '../components/SearchInput';
-import Loader from '../components/Loader';
-import RecipePreviewCard from '../components/RecipePreviewCard';
-import RecipesList from '../components/RecipesList';
-import PageContainer from '../components/PageContainer';
-
-const NotFoundQueryImage = styled.img`
-  width: 208px;
-  margin-bottom: 1.8rem;
-
-  @media screen and (min-width: 768px) {
-    width: 350px;
-  }
-`;
-
-const NotFoundQueryText = styled.p`
-  text-align: center;
-  opacity: 0.5;
-  letter-spacing: -0.28px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
+import SectionHeading from '../components/common/SectionHeading';
+import SearchInput from '../components/common/SearchInput';
+import Loader from '../components/common/Loader';
+import RecipePreviewCard from '../components/recipes/RecipePreviewCard';
+import RecipesList from '../components/recipes/RecipesList';
+import PageContainer from '../components/common/PageContainer';
+import ErrorComponent from '../components/common/ErrorComponent';
 
 const StyledSearchPage = styled.div`
   display: grid;
@@ -85,12 +67,7 @@ const SearchPage = () => {
         <RecipesList>
           {isLoading && <Loader />}
           {(!isLoading || isError) && (!recipes || !recipes?.length) ? (
-            <div>
-              <NotFoundQueryImage src="/searchTry.png" alt="Vegetables cart" />
-              <NotFoundQueryText>
-                Try looking for something else..
-              </NotFoundQueryText>
-            </div>
+            <ErrorComponent>Try looking for something else..</ErrorComponent>
           ) : (
             recipes?.map((recipe) => (
               <RecipePreviewCard

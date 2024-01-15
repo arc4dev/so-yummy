@@ -8,11 +8,11 @@ import {
   getRecipesByCategory,
 } from '../utils/recipesApi';
 
-import SectionHeading from '../components/SectionHeading';
-import RecipePreviewCard from '../components/RecipePreviewCard';
-import Loader from '../components/Loader';
-import RecipesList from '../components/RecipesList';
-import PageContainer from '../components/PageContainer';
+import SectionHeading from '../components/common/SectionHeading';
+import RecipePreviewCard from '../components/recipes/RecipePreviewCard';
+import Loader from '../components/common/Loader';
+import RecipesList from '../components/recipes/RecipesList';
+import PageContainer from '../components/common/PageContainer';
 
 const StyledCategoriesPage = styled.div`
   display: grid;

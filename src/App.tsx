@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import GlobalStyles from './styles/GlobalStyles';
 
-import AppLayout from './components/AppLayout';
+import AppLayout from './components/common/AppLayout';
 import HomePage from './pages/HomePage';
 import CategoriesPage from './pages/CategoriesPage';
 import SearchPage from './pages/SearchPage';
@@ -15,9 +15,9 @@ import ShoppingListPage from './pages/ShoppingListPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
-import { useAuth } from './contexts/authContexts';
-import ProtectedRoute from './components/ProtectedRoute';
-import RestrictedRoute from './components/RestrictedRoute';
+import { useAuth } from './contexts/authContext';
+import ProtectedRoute from './components/auth/ProtectedRoute';
+import RestrictedRoute from './components/auth/RestrictedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
@@ -64,7 +64,7 @@ function App() {
             duration: 3000,
           },
           error: {
-            duration: 3000,
+            duration: 2500,
           },
           style: {
             fontSize: '1.1rem',

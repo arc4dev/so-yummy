@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import Input from './Input';
-import Button from './Button';
+import Input from '../common/Input';
+import Button from '../common/Button';
 import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
-import { useAuth } from '../contexts/authContexts';
+import { useAuth } from '../../contexts/authContext';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '../utils/userApi';
+import { registerUser } from '../../utils/userApi';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
