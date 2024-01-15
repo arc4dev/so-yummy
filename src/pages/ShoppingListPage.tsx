@@ -1,16 +1,20 @@
+import { useQuery } from '@tanstack/react-query';
 import IngredientsTable from '../components/IngredientsTable';
 import PageContainer from '../components/PageContainer';
+import { getShoppingCart } from '../utils/recipesApi';
+import Loader from '../components/Loader';
 
 const ShoppingListPage = () => {
-  // TODO - Fetch own ingredients from API
-  const data = [
-    { ingredientName: 'Salt', ingredientMeasure: '1 tsp' },
-    { ingredientName: 'Pepper', ingredientMeasure: '1 tsp' },
-  ];
+  const { isLoading, data } = useQuery({
+    queryKey: ['shopping-cart'],
+    queryFn: getShoppingCart,
+  });
+
+  if (isLoading) return <Loader />;
 
   return (
     <PageContainer>
-      <IngredientsTable ingredients={data} type="shopping-list" />
+      <IngredientsTable ingredients={data?.data || []} type="shopping-list" />
     </PageContainer>
   );
 };

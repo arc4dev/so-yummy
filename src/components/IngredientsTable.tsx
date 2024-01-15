@@ -55,6 +55,8 @@ type Props = {
 };
 
 const IngredientsTable = ({ ingredients, type }: Props) => {
+  console.log(ingredients);
+
   return (
     <div>
       <IngredientTable>
