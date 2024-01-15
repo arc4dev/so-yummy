@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import IngredientsTable from '../components/IngredientsTable';
-import PageContainer from '../components/PageContainer';
+import IngredientsTable from '../components/recipes/IngredientsTable';
+import PageContainer from '../components/common/PageContainer';
 import { getShoppingCart } from '../utils/recipesApi';
-import Loader from '../components/Loader';
+import Loader from '../components/common/Loader';
 
 const ShoppingListPage = () => {
   const { isLoading, data } = useQuery({

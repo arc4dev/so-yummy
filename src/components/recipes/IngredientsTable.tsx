@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import IngredientItem from './IngredientItem';
-import ErrorComponent from './ErrorComponent';
+import ErrorComponent from '../common/ErrorComponent';
 
 const IngredientTable = styled.div`
   background-color: var(--color-action);

@@ -1,7 +1,7 @@
 import { FaXmark } from 'react-icons/fa6';
 import styled from 'styled-components';
 
-import useShoppingCart from '../hooks/useShoppingCart';
+import useShoppingCart from '../../hooks/useShoppingCart';
 import { useState } from 'react';
 
 const StyledIngredientItem = styled.li`
@@ -140,7 +140,7 @@ function IngredientItem({ name, measure, id, type }: Props) {
     await removeIngredientMutate(id);
 
   const handleCheckboxChange = async (
-    e: React.MouseEvent<HTMLInputElement, MouseEvent>,
+    e: React.ChangeEvent<HTMLInputElement>,
     id: string,
     ingredientMeasure: string
   ) => {
@@ -173,7 +173,7 @@ function IngredientItem({ name, measure, id, type }: Props) {
       <IngredientMeasure>{measure}</IngredientMeasure>
       {type === 'recipe' ? (
         <StyledCheckbox
-          onClick={(e) => handleCheckboxChange(e, id, measure)}
+          onChange={(e) => handleCheckboxChange(e, id, measure)}
           checked={isChecked}
           disabled={isPending}
           type="checkbox"

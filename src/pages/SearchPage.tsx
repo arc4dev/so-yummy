@@ -3,13 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { getRecipeByQuery } from '../utils/recipesApi';
 import styled from 'styled-components';
 
-import SectionHeading from '../components/SectionHeading';
-import SearchInput from '../components/SearchInput';
-import Loader from '../components/Loader';
-import RecipePreviewCard from '../components/RecipePreviewCard';
-import RecipesList from '../components/RecipesList';
-import PageContainer from '../components/PageContainer';
-import ErrorComponent from '../components/ErrorComponent';
+import SectionHeading from '../components/common/SectionHeading';
+import SearchInput from '../components/common/SearchInput';
+import Loader from '../components/common/Loader';
+import RecipePreviewCard from '../components/recipes/RecipePreviewCard';
+import RecipesList from '../components/recipes/RecipesList';
+import PageContainer from '../components/common/PageContainer';
+import ErrorComponent from '../components/common/ErrorComponent';
 
 const StyledSearchPage = styled.div`
   display: grid;
