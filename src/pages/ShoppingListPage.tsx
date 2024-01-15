@@ -8,6 +8,7 @@ const ShoppingListPage = () => {
   const { isLoading, data } = useQuery({
     queryKey: ['shopping-cart'],
     queryFn: getShoppingCart,
+    staleTime: 1000,
   });
 
   if (isLoading) return <Loader />;

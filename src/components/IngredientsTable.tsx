@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 import IngredientItem from './IngredientItem';
+import ErrorComponent from './ErrorComponent';
 
 const IngredientTable = styled.div`
   background-color: var(--color-action);
@@ -63,17 +64,23 @@ const IngredientsTable = ({ ingredients, type }: Props) => {
         <span>{type === 'recipe' ? 'Add to list' : 'Remove'}</span>
       </IngredientTable>
 
-      <IngredientsList>
-        {ingredients.map((item) => (
-          <IngredientItem
-            key={item.ingredient._id}
-            id={item.ingredient._id}
-            name={item.ingredient.name}
-            measure={item.ingredientMeasure}
-            type={type}
-          />
-        ))}
-      </IngredientsList>
+      {!ingredients.length ? (
+        <ErrorComponent style={{ paddingTop: '1rem' }}>
+          You don't have any products yet!
+        </ErrorComponent>
+      ) : (
+        <IngredientsList>
+          {ingredients.map((item) => (
+            <IngredientItem
+              key={item.ingredient._id}
+              id={item.ingredient._id}
+              name={item.ingredient.name}
+              measure={item.ingredientMeasure}
+              type={type}
+            />
+          ))}
+        </IngredientsList>
+      )}
     </div>
   );
 };

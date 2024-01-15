@@ -17,7 +17,7 @@ const useShoppingCart = () => {
         queryClient.invalidateQueries({
           queryKey: ['shopping-cart'],
         });
-        toast.success('Ingredient removed from shopping list!');
+        toast.success('Ingredient removed from the shopping list!');
       },
       onError: (error: AxiosError<ResponseError>) =>
         toast.error(error?.response?.data.message || error.message),
@@ -26,7 +26,12 @@ const useShoppingCart = () => {
   const { mutateAsync: addIngredientMutate, isPending: isPendingAdd } =
     useMutation({
       mutationFn: addShoppingCartItem,
-      onSuccess: () => toast.success('Ingredient added to the shopping list!'),
+      onSuccess: () => {
+        queryClient.invalidateQueries({
+          queryKey: ['shopping-cart'],
+        });
+        toast.success('Ingredient added to the shopping list!');
+      },
       onError: (error: AxiosError<ResponseError>) =>
         toast.error(error?.response?.data.message || error.message),
     });

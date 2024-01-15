@@ -9,25 +9,7 @@ import Loader from '../components/Loader';
 import RecipePreviewCard from '../components/RecipePreviewCard';
 import RecipesList from '../components/RecipesList';
 import PageContainer from '../components/PageContainer';
-
-const NotFoundQueryImage = styled.img`
-  width: 208px;
-  margin-bottom: 1.8rem;
-
-  @media screen and (min-width: 768px) {
-    width: 350px;
-  }
-`;
-
-const NotFoundQueryText = styled.p`
-  text-align: center;
-  opacity: 0.5;
-  letter-spacing: -0.28px;
-
-  @media screen and (min-width: 768px) {
-    font-size: 1.5rem;
-  }
-`;
+import ErrorComponent from '../components/ErrorComponent';
 
 const StyledSearchPage = styled.div`
   display: grid;
@@ -85,12 +67,7 @@ const SearchPage = () => {
         <RecipesList>
           {isLoading && <Loader />}
           {(!isLoading || isError) && (!recipes || !recipes?.length) ? (
-            <div>
-              <NotFoundQueryImage src="/searchTry.png" alt="Vegetables cart" />
-              <NotFoundQueryText>
-                Try looking for something else..
-              </NotFoundQueryText>
-            </div>
+            <ErrorComponent>Try looking for something else..</ErrorComponent>
           ) : (
             recipes?.map((recipe) => (
               <RecipePreviewCard

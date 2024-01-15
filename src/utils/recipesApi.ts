@@ -92,27 +92,19 @@ export const getRecipesHomeCategories = async () => {
 };
 
 export const getOwnRecipes = async () => {
-  try {
-    const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-      '/users/my-recipes'
-    );
+  const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
+    '/users/my-recipes'
+  );
 
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  return res.data;
 };
 
 export const getShoppingCart = async () => {
-  try {
-    const res = await axios.get<DatabaseResponseMany<IngredientItem>>(
-      '/shopping-list'
-    );
+  const res = await axios.get<DatabaseResponseMany<IngredientItem>>(
+    '/shopping-list'
+  );
 
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
+  return res.data;
 };
 
 export const addShoppingCartItem = async ({
@@ -122,29 +114,21 @@ export const addShoppingCartItem = async ({
   ingredientId: string;
   ingredientMeasure: string;
 }) => {
-  try {
-    const res = await axios.post<DatabaseResponse<IngredientItem>>(
-      '/shopping-list',
-      {
-        ingredient: ingredientId,
-        ingredientMeasure,
-      }
-    );
+  const res = await axios.post<DatabaseResponse<IngredientItem>>(
+    '/shopping-list',
+    {
+      ingredient: ingredientId,
+      ingredientMeasure,
+    }
+  );
 
-    return res.data.data;
-  } catch (err) {
-    console.log(err);
-  }
+  return res.data.data;
 };
 
 export const deleteShoppingCartItem = async (ingredientId: string) => {
-  try {
-    await axios.delete<DatabaseResponse<IngredientItem>>(
-      `/shopping-list/${ingredientId}`
-    );
+  await axios.delete<DatabaseResponse<IngredientItem>>(
+    `/shopping-list/${ingredientId}`
+  );
 
-    return null;
-  } catch (err) {
-    console.log(err);
-  }
+  return null;
 };

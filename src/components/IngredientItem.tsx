@@ -2,6 +2,7 @@ import { FaXmark } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 import useShoppingCart from '../hooks/useShoppingCart';
+import { useState } from 'react';
 
 const StyledIngredientItem = styled.li`
   display: grid;
@@ -133,24 +134,29 @@ type Props = {
 function IngredientItem({ name, measure, id, type }: Props) {
   const { addIngredientMutate, removeIngredientMutate, isPending } =
     useShoppingCart();
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleRemoveIngredient = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    id: string
-  ) => await removeIngredientMutate(id);
+  const handleRemoveIngredient = async (id: string) =>
+    await removeIngredientMutate(id);
 
   const handleCheckboxChange = async (
     e: React.MouseEvent<HTMLInputElement, MouseEvent>,
     id: string,
     ingredientMeasure: string
   ) => {
-    if (e.currentTarget.checked) {
-      await addIngredientMutate({
-        ingredientId: id,
-        ingredientMeasure,
-      });
-    } else {
-      await removeIngredientMutate(id);
+    try {
+      if (e.currentTarget.checked) {
+        setIsChecked(true);
+        await addIngredientMutate({
+          ingredientId: id,
+          ingredientMeasure,
+        });
+      } else {
+        setIsChecked(false);
+        await removeIngredientMutate(id);
+      }
+    } catch (err) {
+      setIsChecked((prev) => !prev);
     }
   };
 
@@ -168,12 +174,12 @@ function IngredientItem({ name, measure, id, type }: Props) {
       {type === 'recipe' ? (
         <StyledCheckbox
           onClick={(e) => handleCheckboxChange(e, id, measure)}
+          checked={isChecked}
+          disabled={isPending}
           type="checkbox"
         />
       ) : (
-        <button
-          onClick={(e) => handleRemoveIngredient(e, id)}
-          disabled={isPending}>
+        <button onClick={() => handleRemoveIngredient(id)} disabled={isPending}>
           <FaXmark style={{ width: '18px', height: '18px' }} />
         </button>
       )}
