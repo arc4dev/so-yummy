@@ -10,8 +10,7 @@ const data = {
   data: [
     {
       _id: '659817188ccf7b24a86dd15d',
-      strMeal:
-        'Beef Banh Mi Bowls with Sriracha Mayo, Carrot & Pickled Cucumber',
+      strMeal: 'Beef Banh Mi Bowls with Sriracha Mayo',
       strMealThumb:
         'https://www.themealdb.com/images/media/meals/z0ageb1583189517.jpg',
       strDescription:
@@ -24,7 +23,7 @@ const data = {
       strMealThumb:
         'https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg',
       strDescription:
-        'Bread omelette is a popular and delicious breakfast dish made with bread and eggs. It is a perfect combination of carbohydrates and protein, making it a filling and nutritious meal to start the day. To make this dish, simply beat an egg with a pinch of salt, dip a slice of bread in the egg mixture and fry it in a pan until golden and crispy. Flip it over, add more egg mixture on top, and fold it into an omelette shape. Cook until the egg is fully set and serve it hot. This dish can be made in just 10 minutes.',
+        'Bread omelette is a popular and delicious breakfast dish made with bread and eggs. It is a perfect combination of carbohydrates and protein, making it a filling and nutritious meal to start the day.',
       cookingTime: 10,
     },
   ],
