@@ -78,7 +78,7 @@ const CookingTime = styled.span`
 
 const DetailsContainer = styled.div`
   display: grid;
-  grid-template-rows: auto 1fr auto;
+  grid-template-rows: 1fr minmax(auto, 50px) 1fr;
   width: 100%;
   gap: 0.5rem;
 
@@ -103,6 +103,7 @@ const ActionContainer = styled.div`
 `;
 
 const TrashButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
+  align-self: flex-start;
   border-radius: 4px;
   padding: 0.5rem;
   font-size: 1rem;
@@ -147,7 +148,7 @@ const OwnRecipeItem = ({ recipe, variant = 'primary' }: Props) => {
             size="small"
             variant="skew"
             btnColor={variant === 'primary' ? 'primary' : 'black'}
-            to={`/recipes/${_id}?p=true`}>
+            to={`/recipes/${_id}${variant === 'primary' ? '?p=true' : ''}`}>
             See recipe
           </Button>
         </ActionContainer>

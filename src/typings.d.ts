@@ -34,6 +34,7 @@ type Recipe = {
   _id: string;
   strMeal: string;
   strMealThumb: string;
+  favouritedBy: string[];
 };
 
 type OwnRecipePreview = Recipe & {

@@ -15,10 +15,14 @@ const LogoHeader = styled.h3`
   letter-spacing: 0.27px;
 `;
 
-const LogoContainer = () => {
+type Props = {
+  variant?: 'primary' | 'secondary';
+};
+
+const LogoContainer = ({ variant = 'primary' }: Props) => {
   return (
     <StyledLogoContainer>
-      <Logo />
+      <Logo variant={variant} />
       <LogoHeader>So Yummy</LogoHeader>
     </StyledLogoContainer>
   );

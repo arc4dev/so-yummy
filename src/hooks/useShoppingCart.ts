@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import {
   addShoppingCartItem,
   deleteShoppingCartItem,
-} from '../utils/recipesApi';
+} from '../utils/shoppingCartApi';
 
 const useShoppingCart = () => {
   const queryClient = useQueryClient();

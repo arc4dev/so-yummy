@@ -9,7 +9,7 @@ const sizes = {
   `,
   small: css`
     font-size: 0.71rem;
-    padding: 6px 14px;
+    padding: 8px 14px;
 
     @media screen and (min-width: 768px) {
       font-size: 1rem;

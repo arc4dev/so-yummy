@@ -15,11 +15,6 @@ const Icon = styled.div`
   top: 1.15rem;
   left: 1.2rem;
   width: 20px;
-
-  /* @media screen and (min-width: 768px) {
-    top: 1.15rem;
-    left: 1.2rem;
-  } */
 `;
 
 const ErrorMessage = styled.span`
@@ -89,9 +84,10 @@ const StyledInput = styled.input<{ $sizee: InputSizee }>`
 `;
 
 type InputSizee = 'stretch' | 'primary';
+type InputVariant = 'Email' | 'Password' | 'Name' | 'Newsletter';
 
 type Props = {
-  variant: 'Email' | 'Password' | 'Name' | 'Newsletter';
+  variant: InputVariant;
   sizee: InputSizee;
   error?: FieldError;
 } & React.ComponentProps<'input'>;
