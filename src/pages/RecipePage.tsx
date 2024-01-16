@@ -8,6 +8,8 @@ import { getRecipeById } from '../utils/recipesApi';
 import Loader from '../components/common/Loader';
 import PageContainer from '../components/common/PageContainer';
 import IngredientsTable from '../components/recipes/IngredientsTable';
+import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/authContext';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -185,17 +187,32 @@ const RecipeImage = styled.img`
 `;
 
 const RecipePage = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const [searchParamas] = useSearchParams({
     p: 'false',
   });
   const isPrivate = searchParamas.get('p') === 'true';
 
+  const [isFavourite, setIsFavourite] = useState(false);
+
   const { data: recipe, isLoading } = useQuery({
     queryKey: ['recipe', id],
     queryFn: () => getRecipeById(id!, isPrivate),
     enabled: !!id,
   });
+
+  useEffect(() => {
+    setIsFavourite(!!recipe?.favouritedBy.includes(user?._id || ''));
+  }, [recipe?.favouritedBy, user?._id]);
+
+  const handleFavouriteClick = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+
+    // TODO - Addding and deleting
+  };
 
   if (isLoading) return <Loader />;
 
@@ -206,8 +223,10 @@ const RecipePage = () => {
           <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
           <RecipeDescription>{recipe?.strDescription}</RecipeDescription>
 
-          <RecipeAddToFavoriteButton>
-            Add to favorite recipes
+          <RecipeAddToFavoriteButton onClick={(e) => handleFavouriteClick(e)}>
+            {isFavourite
+              ? 'Remove from favourite recipes'
+              : 'Add to favourite recipes'}
           </RecipeAddToFavoriteButton>
 
           <RecipeTime>

@@ -1,5 +1,3 @@
-'use client';
-
 import React, { createContext, useContext, useReducer } from 'react';
 
 interface AuthState {

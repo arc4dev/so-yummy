@@ -29,7 +29,7 @@ const CategoriesList = styled.ul`
   }
 `;
 
-const Category = styled.li<{ isActive: boolean }>`
+const Category = styled.li<{ $isActive: boolean }>`
   cursor: pointer;
   color: var(--color-gray-2);
   padding: 0 14px;
@@ -47,7 +47,7 @@ const Category = styled.li<{ isActive: boolean }>`
   }
 
   ${(props) =>
-    props.isActive &&
+    props.$isActive &&
     css`
       color: var(--color-action);
       border-bottom: 2px solid var(--color-action);
@@ -91,7 +91,7 @@ const CategoriesPage = () => {
           {categories?.map((category) => (
             <Category
               key={category}
-              isActive={categoryParam === category}
+              $isActive={categoryParam === category}
               onClick={() => setSearchParams({ c: category })}>
               {category}
             </Category>
