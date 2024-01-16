@@ -1,6 +1,8 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-const Container = styled.div`
+const StyledPageContainer = styled.div`
   max-width: 1440px;
   margin: 0 auto;
   padding: 50px 16px;
@@ -14,4 +16,18 @@ const Container = styled.div`
   }
 `;
 
-export default Container;
+type Props = {
+  children: React.ReactNode;
+};
+
+const PageContainer = ({ children }: Props) => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return <StyledPageContainer>{children}</StyledPageContainer>;
+};
+
+export default PageContainer;

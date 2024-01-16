@@ -37,7 +37,7 @@ type Recipe = {
 };
 
 type OwnRecipePreview = Recipe & {
-  cookingTime: string;
+  cookingTime: number;
   strDescription: string;
 };
 

@@ -4,6 +4,7 @@ import OwnRecipeList from '../components/recipes/OwnRecipeList';
 import PageContainer from '../components/common/PageContainer';
 import Loader from '../components/common/Loader';
 import { getOwnRecipes } from '../utils/recipesApi';
+import SectionHeading from '../components/common/SectionHeading';
 
 const MyRecipesPage = () => {
   const { data, isLoading } = useQuery({
@@ -15,6 +16,7 @@ const MyRecipesPage = () => {
 
   return (
     <PageContainer>
+      <SectionHeading>My recipes</SectionHeading>
       <OwnRecipeList recipes={data?.data || []} />
     </PageContainer>
   );

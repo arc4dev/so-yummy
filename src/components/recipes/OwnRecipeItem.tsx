@@ -102,13 +102,13 @@ const ActionContainer = styled.div`
   align-items: flex-end;
 `;
 
-const TrashButton = styled.button<{ variant: 'primary' | 'secondary' }>`
+const TrashButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
   border-radius: 4px;
   padding: 0.5rem;
   font-size: 1rem;
 
-  ${({ variant }) =>
-    variant === 'primary'
+  ${({ $variant }) =>
+    $variant === 'primary'
       ? `
     background-color: var(--color-action);
     color: var(--color-white);
@@ -134,7 +134,7 @@ const OwnRecipeItem = ({ recipe, variant = 'primary' }: Props) => {
         <TitleContainer>
           <RecipeTitle>{strMeal}</RecipeTitle>
           <TrashButton
-            variant={variant === 'primary' ? 'primary' : 'secondary'}>
+            $variant={variant === 'primary' ? 'primary' : 'secondary'}>
             <LuTrash2 />
           </TrashButton>
         </TitleContainer>
