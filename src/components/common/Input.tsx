@@ -84,9 +84,10 @@ const StyledInput = styled.input<{ $sizee: InputSizee }>`
 `;
 
 type InputSizee = 'stretch' | 'primary';
+type InputVariant = 'Email' | 'Password' | 'Name' | 'Newsletter';
 
 type Props = {
-  variant: 'Email' | 'Password' | 'Name' | 'Newsletter';
+  variant: InputVariant;
   sizee: InputSizee;
   error?: FieldError;
 } & React.ComponentProps<'input'>;

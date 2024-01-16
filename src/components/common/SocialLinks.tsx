@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FaFacebook, FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 
 const SocialsList = styled.ul`
   display: flex;
@@ -28,16 +29,24 @@ const SocialLinks = () => {
   return (
     <SocialsList>
       <SocialItem>
-        <FaFacebook style={iconStyle} />
+        <Link to="https://www.facebook.com">
+          <FaFacebook style={iconStyle} />
+        </Link>
       </SocialItem>
       <SocialItem>
-        <FaYoutube style={iconStyle} />
+        <Link to="https://www.youtube.com">
+          <FaYoutube style={iconStyle} />
+        </Link>
       </SocialItem>
       <SocialItem>
-        <FaTwitter style={iconStyle} />
+        <Link to="https://www.twitter.com">
+          <FaTwitter style={iconStyle} />
+        </Link>
       </SocialItem>
       <SocialItem>
-        <FaInstagram style={iconStyle} />
+        <Link to="https://www.instagram.com">
+          <FaInstagram style={iconStyle} />
+        </Link>
       </SocialItem>
     </SocialsList>
   );
