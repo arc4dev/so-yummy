@@ -10,6 +10,7 @@ import PageContainer from '../components/common/PageContainer';
 import IngredientsTable from '../components/recipes/IngredientsTable';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/authContext';
+import Button from '../components/common/Button';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -211,6 +212,7 @@ const RecipePage = () => {
   ) => {
     e.preventDefault();
 
+    console.log('clicked');
     // TODO - Addding and deleting
   };
 
@@ -223,11 +225,15 @@ const RecipePage = () => {
           <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
           <RecipeDescription>{recipe?.strDescription}</RecipeDescription>
 
-          <RecipeAddToFavoriteButton onClick={(e) => handleFavouriteClick(e)}>
+          <Button
+            variant="skew"
+            btnColor="secondary"
+            size="small"
+            onClick={(e) => handleFavouriteClick(e)}>
             {isFavourite
               ? 'Remove from favourite recipes'
               : 'Add to favourite recipes'}
-          </RecipeAddToFavoriteButton>
+          </Button>
 
           <RecipeTime>
             <FiClock />

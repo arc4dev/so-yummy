@@ -98,3 +98,11 @@ export const getOwnRecipes = async () => {
 
   return res.data;
 };
+
+export const getFavouriteRecipes = async () => {
+  const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
+    '/users/favourite-recipes'
+  );
+
+  return res.data;
+};
