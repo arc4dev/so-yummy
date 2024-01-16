@@ -15,11 +15,6 @@ const Icon = styled.div`
   top: 1.15rem;
   left: 1.2rem;
   width: 20px;
-
-  /* @media screen and (min-width: 768px) {
-    top: 1.15rem;
-    left: 1.2rem;
-  } */
 `;
 
 const ErrorMessage = styled.span`

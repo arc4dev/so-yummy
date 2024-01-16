@@ -154,7 +154,7 @@ const Footer = () => {
     <StyledFooter>
       <MainFooter>
         <Container>
-          <LogoContainer />
+          <LogoContainer variant="secondary" />
 
           <StyledFooterList>
             <li>
@@ -182,7 +182,7 @@ const Footer = () => {
           </NewsletterDescription>
 
           <NewsletterContainer>
-            <Input type="Newsletter" />
+            <Input variant="Newsletter" sizee="stretch" />
             <Button size="primary">Subscribe</Button>
           </NewsletterContainer>
         </NewsletterForm>
