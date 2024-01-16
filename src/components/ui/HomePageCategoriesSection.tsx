@@ -47,13 +47,12 @@ const CategoriesListItem = styled.li`
 `;
 
 const CategoriesSection = () => {
-  // TODO - ERROR HANDLING
+  const { isMobile, isTablet, isDesktop } = useBreakpoints();
+
   const { isLoading, data } = useQuery({
     queryKey: ['recipes'],
     queryFn: getRecipesHomeCategories,
   });
-
-  const { isMobile, isTablet, isDesktop } = useBreakpoints();
 
   if (isLoading) return <Loader />;
 
@@ -84,7 +83,7 @@ const CategoriesSection = () => {
             <div style={{ marginLeft: 'auto' }}>
               <Button
                 to={`/categories?c=${categorizedRecipe.category}`}
-                size="small">
+                size="smallStatic">
                 See all
               </Button>
             </div>

@@ -45,22 +45,23 @@ const StyledInput = styled.input`
 
 type ButtonBgColorTypes = 'primary' | 'secondary';
 
-const StyledButton = styled.button<{ bgcolor: ButtonBgColorTypes }>`
+const StyledButton = styled.button<{ $bgcolor: ButtonBgColorTypes }>`
   position: absolute;
-  top: -3px;
+  top: -2px;
   right: 0;
-  padding: 1.21em 2.28em;
+  padding: 1.1rem 2.28rem;
   border-radius: 24px 44px;
-  background-color: ${({ bgcolor }) =>
-    bgcolor === 'secondary' ? 'var(--color-action)' : 'var(--color-black)'};
+  background-color: ${({ $bgcolor }) =>
+    $bgcolor === 'secondary' ? 'var(--color-action)' : 'var(--color-black)'};
   color: var(--color-white-2);
 
   @media screen and (min-width: 768px) {
-    top: 0;
+    padding: 1.38rem 2.28rem;
     font-size: 1rem;
   }
 
   @media screen and (min-width: 1280px) {
+    padding: 1.55rem 2.28rem;
     font-size: 1.15rem;
   }
 `;
@@ -115,7 +116,7 @@ const SearchInput = ({
     <div>
       <InputContainer onSubmit={onSubmit}>
         <StyledInput name="query" type="text" placeholder="Beef |" />
-        <StyledButton bgcolor={btnColor}>Search</StyledButton>
+        <StyledButton $bgcolor={btnColor}>Search</StyledButton>
       </InputContainer>
 
       {type === 'searchWithFilter' && (

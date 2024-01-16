@@ -156,7 +156,7 @@ const HeroSection = () => {
                 way to enjoy a variety of fresh ingredients in one satisfying
                 meal
               </p>
-              <StyledRecipesLink to="/recipes/all">
+              <StyledRecipesLink to="/categories">
                 See recipes <FaArrowRight />
               </StyledRecipesLink>
             </HomeImageDescriptionBox>

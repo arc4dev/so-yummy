@@ -29,6 +29,7 @@ const GlobalStyles = createGlobalStyle`
 html {
   font-family: 'Poppins', sans-serif;
   font-size: 14px;
+  background-color: var(--color-white-2);
   color: var(--color-primary);
   font-weight:400
 }
