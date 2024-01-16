@@ -81,3 +81,5 @@ type ResponseError = {
   status: 'fail';
   message: string;
 };
+
+type OwnRecipeListVariant = 'primary' | 'secondary';

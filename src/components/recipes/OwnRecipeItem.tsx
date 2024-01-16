@@ -102,23 +102,29 @@ const ActionContainer = styled.div`
   align-items: flex-end;
 `;
 
-const TrashButton = styled.button`
-  background-color: var(--color-action);
-  color: var(--color-white);
+const TrashButton = styled.button<{ variant: 'primary' | 'secondary' }>`
   border-radius: 4px;
   padding: 0.5rem;
   font-size: 1rem;
 
-  @media screen and (min-width: 768px) {
-    font-size: 1.71rem;
-  }
+  ${({ variant }) =>
+    variant === 'primary'
+      ? `
+    background-color: var(--color-action);
+    color: var(--color-white);
+  `
+      : `
+      background-color: var(--color-action-light);
+      color: var(--color-primary);
+  `}
 `;
 
 type Props = {
   recipe: OwnRecipePreview;
+  variant?: OwnRecipeListVariant;
 };
 
-const OwnRecipeItem = ({ recipe }: Props) => {
+const OwnRecipeItem = ({ recipe, variant = 'primary' }: Props) => {
   const { _id, strMeal, strDescription, strMealThumb, cookingTime } = recipe;
 
   return (
@@ -127,7 +133,8 @@ const OwnRecipeItem = ({ recipe }: Props) => {
       <DetailsContainer>
         <TitleContainer>
           <RecipeTitle>{strMeal}</RecipeTitle>
-          <TrashButton>
+          <TrashButton
+            variant={variant === 'primary' ? 'primary' : 'secondary'}>
             <LuTrash2 />
           </TrashButton>
         </TitleContainer>
@@ -136,7 +143,11 @@ const OwnRecipeItem = ({ recipe }: Props) => {
 
         <ActionContainer>
           <CookingTime>{cookingTime} min</CookingTime>
-          <Button size="small" variant="skew" to={`/recipes/${_id}?p=true`}>
+          <Button
+            size="small"
+            variant="skew"
+            btnColor={variant === 'primary' ? 'primary' : 'black'}
+            to={`/recipes/${_id}?p=true`}>
             See recipe
           </Button>
         </ActionContainer>

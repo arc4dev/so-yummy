@@ -18,16 +18,17 @@ const StyledOwnRecipesList = styled.ul`
 
 type Props = {
   recipes: OwnRecipePreview[];
+  variant?: OwnRecipeListVariant;
 };
 
-const OwnRecipeList = ({ recipes }: Props) => {
+const OwnRecipeList = ({ recipes, variant = 'primary' }: Props) => {
   return (
     <StyledOwnRecipesList>
       {!recipes.length ? (
         <ErrorComponent>You don't have any recipes yet!</ErrorComponent>
       ) : (
         recipes?.map((recipe) => (
-          <OwnRecipeItem key={recipe._id} recipe={recipe} />
+          <OwnRecipeItem variant={variant} key={recipe._id} recipe={recipe} />
         ))
       )}
     </StyledOwnRecipesList>
