@@ -90,7 +90,7 @@ function App() {
           <Route
             path="/"
             element={
-              <RestrictedRoute redirectTo="/home" component={<StartPage />} />
+              <RestrictedRoute redirectTo={lastUrl} component={<StartPage />} />
             }
           />
           <Route
@@ -103,7 +103,7 @@ function App() {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/home"
+                redirectTo={lastUrl}
                 component={<RegisterPage />}
               />
             }
@@ -123,11 +123,11 @@ function App() {
                 <Route path="all" element={<MyRecipesPage />} />
                 <Route path="favourites" element={<FavouritesPage />} />
                 <Route path="new" element={<AddRecipePage />} />
-                <Route path=":id" element={<RecipePage />} />R
+                <Route path=":id" element={<RecipePage />} />
               </Route>
-            </Route>
 
-            <Route path="*" element={<NotFoundPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
