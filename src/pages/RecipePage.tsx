@@ -195,11 +195,7 @@ const RecipePage = () => {
     setIsFavourite(!!recipe?.favouritedBy.includes(user?._id || ''));
   }, [recipe?.favouritedBy, user?._id]);
 
-  const handleFavouriteClick = async (
-    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
-    e.preventDefault();
-
+  const handleFavouriteClick = async () => {
     if (isFavourite) await deleteFavouriteRecipeMutate(recipe?._id || '');
     else await addFavouriteRecipeMutate(recipe?._id || '');
 
@@ -215,16 +211,18 @@ const RecipePage = () => {
           <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
           <RecipeDescription>{recipe?.strDescription}</RecipeDescription>
 
-          <Button
-            variant="skew"
-            btnColor="secondary"
-            size="small"
-            disabled={isPending}
-            onClick={(e) => handleFavouriteClick(e)}>
-            {isFavourite
-              ? 'Remove from favourite recipes'
-              : 'Add to favourite recipes'}
-          </Button>
+          {!isPrivate && (
+            <Button
+              variant="skew"
+              btnColor="secondary"
+              size="small"
+              disabled={isPending}
+              onClick={handleFavouriteClick}>
+              {isFavourite
+                ? 'Remove from favourite recipes'
+                : 'Add to favourite recipes'}
+            </Button>
+          )}
 
           <RecipeTime>
             <FiClock />
