@@ -1,6 +1,8 @@
 import { LuTrash2 } from 'react-icons/lu';
 import styled from 'styled-components';
 import Button from '../common/Button';
+import useOwnRecipes from '../../hooks/useOwnRecipes';
+import useFavouriteRecipes from '../../hooks/useFavouriteRecipes';
 
 const StyledOwnRecipeItem = styled.li`
   width: 100%;
@@ -123,10 +125,24 @@ const TrashButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
 type Props = {
   recipe: OwnRecipePreview;
   variant?: OwnRecipeListVariant;
+  page: 'favourites' | 'own';
 };
 
-const OwnRecipeItem = ({ recipe, variant = 'primary' }: Props) => {
+const OwnRecipeItem = ({ recipe, variant = 'primary', page }: Props) => {
   const { _id, strMeal, strDescription, strMealThumb, cookingTime } = recipe;
+  const { deleteOwnRecipeMutate, isPending: isPendingOwn } = useOwnRecipes();
+  const { deleteFavouriteRecipeMutate, isPending: isPendingFavourite } =
+    useFavouriteRecipes();
+
+  const handleRemoveFavouriteRecipe = async () => {
+    await deleteFavouriteRecipeMutate(_id);
+  };
+
+  const handleRemoveOwnRecipe = async () => {
+    await deleteOwnRecipeMutate(_id);
+  };
+
+  const isPending = isPendingOwn || isPendingFavourite;
 
   return (
     <StyledOwnRecipeItem>
@@ -135,6 +151,12 @@ const OwnRecipeItem = ({ recipe, variant = 'primary' }: Props) => {
         <TitleContainer>
           <RecipeTitle>{strMeal}</RecipeTitle>
           <TrashButton
+            onClick={
+              page === 'favourites'
+                ? handleRemoveFavouriteRecipe
+                : handleRemoveOwnRecipe
+            }
+            disabled={isPending}
             $variant={variant === 'primary' ? 'primary' : 'secondary'}>
             <LuTrash2 />
           </TrashButton>

@@ -11,6 +11,7 @@ import IngredientsTable from '../components/recipes/IngredientsTable';
 import { useEffect, useState } from 'react';
 import { useAuth } from '../contexts/authContext';
 import Button from '../components/common/Button';
+import useFavouriteRecipes from '../hooks/useFavouriteRecipes';
 
 const StyledRecipePage = styled.div`
   padding-top: 380px;
@@ -67,21 +68,6 @@ const RecipeDescription = styled.p`
 
   @media screen and (min-width: 1440px) {
     margin-bottom: 30px;
-  }
-`;
-
-const RecipeAddToFavoriteButton = styled.button`
-  padding: 10px 18px;
-  font-size: 0.71rem;
-  background-color: transparent;
-  border: 2px solid var(--color-action);
-  border-radius: 24px 44px;
-  transition: all 200ms ease-in-out;
-
-  @media screen and (min-width: 768px) {
-    padding: 18px 44px;
-    font-size: 1.14rem;
-    line-height: calc(24 / 16);
   }
 `;
 
@@ -195,6 +181,8 @@ const RecipePage = () => {
   });
   const isPrivate = searchParamas.get('p') === 'true';
 
+  const { isPending, deleteFavouriteRecipeMutate, addFavouriteRecipeMutate } =
+    useFavouriteRecipes();
   const [isFavourite, setIsFavourite] = useState(false);
 
   const { data: recipe, isLoading } = useQuery({
@@ -212,8 +200,10 @@ const RecipePage = () => {
   ) => {
     e.preventDefault();
 
-    console.log('clicked');
-    // TODO - Addding and deleting
+    if (isFavourite) await deleteFavouriteRecipeMutate(recipe?._id || '');
+    else await addFavouriteRecipeMutate(recipe?._id || '');
+
+    setIsFavourite(!isFavourite);
   };
 
   if (isLoading) return <Loader />;
@@ -229,6 +219,7 @@ const RecipePage = () => {
             variant="skew"
             btnColor="secondary"
             size="small"
+            disabled={isPending}
             onClick={(e) => handleFavouriteClick(e)}>
             {isFavourite
               ? 'Remove from favourite recipes'
