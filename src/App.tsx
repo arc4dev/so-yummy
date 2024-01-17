@@ -21,7 +21,7 @@ import RestrictedRoute from './components/auth/RestrictedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { refreshUser } from './utils/userApi';
 
 const queryClient = new QueryClient({
@@ -34,6 +34,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const { dispatch } = useAuth();
+  const [lastUrl, setLastUrl] = useState('/home');
 
   useEffect(() => {
     const refresh = async () => {
@@ -50,6 +51,14 @@ function App() {
     };
     refresh();
   }, [dispatch]);
+
+  useEffect(() => {
+    window.onbeforeunload = () => {
+      localStorage.setItem('lastUrl', window.location.pathname);
+    };
+
+    setLastUrl(localStorage.getItem('lastUrl') || '/home');
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -87,7 +96,7 @@ function App() {
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
+              <RestrictedRoute redirectTo={lastUrl} component={<LoginPage />} />
             }
           />
           <Route
