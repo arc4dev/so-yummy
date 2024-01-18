@@ -18,6 +18,8 @@ const GlobalStyles = createGlobalStyle`
   --color-gray-3: #3E4462; 
   --color-gray-4: #D9D9D9;
 
+  --color-line: #E0E0E0; // line
+
   --color-white: #FFFFFF; // background
   --color-white-2: #FAFAFA; // text
 
