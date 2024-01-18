@@ -5,6 +5,7 @@ import Button from '../components/common/Button';
 import styled from 'styled-components';
 import cameraFrame from '../assets/camera-frame.svg';
 import ButtonIcon from '../components/common/ButtonIcon';
+import PopularRecipes from '../components/common/PopularRecipes';
 
 const RecipeInfoContainer = styled.div`
   display: grid;
@@ -148,44 +149,6 @@ const FormTextarea = styled.textarea`
   max-width: 500px;
 `;
 
-const PopularRecipesContainer = styled.div`
-  display: grid;
-  gap: 1.8rem;
-`;
-
-const PopularRecipesList = styled.ul`
-  display: grid;
-  gap: 1.71rem;
-`;
-
-const PopularRecipeItem = styled.li`
-  display: flex;
-  gap: 0.85rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--color-line);
-`;
-
-const PopularRecipeImage = styled.img`
-  width: 102px;
-  height: 85px;
-`;
-
-const PopularRecipeInfo = styled.div``;
-
-const PopularRecipeHeader = styled.h3`
-  font-size: 1.14rem;
-  font-weight: 500;
-  line-height: 1.25;
-  letter-spacing: -0.24px;
-`;
-
-const PopularRecipeDescription = styled.p`
-  font-size: 0.86rem;
-  font-weight: 300;
-  line-height: 1.33;
-  letter-spacing: -0.24px;
-`;
-
 const AddRecipePage = () => {
   return (
     <PageContainer>
@@ -272,41 +235,7 @@ const AddRecipePage = () => {
           </Button>
         </RecipePreparationContainer>
 
-        <PopularRecipesContainer>
-          <SectionHeading type="secondary">Popular recipe</SectionHeading>
-
-          <PopularRecipesList>
-            <PopularRecipeItem>
-              <PopularRecipeImage
-                src="https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg"
-                alt=""
-              />
-
-              <PopularRecipeInfo>
-                <PopularRecipeHeader>Banana pancakes</PopularRecipeHeader>
-                <PopularRecipeDescription>
-                  In a bowl, mash the banana with a fork until it resembles a
-                  thick purée...
-                </PopularRecipeDescription>
-              </PopularRecipeInfo>
-            </PopularRecipeItem>
-
-            <PopularRecipeItem>
-              <PopularRecipeImage
-                src="https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg"
-                alt=""
-              />
-
-              <PopularRecipeInfo>
-                <PopularRecipeHeader>Banana pancakes</PopularRecipeHeader>
-                <PopularRecipeDescription>
-                  In a bowl, mash the banana with a fork until it resembles a
-                  thick purée...
-                </PopularRecipeDescription>
-              </PopularRecipeInfo>
-            </PopularRecipeItem>
-          </PopularRecipesList>
-        </PopularRecipesContainer>
+        <PopularRecipes />
       </AddRecipeForm>
     </PageContainer>
   );
