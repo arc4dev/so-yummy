@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import useShoppingCart from '../../hooks/useShoppingCart';
 import { useState } from 'react';
+import ButtonIcon from '../common/ButtonIcon';
 
 const StyledIngredientItem = styled.li`
   display: grid;
@@ -179,9 +180,11 @@ function IngredientItem({ name, measure, id, type }: Props) {
           type="checkbox"
         />
       ) : (
-        <button onClick={() => handleRemoveIngredient(id)} disabled={isPending}>
-          <FaXmark style={{ width: '18px', height: '18px' }} />
-        </button>
+        <ButtonIcon
+          variant="x"
+          onClick={() => handleRemoveIngredient(id)}
+          disabled={isPending}
+        />
       )}
     </StyledIngredientItem>
   );

@@ -10,6 +10,7 @@ const sizes = {
   small: css`
     font-size: 0.71rem;
     padding: 8px 14px;
+    width: fit-content;
 
     @media screen and (min-width: 768px) {
       font-size: 1rem;
@@ -23,9 +24,11 @@ const sizes = {
   `,
   smallStatic: css`
     padding: 10px 24px;
+    width: fit-content;
   `,
   primary: css`
     padding: 0.7rem 1.7rem;
+    width: fit-content;
 
     @media screen and (min-width: 768px) {
       font-size: 1.15rem;
@@ -79,7 +82,7 @@ type Props = {
   size?: ButtonSize;
   btnColor?: ButtonColor;
   to?: string;
-} & React.ButtonHTMLAttributes<HTMLButtonElement>;
+} & React.ComponentProps<'button'>;
 
 const Button = ({
   children,

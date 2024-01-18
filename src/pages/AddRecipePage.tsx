@@ -2,21 +2,25 @@ import { FaXmark } from 'react-icons/fa6';
 import PageContainer from '../components/common/PageContainer';
 import SectionHeading from '../components/common/SectionHeading';
 import Button from '../components/common/Button';
-import { FaAngleDown } from 'react-icons/fa6';
 import styled from 'styled-components';
 import cameraFrame from '../assets/camera-frame.svg';
-import ButtonExpand from '../components/common/ButtonExpand';
+import ButtonIcon from '../components/common/ButtonIcon';
 
 const RecipeInfoContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  display: grid;
+  justify-items: center;
   align-items: center;
-  gap: 32px;
+  gap: 2.1rem;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: auto 1fr;
+  }
 `;
 
 const AddRecipeForm = styled.form`
   margin-top: 4.5rem;
+  display: grid;
+  gap: 4.5rem;
 `;
 
 const FileInputWrapper = styled.div`
@@ -67,22 +71,119 @@ const FormInputWrapper = styled.div`
   position: relative;
 `;
 
-const FormInputOption = styled.div`
+const FormInputOption = styled.div<{ $type: 'select' | 'addon' }>`
   display: flex;
-  font-size: 12px;
-  gap: 13px;
+  font-size: 0.86rem;
+  gap: 0.9rem;
   height: 100%;
   justify-content: right;
-  padding-top: 3px;
+  align-items: center;
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
   cursor: pointer;
+
+  ${({ $type }) => $type === 'addon' && 'padding-right: 1.28rem;'}
+  ${({ $type }) => $type === 'select' && 'width: 100%;'}
 `;
 
 const FormInputOptionText = styled.span`
   font-size: 0.85rem;
+`;
+
+const IngredientsAddingContainer = styled.div`
+  display: grid;
+  gap: 1.8rem;
+`;
+
+const IngredientsHeadingWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const IngredientFormItem = styled.li`
+  display: grid;
+  grid-template-columns: 3.5fr auto 0.2fr;
+  gap: 1rem;
+
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 3fr auto 1fr;
+  }
+`;
+
+const IngredientsFormList = styled.ul``;
+
+const IngredientFormInput = styled(FormInput)`
+  background-color: hsla(0, 0%, 85%, 0.2);
+  padding: 1.14rem 1.28rem;
+`;
+
+const IngredientsButtonGroup = styled.div`
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.9rem;
+  border: 1px solid var(--color-gray-4);
+  border-radius: 1rem;
+  padding: 0.15rem 0.7rem;
+`;
+
+const RecipePreparationContainer = styled.div`
+  display: grid;
+  gap: 1.8rem;
+`;
+
+const FormTextarea = styled.textarea`
+  background-color: hsla(0, 0%, 85%, 0.2);
+  border-radius: 0.5rem;
+  padding: 1.14rem 1.28rem;
+  line-height: 1.5;
+  letter-spacing: -0.28px;
+  font-weight: 300;
+  outline: transparent;
+  border: transparent;
+  width: 100%;
+  height: 100%;
+  max-width: 500px;
+`;
+
+const PopularRecipesContainer = styled.div`
+  display: grid;
+  gap: 1.8rem;
+`;
+
+const PopularRecipesList = styled.ul`
+  display: grid;
+  gap: 1.71rem;
+`;
+
+const PopularRecipeItem = styled.li`
+  display: flex;
+  gap: 0.85rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-line);
+`;
+
+const PopularRecipeImage = styled.img`
+  width: 102px;
+  height: 85px;
+`;
+
+const PopularRecipeInfo = styled.div``;
+
+const PopularRecipeHeader = styled.h3`
+  font-size: 1.14rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.24px;
+`;
+
+const PopularRecipeDescription = styled.p`
+  font-size: 0.86rem;
+  font-weight: 300;
+  line-height: 1.33;
+  letter-spacing: -0.24px;
 `;
 
 const AddRecipePage = () => {
@@ -109,60 +210,103 @@ const AddRecipePage = () => {
             <FormInputWrapper>
               <FormInput type="text" placeholder="Category" />
 
-              <FormInputOption>
+              <FormInputOption $type="select">
                 <FormInputOptionText>Breakfast</FormInputOptionText>
-                <ButtonExpand />
+                <ButtonIcon variant="expand" />
               </FormInputOption>
             </FormInputWrapper>
 
             <FormInputWrapper>
               <FormInput type="text" placeholder="Cooking time" />
 
-              <FormInputOption>
+              <FormInputOption $type="select">
                 <FormInputOptionText>15 min</FormInputOptionText>
-                <ButtonExpand />
+                <ButtonIcon variant="expand" />
               </FormInputOption>
             </FormInputWrapper>
           </InputContainer>
         </RecipeInfoContainer>
-        <div>
-          <div>
+
+        <IngredientsAddingContainer>
+          <IngredientsHeadingWrapper>
             <SectionHeading type="secondary">Ingredients</SectionHeading>
 
-            <div>
-              <button>-</button>
+            <IngredientsButtonGroup>
+              <ButtonIcon variant="minus" />
               <span>3</span>
-              <button>+</button>
-            </div>
-          </div>
+              <ButtonIcon variant="plus" />
+            </IngredientsButtonGroup>
+          </IngredientsHeadingWrapper>
 
-          <ul>
-            <li>
-              <div>
-                <input type="text" />
-                <ButtonExpand />
-              </div>
+          <IngredientsFormList>
+            <IngredientFormItem>
+              <FormInputWrapper>
+                <IngredientFormInput type="text" placeholder="Salt" />
 
-              <div>
-                <input type="text" />
-                <ButtonExpand />
-              </div>
+                <FormInputOption $type="addon">
+                  <ButtonIcon variant="expand" />
+                </FormInputOption>
+              </FormInputWrapper>
 
-              <button>
-                <FaXmark />
-              </button>
-            </li>
-          </ul>
-        </div>
-        <div>
+              <FormInputWrapper style={{ width: '110px' }}>
+                <IngredientFormInput type="number" placeholder="0" />
+
+                <FormInputOption $type="addon">
+                  <FormInputOptionText>tbs</FormInputOptionText>
+                  <ButtonIcon variant="expand" />
+                </FormInputOption>
+              </FormInputWrapper>
+
+              <ButtonIcon variant="x" style={{ justifySelf: 'flex-end' }} />
+            </IngredientFormItem>
+          </IngredientsFormList>
+        </IngredientsAddingContainer>
+
+        <RecipePreparationContainer>
           <SectionHeading type="secondary">Recipe preparation</SectionHeading>
 
-          <textarea name="instructions" cols={50} rows={7} />
+          <FormTextarea name="instructions" cols={50} rows={7} />
 
           <Button variant="skew" btnColor="black">
             Add
           </Button>
-        </div>
+        </RecipePreparationContainer>
+
+        <PopularRecipesContainer>
+          <SectionHeading type="secondary">Popular recipe</SectionHeading>
+
+          <PopularRecipesList>
+            <PopularRecipeItem>
+              <PopularRecipeImage
+                src="https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg"
+                alt=""
+              />
+
+              <PopularRecipeInfo>
+                <PopularRecipeHeader>Banana pancakes</PopularRecipeHeader>
+                <PopularRecipeDescription>
+                  In a bowl, mash the banana with a fork until it resembles a
+                  thick purée...
+                </PopularRecipeDescription>
+              </PopularRecipeInfo>
+            </PopularRecipeItem>
+
+            <PopularRecipeItem>
+              <PopularRecipeImage
+                src="https://www.themealdb.com/images/media/meals/hqaejl1695738653.jpg"
+                alt=""
+              />
+
+              <PopularRecipeInfo>
+                <PopularRecipeHeader>Banana pancakes</PopularRecipeHeader>
+                <PopularRecipeDescription>
+                  In a bowl, mash the banana with a fork until it resembles a
+                  thick purée...
+                </PopularRecipeDescription>
+              </PopularRecipeInfo>
+            </PopularRecipeItem>
+          </PopularRecipesList>
+        </PopularRecipesContainer>
       </AddRecipeForm>
     </PageContainer>
   );
