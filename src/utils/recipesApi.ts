@@ -9,6 +9,8 @@ axios.defaults.headers.common['Authorization'] = `Bearer ${
   import.meta.env.VITE_TEST_API_KEY
 }`;
 
+// General recipes
+
 export const getRecipeById = async (id: string, isSearchPrivate: boolean) => {
   try {
     const res = await axios.get<DatabaseResponse<RecipeDetails>>(
@@ -91,6 +93,8 @@ export const getRecipesHomeCategories = async () => {
   }
 };
 
+// Own recipes
+
 export const getOwnRecipes = async () => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
     '/users/my-recipes'
@@ -99,10 +103,45 @@ export const getOwnRecipes = async () => {
   return res.data;
 };
 
+export const addOwnRecipe = async () => {
+  const res = await axios.post<DatabaseResponse<OwnRecipePreview>>('');
+
+  return res.data;
+};
+
+export const deleteOwnRecipe = async (recipeId: string) => {
+  await axios.delete<DatabaseResponse<OwnRecipePreview>>(
+    `/users/my-recipes/${recipeId}`
+  );
+
+  return null;
+};
+
+// Favourite recipes
+
 export const getFavouriteRecipes = async () => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
     '/users/favourite-recipes'
   );
 
   return res.data;
+};
+
+export const addFavouriteRecipe = async (recipeId: string) => {
+  const res = await axios.post<DatabaseResponse<OwnRecipePreview>>(
+    '/users/favourite-recipes',
+    {
+      recipeId,
+    }
+  );
+
+  return res.data;
+};
+
+export const deleteFavouriteRecipe = async (recipeId: string) => {
+  await axios.delete<DatabaseResponse<OwnRecipePreview>>(
+    `/users/favourite-recipes/${recipeId}`
+  );
+
+  return null;
 };

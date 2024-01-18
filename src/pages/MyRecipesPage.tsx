@@ -8,7 +8,7 @@ import SectionHeading from '../components/common/SectionHeading';
 
 const MyRecipesPage = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ['recipes', 'my-recipes'],
+    queryKey: ['my-recipes'],
     queryFn: () => getOwnRecipes(),
   });
 
@@ -17,7 +17,7 @@ const MyRecipesPage = () => {
   return (
     <PageContainer>
       <SectionHeading>My recipes</SectionHeading>
-      <OwnRecipeList recipes={data?.data || []} />
+      <OwnRecipeList recipes={data?.data || []} page="own" />
     </PageContainer>
   );
 };

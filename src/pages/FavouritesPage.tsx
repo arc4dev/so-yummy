@@ -16,7 +16,11 @@ const FavouritesPage = () => {
   return (
     <PageContainer>
       <SectionHeading>Favourites</SectionHeading>
-      <OwnRecipeList recipes={data?.data || []} variant="secondary" />
+      <OwnRecipeList
+        recipes={data?.data || []}
+        variant="secondary"
+        page="favourites"
+      />
     </PageContainer>
   );
 };
