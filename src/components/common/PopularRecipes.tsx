@@ -77,7 +77,7 @@ const PopularRecipes = () => {
 
   return (
     <StyledPopularRecipes>
-      <SectionHeading type="secondary">Popular recipe</SectionHeading>
+      <SectionHeading type="secondary">Popular recipes</SectionHeading>
 
       <PopularRecipesList>
         {data.map((recipe) => (

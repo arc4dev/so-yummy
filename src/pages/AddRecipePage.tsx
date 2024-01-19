@@ -1,4 +1,3 @@
-import { FaXmark } from 'react-icons/fa6';
 import PageContainer from '../components/common/PageContainer';
 import SectionHeading from '../components/common/SectionHeading';
 import Button from '../components/common/Button';
@@ -6,6 +5,18 @@ import styled from 'styled-components';
 import cameraFrame from '../assets/camera-frame.svg';
 import ButtonIcon from '../components/common/ButtonIcon';
 import PopularRecipes from '../components/common/PopularRecipes';
+import SocialLinks from '../components/common/SocialLinks';
+import useBreakpoints from '../hooks/useBreakpoints';
+
+const StyledAddRecipePage = styled.div`
+  display: grid;
+  gap: 4.5rem;
+
+  @media screen and (min-width: 1440px) {
+    grid-template-columns: 2fr 1fr;
+    gap: 7rem;
+  }
+`;
 
 const RecipeInfoContainer = styled.div`
   display: grid;
@@ -149,94 +160,128 @@ const FormTextarea = styled.textarea`
   max-width: 500px;
 `;
 
+const FollowUsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start !important;
+`;
+
+const Aside = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+
+  @media screen and (min-width: 1440px) {
+    margin-top: 8.9rem;
+  }
+`;
+
 const AddRecipePage = () => {
+  const { isDesktop } = useBreakpoints();
+
   return (
     <PageContainer>
-      <SectionHeading>Add recipe</SectionHeading>
+      <StyledAddRecipePage>
+        <div>
+          <SectionHeading>Add recipe</SectionHeading>
 
-      <AddRecipeForm>
-        <RecipeInfoContainer>
-          <FileInputWrapper>
-            <FileInput type="file" />
-            <CameraImage src={cameraFrame} alt="Camera frame" />
-          </FileInputWrapper>
+          <AddRecipeForm>
+            <RecipeInfoContainer>
+              <FileInputWrapper>
+                <FileInput type="file" />
+                <CameraImage src={cameraFrame} alt="Camera frame" />
+              </FileInputWrapper>
 
-          <InputContainer>
-            <FormInputWrapper>
-              <FormInput type="text" placeholder="Enter item title" />
-            </FormInputWrapper>
+              <InputContainer>
+                <FormInputWrapper>
+                  <FormInput type="text" placeholder="Enter item title" />
+                </FormInputWrapper>
 
-            <FormInputWrapper>
-              <FormInput type="text" placeholder="Enter about recipe" />
-            </FormInputWrapper>
+                <FormInputWrapper>
+                  <FormInput type="text" placeholder="Enter about recipe" />
+                </FormInputWrapper>
 
-            <FormInputWrapper>
-              <FormInput type="text" placeholder="Category" />
+                <FormInputWrapper>
+                  <FormInput type="text" placeholder="Category" />
 
-              <FormInputOption $type="select">
-                <FormInputOptionText>Breakfast</FormInputOptionText>
-                <ButtonIcon variant="expand" />
-              </FormInputOption>
-            </FormInputWrapper>
+                  <FormInputOption $type="select">
+                    <FormInputOptionText>Breakfast</FormInputOptionText>
+                    <ButtonIcon variant="expand" />
+                  </FormInputOption>
+                </FormInputWrapper>
 
-            <FormInputWrapper>
-              <FormInput type="text" placeholder="Cooking time" />
+                <FormInputWrapper>
+                  <FormInput type="text" placeholder="Cooking time" />
 
-              <FormInputOption $type="select">
-                <FormInputOptionText>15 min</FormInputOptionText>
-                <ButtonIcon variant="expand" />
-              </FormInputOption>
-            </FormInputWrapper>
-          </InputContainer>
-        </RecipeInfoContainer>
+                  <FormInputOption $type="select">
+                    <FormInputOptionText>15 min</FormInputOptionText>
+                    <ButtonIcon variant="expand" />
+                  </FormInputOption>
+                </FormInputWrapper>
+              </InputContainer>
+            </RecipeInfoContainer>
 
-        <IngredientsAddingContainer>
-          <IngredientsHeadingWrapper>
-            <SectionHeading type="secondary">Ingredients</SectionHeading>
+            <IngredientsAddingContainer>
+              <IngredientsHeadingWrapper>
+                <SectionHeading type="secondary">Ingredients</SectionHeading>
 
-            <IngredientsButtonGroup>
-              <ButtonIcon variant="minus" />
-              <span>3</span>
-              <ButtonIcon variant="plus" />
-            </IngredientsButtonGroup>
-          </IngredientsHeadingWrapper>
+                <IngredientsButtonGroup>
+                  <ButtonIcon variant="minus" />
+                  <span>3</span>
+                  <ButtonIcon variant="plus" />
+                </IngredientsButtonGroup>
+              </IngredientsHeadingWrapper>
 
-          <IngredientsFormList>
-            <IngredientFormItem>
-              <FormInputWrapper>
-                <IngredientFormInput type="text" placeholder="Salt" />
+              <IngredientsFormList>
+                <IngredientFormItem>
+                  <FormInputWrapper>
+                    <IngredientFormInput type="text" placeholder="Salt" />
 
-                <FormInputOption $type="addon">
-                  <ButtonIcon variant="expand" />
-                </FormInputOption>
-              </FormInputWrapper>
+                    <FormInputOption $type="addon">
+                      <ButtonIcon variant="expand" />
+                    </FormInputOption>
+                  </FormInputWrapper>
 
-              <FormInputWrapper style={{ width: '110px' }}>
-                <IngredientFormInput type="number" placeholder="0" />
+                  <FormInputWrapper style={{ width: '110px' }}>
+                    <IngredientFormInput type="number" placeholder="0" />
 
-                <FormInputOption $type="addon">
-                  <FormInputOptionText>tbs</FormInputOptionText>
-                  <ButtonIcon variant="expand" />
-                </FormInputOption>
-              </FormInputWrapper>
+                    <FormInputOption $type="addon">
+                      <FormInputOptionText>tbs</FormInputOptionText>
+                      <ButtonIcon variant="expand" />
+                    </FormInputOption>
+                  </FormInputWrapper>
 
-              <ButtonIcon variant="x" style={{ justifySelf: 'flex-end' }} />
-            </IngredientFormItem>
-          </IngredientsFormList>
-        </IngredientsAddingContainer>
+                  <ButtonIcon variant="x" style={{ justifySelf: 'flex-end' }} />
+                </IngredientFormItem>
+              </IngredientsFormList>
+            </IngredientsAddingContainer>
 
-        <RecipePreparationContainer>
-          <SectionHeading type="secondary">Recipe preparation</SectionHeading>
+            <RecipePreparationContainer>
+              <SectionHeading type="secondary">
+                Recipe preparation
+              </SectionHeading>
 
-          <FormTextarea name="instructions" cols={50} rows={7} />
+              <FormTextarea name="instructions" cols={50} rows={7} />
 
-          <Button variant="skew" btnColor="black">
-            Add
-          </Button>
-        </RecipePreparationContainer>
+              <Button variant="skew" btnColor="black">
+                Add
+              </Button>
+            </RecipePreparationContainer>
+          </AddRecipeForm>
+        </div>
 
-        <PopularRecipes />
-      </AddRecipeForm>
+        <Aside>
+          {isDesktop && (
+            <FollowUsContainer>
+              <SectionHeading type="secondary">Follow us</SectionHeading>
+              <SocialLinks />
+            </FollowUsContainer>
+          )}
+
+          <PopularRecipes />
+        </Aside>
+      </StyledAddRecipePage>
     </PageContainer>
   );
 };

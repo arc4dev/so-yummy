@@ -91,7 +91,11 @@ const CategoriesSection = () => {
         ))}
       </CategoriesList>
 
-      <Button to="/categories" size="primary">
+      <Button
+        to="/categories"
+        size="primary"
+        btnColor="secondary"
+        variant="skew">
         Other Categories
       </Button>
     </HomePageCategoriesSection>
