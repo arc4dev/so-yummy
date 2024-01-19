@@ -7,6 +7,8 @@ import ButtonIcon from '../components/common/ButtonIcon';
 import PopularRecipes from '../components/common/PopularRecipes';
 import SocialLinks from '../components/common/SocialLinks';
 import useBreakpoints from '../hooks/useBreakpoints';
+import { useState } from 'react';
+import IngredientFormItem from '../components/recipes/IngredientFormItem';
 
 const StyledAddRecipePage = styled.div`
   display: grid;
@@ -73,17 +75,22 @@ const FormInput = styled.input`
   }
 `;
 
+const IngredientsFormList = styled.ul`
+  display: grid;
+  gap: 1.5rem;
+`;
+
 const InputContainer = styled.div`
   width: 100%;
   display: grid;
   gap: 1.71rem;
 `;
 
-const FormInputWrapper = styled.div`
+export const FormInputWrapper = styled.div`
   position: relative;
 `;
 
-const FormInputOption = styled.div<{ $type: 'select' | 'addon' }>`
+export const FormInputOption = styled.div<{ $type: 'select' | 'addon' }>`
   display: flex;
   font-size: 0.86rem;
   gap: 0.9rem;
@@ -99,7 +106,7 @@ const FormInputOption = styled.div<{ $type: 'select' | 'addon' }>`
   ${({ $type }) => $type === 'select' && 'width: 100%;'}
 `;
 
-const FormInputOptionText = styled.span`
+export const FormInputOptionText = styled.span`
   font-size: 0.85rem;
 `;
 
@@ -112,23 +119,6 @@ const IngredientsHeadingWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const IngredientFormItem = styled.li`
-  display: grid;
-  grid-template-columns: 3.5fr auto 0.2fr;
-  gap: 1rem;
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: 3fr auto 1fr;
-  }
-`;
-
-const IngredientsFormList = styled.ul``;
-
-const IngredientFormInput = styled(FormInput)`
-  background-color: hsla(0, 0%, 85%, 0.2);
-  padding: 1.14rem 1.28rem;
 `;
 
 const IngredientsButtonGroup = styled.div`
@@ -180,6 +170,19 @@ const Aside = styled.div`
 const AddRecipePage = () => {
   const { isDesktop } = useBreakpoints();
 
+  const [ingredients, setIngredients] = useState<
+    { ingredient: string; ingredientMeasure: string }[]
+  >([]);
+
+  const handleRemoveIngredient = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+    i: number
+  ) => {
+    e.preventDefault();
+
+    setIngredients(ingredients.filter((_, index) => index !== i));
+  };
+
   return (
     <PageContainer>
       <StyledAddRecipePage>
@@ -227,33 +230,35 @@ const AddRecipePage = () => {
                 <SectionHeading type="secondary">Ingredients</SectionHeading>
 
                 <IngredientsButtonGroup>
-                  <ButtonIcon variant="minus" />
-                  <span>3</span>
-                  <ButtonIcon variant="plus" />
+                  <ButtonIcon
+                    variant="minus"
+                    onClick={(e) =>
+                      handleRemoveIngredient(e, ingredients.length - 1)
+                    }
+                  />
+                  <span>{ingredients.length}</span>
+                  <ButtonIcon
+                    variant="plus"
+                    onClick={(e) => {
+                      e.preventDefault();
+
+                      setIngredients([
+                        ...ingredients,
+                        { ingredient: '', ingredientMeasure: '' },
+                      ]);
+                    }}
+                  />
                 </IngredientsButtonGroup>
               </IngredientsHeadingWrapper>
 
               <IngredientsFormList>
-                <IngredientFormItem>
-                  <FormInputWrapper>
-                    <IngredientFormInput type="text" placeholder="Salt" />
-
-                    <FormInputOption $type="addon">
-                      <ButtonIcon variant="expand" />
-                    </FormInputOption>
-                  </FormInputWrapper>
-
-                  <FormInputWrapper style={{ width: '110px' }}>
-                    <IngredientFormInput type="number" placeholder="0" />
-
-                    <FormInputOption $type="addon">
-                      <FormInputOptionText>tbs</FormInputOptionText>
-                      <ButtonIcon variant="expand" />
-                    </FormInputOption>
-                  </FormInputWrapper>
-
-                  <ButtonIcon variant="x" style={{ justifySelf: 'flex-end' }} />
-                </IngredientFormItem>
+                {ingredients.map((ingredient, i) => (
+                  <IngredientFormItem
+                    key={i}
+                    ingredient={ingredient}
+                    onClick={(e) => handleRemoveIngredient(e, i)}
+                  />
+                ))}
               </IngredientsFormList>
             </IngredientsAddingContainer>
 
