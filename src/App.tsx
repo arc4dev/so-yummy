@@ -54,7 +54,12 @@ function App() {
 
   useEffect(() => {
     window.onbeforeunload = () => {
-      localStorage.setItem('lastUrl', window.location.pathname);
+      localStorage.setItem(
+        'lastUrl',
+        window.location.pathname === '/login'
+          ? '/home'
+          : window.location.pathname
+      );
     };
 
     setLastUrl(localStorage.getItem('lastUrl') || '/home');
