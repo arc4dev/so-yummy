@@ -1,7 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import { addFavouriteRecipe, deleteFavouriteRecipe } from '../utils/recipesApi';
+import {
+  addFavouriteRecipe,
+  deleteFavouriteRecipe,
+} from '../services/recipesApi';
 
 const useFavouriteRecipes = () => {
   const queryClient = useQueryClient();

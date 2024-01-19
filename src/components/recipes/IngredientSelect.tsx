@@ -2,7 +2,7 @@ import React from 'react';
 import AsyncSelect from 'react-select/async';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import _ from 'lodash';
-import { getIngredientsByQuery } from '../../utils/recipesApi';
+import { getIngredientsByQuery } from '../../services/recipesApi';
 
 const styles = (isTablet: boolean) => ({
   control: () => ({
@@ -26,13 +26,13 @@ const styles = (isTablet: boolean) => ({
     marginLeft: '12px',
     marginBottom: '12px',
   }),
-  valueContainer: (baseStyles) => ({
+  valueContainer: (baseStyles: any) => ({
     ...baseStyles,
     padding: '0',
     margin: '0',
     height: isTablet ? '27px' : '20px',
   }),
-  input: (baseStyles) => ({
+  input: (baseStyles: any) => ({
     ...baseStyles,
     caretColor: '#BDBDBD',
     padding: '0',
@@ -43,14 +43,14 @@ const styles = (isTablet: boolean) => ({
     letterSpacing: '-2%',
     color: '#23262A',
   }),
-  placeholder: (baseStyles) => ({
+  placeholder: (baseStyles: any) => ({
     ...baseStyles,
     fontSize: isTablet ? '18px' : '14px',
     lineHeight: '1.5',
     letterSpacing: '-2%',
     color: 'rgba(0, 0, 0, 0.5)',
   }),
-  option: (baseStyles, state) => ({
+  option: (_: any, state: any) => ({
     fontSize: isTablet ? '14px' : '12px',
     lineHeight: '1.5',
     letterSpacing: '-2%',
@@ -61,14 +61,14 @@ const styles = (isTablet: boolean) => ({
       color: 'var(--color-action)',
     },
   }),
-  menu: (baseStyles) => ({
+  menu: (baseStyles: any) => ({
     ...baseStyles,
     width: '100%',
     height: isTablet ? '172px' : '154px',
     borderRadius: '6px',
     boxShadow: '0px 6.51852px 7.82222px rgba(0, 0, 0, 0.0314074)',
   }),
-  menuList: (baseStyles) => ({
+  menuList: (baseStyles: any) => ({
     ...baseStyles,
     width: '100%',
     height: isTablet ? '172px' : '154px',
@@ -100,7 +100,7 @@ type Props = {};
 const IngredientSelect = React.forwardRef(({}: Props, ref) => {
   const { isTablet } = useBreakpoints();
 
-  const convertData = async (value) => {
+  const convertData = async (value: string) => {
     const { data } = await getIngredientsByQuery(value);
 
     return data.map((ingredient) => {
@@ -111,7 +111,7 @@ const IngredientSelect = React.forwardRef(({}: Props, ref) => {
     });
   };
 
-  const promiseOptions = (inputValue, callback) => {
+  const promiseOptions = (inputValue: string, callback) => {
     convertData(inputValue).then((results) => callback(results));
     return;
   };

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getRecipesHomeCategories } from '../../utils/recipesApi';
+import { getRecipesHomeCategories } from '../../services/recipesApi';
 import SectionHeading from '../common/SectionHeading';
 import Button from '../common/Button';
 import RecipePreviewCard from '../recipes/RecipePreviewCard';

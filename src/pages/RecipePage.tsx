@@ -3,7 +3,7 @@ import { useParams, useSearchParams } from 'react-router-dom';
 import { FiClock } from 'react-icons/fi';
 import styled from 'styled-components';
 
-import { getRecipeById } from '../utils/recipesApi';
+import { getRecipeById } from '../services/recipesApi';
 
 import Loader from '../components/common/Loader';
 import PageContainer from '../components/common/PageContainer';

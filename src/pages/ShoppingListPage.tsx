@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import IngredientsTable from '../components/recipes/IngredientsTable';
 import PageContainer from '../components/common/PageContainer';
-import { getShoppingCart } from '../utils/shoppingCartApi';
+import { getShoppingCart } from '../services/shoppingCartApi';
 import Loader from '../components/common/Loader';
 import SectionHeading from '../components/common/SectionHeading';
 

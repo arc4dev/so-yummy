@@ -6,7 +6,7 @@ import styled, { css } from 'styled-components';
 import {
   getAllRecipesCategories,
   getRecipesByCategory,
-} from '../utils/recipesApi';
+} from '../services/recipesApi';
 
 import SectionHeading from '../components/common/SectionHeading';
 import RecipePreviewCard from '../components/recipes/RecipePreviewCard';

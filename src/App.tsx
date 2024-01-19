@@ -22,7 +22,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
 import { useEffect, useState } from 'react';
-import { refreshUser } from './utils/userApi';
+import { refreshUser } from './services/userApi';
 
 const queryClient = new QueryClient({
   defaultOptions: {
