@@ -9,6 +9,7 @@ import SocialLinks from '../components/common/SocialLinks';
 import useBreakpoints from '../hooks/useBreakpoints';
 import { useState } from 'react';
 import IngredientFormItem from '../components/recipes/IngredientFormItem';
+import SmallSelect from '../components/recipes/CategorySelect';
 
 const StyledAddRecipePage = styled.div`
   display: grid;
@@ -167,6 +168,29 @@ const Aside = styled.div`
   }
 `;
 
+const SelectContainer = styled.div`
+  position: absolute;
+  top: 0;
+  right: 5px;
+  width: 120px;
+`;
+const TextLabel = styled.label`
+  position: relative;
+  display: block;
+  width: 343px;
+  color: #878787;
+  background-color: inherit;
+  border: transparent;
+  border-bottom: 1px solid var(--color-line);
+  font-size: 1rem;
+  letter-spacing: -0.28px;
+  line-height: 1.5;
+  outline: transparent;
+  padding-bottom: 1.3rem;
+  font-weight: 300;
+  width: 100%;
+`;
+
 const AddRecipePage = () => {
   const { isDesktop } = useBreakpoints();
 
@@ -205,23 +229,19 @@ const AddRecipePage = () => {
                   <FormInput type="text" placeholder="Enter about recipe" />
                 </FormInputWrapper>
 
-                <FormInputWrapper>
-                  <FormInput type="text" placeholder="Category" />
+                <TextLabel>
+                  Category
+                  <SelectContainer>
+                    <SmallSelect type="category" />
+                  </SelectContainer>
+                </TextLabel>
 
-                  <FormInputOption $type="select">
-                    <FormInputOptionText>Breakfast</FormInputOptionText>
-                    <ButtonIcon variant="expand" />
-                  </FormInputOption>
-                </FormInputWrapper>
-
-                <FormInputWrapper>
-                  <FormInput type="text" placeholder="Cooking time" />
-
-                  <FormInputOption $type="select">
-                    <FormInputOptionText>15 min</FormInputOptionText>
-                    <ButtonIcon variant="expand" />
-                  </FormInputOption>
-                </FormInputWrapper>
+                <TextLabel>
+                  Cooking time
+                  <SelectContainer>
+                    <SmallSelect type="cookingTime" />
+                  </SelectContainer>
+                </TextLabel>
               </InputContainer>
             </RecipeInfoContainer>
 
@@ -252,6 +272,7 @@ const AddRecipePage = () => {
               </IngredientsHeadingWrapper>
 
               <IngredientsFormList>
+                {ingredients.length === 0 && <p>No ingredients added!</p>}
                 {ingredients.map((ingredient, i) => (
                   <IngredientFormItem
                     key={i}

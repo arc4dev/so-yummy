@@ -5,6 +5,7 @@ import {
   FormInputOptionText,
   FormInputWrapper,
 } from '../../pages/AddRecipePage';
+import IngredientSelect from './IngredientSelect';
 
 const FormInput = styled.input`
   background-color: inherit;
@@ -33,9 +34,9 @@ const StyledIngredientFormItem = styled.li`
   }
 `;
 
-const IngredientFormInput = styled(FormInput)`
-  background-color: hsla(0, 0%, 85%, 0.2);
-  padding: 1.14rem 1.28rem;
+const IngredientSelectContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
 
 type Props = {
@@ -46,16 +47,10 @@ type Props = {
 const IngredientFormItem = ({ ingredient, onClick }: Props) => {
   return (
     <StyledIngredientFormItem>
-      <FormInputWrapper>
-        <IngredientFormInput type="text" placeholder="Salt" />
-
-        <FormInputOption $type="addon">
-          <ButtonIcon variant="expand" />
-        </FormInputOption>
-      </FormInputWrapper>
+      <IngredientSelect />
 
       <FormInputWrapper style={{ width: '110px' }}>
-        <IngredientFormInput type="number" placeholder="0" />
+        {/* <IngredientFormInput type="number" placeholder="0" /> */}
 
         <FormInputOption $type="addon">
           <FormInputOptionText>tbs</FormInputOptionText>

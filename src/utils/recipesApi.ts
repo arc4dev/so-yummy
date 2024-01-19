@@ -145,3 +145,11 @@ export const deleteFavouriteRecipe = async (recipeId: string) => {
 
   return null;
 };
+
+export const getIngredientsByQuery = async (query: string) => {
+  const res = await axios.get<DatabaseResponseMany<Ingredient>>(
+    `/ingredients/${query}`
+  );
+
+  return res.data;
+};
