@@ -22,7 +22,7 @@ import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
 import { useEffect, useState } from 'react';
-import { refreshUser } from './utils/userApi';
+import { refreshUser } from './services/userApi';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -54,7 +54,12 @@ function App() {
 
   useEffect(() => {
     window.onbeforeunload = () => {
-      localStorage.setItem('lastUrl', window.location.pathname);
+      localStorage.setItem(
+        'lastUrl',
+        window.location.pathname === '/login'
+          ? '/home'
+          : window.location.pathname
+      );
     };
 
     setLastUrl(localStorage.getItem('lastUrl') || '/home');

@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import { useMutation } from '@tanstack/react-query';
 import { useAuth } from '../../contexts/authContext';
 import { useForm } from 'react-hook-form';
-import { registerUser } from '../../utils/userApi';
+import { registerUser } from '../../services/userApi';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 

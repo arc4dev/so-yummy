@@ -103,8 +103,16 @@ export const getOwnRecipes = async () => {
   return res.data;
 };
 
-export const addOwnRecipe = async () => {
-  const res = await axios.post<DatabaseResponse<OwnRecipePreview>>('');
+export const addOwnRecipe = async (data: any) => {
+  const res = await axios.post<DatabaseResponse<OwnRecipeDetails>>(
+    '/users/my-recipes',
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
 
   return res.data;
 };
@@ -144,4 +152,12 @@ export const deleteFavouriteRecipe = async (recipeId: string) => {
   );
 
   return null;
+};
+
+export const getIngredientsByQuery = async (query: string) => {
+  const res = await axios.get<DatabaseResponseMany<Ingredient>>(
+    `/ingredients/${query}`
+  );
+
+  return res.data;
 };

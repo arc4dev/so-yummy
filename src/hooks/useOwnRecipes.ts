@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosError } from 'axios';
 import toast from 'react-hot-toast';
-import { addOwnRecipe, deleteOwnRecipe } from '../utils/recipesApi';
+import { addOwnRecipe, deleteOwnRecipe } from '../services/recipesApi';
 
 const useOwnRecipes = () => {
   const queryClient = useQueryClient();

@@ -3,7 +3,7 @@ import Button from '../common/Button';
 import { AuthForm, AuthHeader, InputWrapper } from './RegisterForm';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
-import { loginUser } from '../../utils/userApi';
+import { loginUser } from '../../services/userApi';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
 import { useAuth } from '../../contexts/authContext';

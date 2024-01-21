@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getRecipeByQuery } from '../utils/recipesApi';
+import { getRecipeByQuery } from '../services/recipesApi';
 import styled from 'styled-components';
 
 import SectionHeading from '../components/common/SectionHeading';

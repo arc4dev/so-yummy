@@ -2,7 +2,7 @@ import SectionHeading from '../components/common/SectionHeading';
 import PageContainer from '../components/common/PageContainer';
 import OwnRecipeList from '../components/recipes/OwnRecipeList';
 import { useQuery } from '@tanstack/react-query';
-import { getFavouriteRecipes } from '../utils/recipesApi';
+import { getFavouriteRecipes } from '../services/recipesApi';
 import Loader from '../components/common/Loader';
 
 const FavouritesPage = () => {
