@@ -2,41 +2,25 @@ import styled from 'styled-components';
 import Button from '../common/Button';
 import SectionHeading from '../common/SectionHeading';
 import ButtonIcon from '../common/ButtonIcon';
-import SmallSelect from './CategorySelect';
+import SmallSelect from './SmallSelect';
 import { useFieldArray, useForm } from 'react-hook-form';
 import IngredientSelect from './IngredientSelect';
 import MeasureSelect from './MeasureSelect';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FileInput from './FileInput';
+import { transformErrorMessage } from '../../utils/transformErrorMessage';
+import useOwnRecipes from '../../hooks/useOwnRecipes';
+import { useNavigate } from 'react-router-dom';
 
-const schema = yup.object({
-  strMealThumb: yup.mixed(),
-  strMeal: yup.string().min(3).max(30).required(),
-  strDescription: yup.string().min(8).max(200).required(),
-  category: yup.string().required(),
-  cookingTime: yup.number().required(),
-  ingredients: yup
-    .array()
-    .of(
-      yup.object().shape({
-        ingredient: yup.string().required(),
-        ingredientMeasure: yup
-          .string()
-          .required()
-          .test(
-            'isValidIngredientMeasure',
-            'Invalid ingredient measure format',
-            (value) => {
-              const regex = /^\d+\s*(g|kg|tbs|tsp|pcs|ml)$/;
-              return regex.test(value);
-            }
-          ),
-      })
-    )
-    .required(),
-  strInstructions: yup.string().min(10).required(),
-});
+export const ErrorMessage = styled.span`
+  position: absolute;
+  left: 0px;
+  bottom: -20px;
+
+  color: var(--color-wrong);
+  font-size: 0.85rem;
+`;
 
 const SelectContainer = styled.div`
   position: absolute;
@@ -119,6 +103,7 @@ const StyledAddRecipeForm = styled.form`
 `;
 
 const IngredientFormItem = styled.li`
+  position: relative;
   display: grid;
   grid-template-columns: 3.5fr auto 0.2fr;
   gap: 1rem;
@@ -156,12 +141,44 @@ const InputContainer = styled.div`
   gap: 1.71rem;
 `;
 
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const schema = yup.object({
+  strMealThumb: yup.mixed().required(),
+  strMeal: yup.string().min(3).max(30).required(),
+  strDescription: yup.string().min(8).max(200).required(),
+  category: yup.string().required(),
+  cookingTime: yup.number().required(),
+  ingredients: yup
+    .array()
+    .of(
+      yup.object().shape({
+        ingredient: yup.string().required(),
+        ingredientMeasure: yup
+          .string()
+          .required()
+          .test(
+            'isValidIngredientMeasure',
+            'Invalid ingredient measure format',
+            (value) => {
+              const regex = /^\d+\s*(g|kg|tbs|tsp|pcs|ml)$/;
+              return regex.test(value);
+            }
+          ),
+      })
+    )
+    .required(),
+  strInstructions: yup.string().min(10).required(),
+});
+
 const AddRecipeForm = () => {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<yup.InferType<typeof schema>>({
     mode: 'all',
     resolver: yupResolver(schema),
@@ -169,27 +186,49 @@ const AddRecipeForm = () => {
       strMealThumb: undefined,
       strMeal: '',
       strDescription: '',
-      category: undefined,
+      category: '',
       cookingTime: undefined,
       ingredients: [],
       strInstructions: '',
     },
   });
 
+  const navigate = useNavigate();
+  const { addOwnRecipeMutate, isPending } = useOwnRecipes();
+
   const { fields, append, remove } = useFieldArray({
     control,
     name: 'ingredients',
   });
 
-  const onAddRecipe = (data: any) => {
+  const onAddRecipe = async (data: yup.InferType<typeof schema>) => {
     try {
-      console.log(data);
+      const formData = new FormData();
+      formData.append('image', data.strMealThumb);
+      formData.append('strMeal', data.strMeal);
+      formData.append('strDescription', data.strDescription);
+      formData.append('strInstructions', data.strInstructions);
+      formData.append('category', data.category);
+      formData.append('cookingTime', String(data.cookingTime));
+
+      data.ingredients.forEach((ingredient, index) => {
+        formData.append(
+          `ingredients[${index}][ingredient]`,
+          ingredient.ingredient
+        );
+        formData.append(
+          `ingredients[${index}][ingredientMeasure]`,
+          ingredient.ingredientMeasure
+        );
+      });
+
+      await addOwnRecipeMutate(formData);
+
+      navigate('/recipes/all');
     } catch (error) {
       console.log(error);
     }
   };
-
-  console.log(errors);
 
   return (
     <StyledAddRecipeForm onSubmit={handleSubmit(onAddRecipe)}>
@@ -197,23 +236,44 @@ const AddRecipeForm = () => {
         <FileInput name="strMealThumb" control={control} />
 
         <InputContainer>
-          <FormInput
-            type="text"
-            placeholder="Enter item title"
-            {...register('strMeal')}
-          />
+          <InputWrapper>
+            <FormInput
+              type="text"
+              placeholder="Enter item title"
+              autoComplete="off"
+              {...register('strMeal')}
+            />
+            {errors.strMeal && (
+              <ErrorMessage>
+                {transformErrorMessage(errors.strMeal.message)}
+              </ErrorMessage>
+            )}
+          </InputWrapper>
 
-          <FormInput
-            type="text"
-            placeholder="Enter about recipe"
-            {...register('strDescription')}
-          />
+          <InputWrapper>
+            <FormInput
+              type="text"
+              placeholder="Enter about recipe"
+              autoComplete="off"
+              {...register('strDescription')}
+            />
+            {errors.strDescription && (
+              <ErrorMessage>
+                {transformErrorMessage(errors.strDescription.message)}
+              </ErrorMessage>
+            )}
+          </InputWrapper>
 
           <TextLabel>
             Category
             <SelectContainer>
               <SmallSelect control={control} type="category" name="category" />
             </SelectContainer>
+            {errors.category && (
+              <ErrorMessage>
+                {transformErrorMessage(errors.category.message)}
+              </ErrorMessage>
+            )}
           </TextLabel>
 
           <TextLabel>
@@ -225,6 +285,11 @@ const AddRecipeForm = () => {
                 name="cookingTime"
               />
             </SelectContainer>
+            {errors.cookingTime && (
+              <ErrorMessage>
+                {transformErrorMessage(errors.cookingTime.message)}
+              </ErrorMessage>
+            )}
           </TextLabel>
         </InputContainer>
       </RecipeInfoContainer>
@@ -236,11 +301,13 @@ const AddRecipeForm = () => {
           <IngredientsButtonGroup>
             <ButtonIcon
               variant="minus"
+              type="button"
               onClick={() => remove(fields.length - 1)}
             />
             <span>{fields.length}</span>
             <ButtonIcon
               variant="plus"
+              type="button"
               onClick={() => append({ ingredient: '', ingredientMeasure: '' })}
             />
           </IngredientsButtonGroup>
@@ -262,9 +329,13 @@ const AddRecipeForm = () => {
 
               <ButtonIcon
                 variant="x"
+                type="button"
                 style={{ justifySelf: 'flex-end' }}
                 onClick={() => remove(i)}
               />
+              {errors.ingredients && (
+                <ErrorMessage>Fill out ingredient info</ErrorMessage>
+              )}
             </IngredientFormItem>
           ))}
         </IngredientsFormList>
@@ -273,9 +344,20 @@ const AddRecipeForm = () => {
       <RecipePreparationContainer>
         <SectionHeading type="secondary">Recipe preparation</SectionHeading>
 
-        <FormTextarea cols={50} rows={7} {...register('strInstructions')} />
+        <InputWrapper>
+          <FormTextarea cols={50} rows={7} {...register('strInstructions')} />
+          {errors.strInstructions && (
+            <ErrorMessage>
+              {transformErrorMessage(errors.strInstructions.message)}
+            </ErrorMessage>
+          )}
+        </InputWrapper>
 
-        <Button variant="skew" btnColor="black" type="submit">
+        <Button
+          variant="skew"
+          btnColor="black"
+          type="submit"
+          disabled={!isValid || isPending}>
           Add
         </Button>
       </RecipePreparationContainer>

@@ -103,8 +103,16 @@ export const getOwnRecipes = async () => {
   return res.data;
 };
 
-export const addOwnRecipe = async () => {
-  const res = await axios.post<DatabaseResponse<OwnRecipePreview>>('');
+export const addOwnRecipe = async (data: any) => {
+  const res = await axios.post<DatabaseResponse<OwnRecipeDetails>>(
+    '/users/my-recipes',
+    data,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    }
+  );
 
   return res.data;
 };

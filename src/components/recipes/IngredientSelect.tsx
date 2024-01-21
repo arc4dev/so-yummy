@@ -1,9 +1,9 @@
-import React from 'react';
 import AsyncSelect from 'react-select/async';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import _ from 'lodash';
 import { getIngredientsByQuery } from '../../services/recipesApi';
 import { ControllerProps, FieldValues, useController } from 'react-hook-form';
+import styled from 'styled-components';
 
 const styles = (isTablet: boolean) => ({
   control: () => ({
@@ -96,6 +96,15 @@ const styles = (isTablet: boolean) => ({
   }),
 });
 
+const IngredientSelectContainer = styled.div`
+  position: relative;
+`;
+
+type SelectOption = {
+  value: string;
+  label: string;
+};
+
 const IngredientSelect = <T extends FieldValues>({
   ...controllerProps
 }: ControllerProps<T>) => {
@@ -115,21 +124,26 @@ const IngredientSelect = <T extends FieldValues>({
     });
   };
 
-  const promiseOptions = (inputValue: string, callback) => {
+  const promiseOptions = (
+    inputValue: string,
+    callback: (options: SelectOption[]) => void
+  ) => {
     convertData(inputValue).then((results) => callback(results));
     return;
   };
 
   return (
-    <AsyncSelect
-      onChange={(newValue: any) => onChange(newValue?.value)}
-      loadOptions={_.debounce(promiseOptions, 400)}
-      placeholder="Ingredient"
-      noOptionsMessage={({ inputValue }) =>
-        !inputValue ? 'Start typing...' : 'Ingredients not found'
-      }
-      styles={styles(isTablet)}
-    />
+    <IngredientSelectContainer>
+      <AsyncSelect
+        onChange={(newValue: SelectOption | null) => onChange(newValue?.value)}
+        loadOptions={_.debounce(promiseOptions, 400)}
+        placeholder="Ingredient"
+        noOptionsMessage={({ inputValue }) =>
+          !inputValue ? 'Start typing...' : 'Ingredients not found'
+        }
+        styles={styles(isTablet)}
+      />
+    </IngredientSelectContainer>
   );
 };
 

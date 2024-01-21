@@ -50,6 +50,10 @@ type RecipeDetails = Recipe & {
   category: Category;
 };
 
+type OwnRecipeDetails = RecipeDetails & {
+  visibility: 'public' | 'private';
+};
+
 type Ingredient = {
   _id: string;
   name: string;

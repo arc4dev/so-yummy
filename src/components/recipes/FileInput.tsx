@@ -2,11 +2,14 @@ import styled from 'styled-components';
 import cameraFrame from '../../assets/camera-frame.svg';
 import { ControllerProps, FieldValues, useController } from 'react-hook-form';
 import { useState } from 'react';
+import { ErrorMessage } from './AddRecipeForm';
+import { transformErrorMessage } from '../../utils/transformErrorMessage';
 
 const FileInputWrapper = styled.div`
   width: 279px;
   height: 268px;
   border-radius: 8px;
+  position: relative;
 `;
 
 const ImageWrapper = styled.div`
@@ -40,6 +43,7 @@ const FileInput = <T extends FieldValues>({
 }: ControllerProps<T>) => {
   const {
     field: { onChange },
+    fieldState: { error },
   } = useController(controllerProps);
 
   const [file, setFile] = useState('');
@@ -50,6 +54,8 @@ const FileInput = <T extends FieldValues>({
         type="file"
         accept="image/*,.png,.jpg,.web"
         onChange={(e) => {
+          if (!e.target.files) return;
+
           setFile(URL.createObjectURL(e.target.files[0]));
 
           onChange(e.target.files[0]);
@@ -60,6 +66,9 @@ const FileInput = <T extends FieldValues>({
         {file && <FileImage src={file} alt="Uploaded file" />}
         <CameraImage src={cameraFrame} alt="Camera frame" />
       </ImageWrapper>
+      {error && (
+        <ErrorMessage>{transformErrorMessage(error.message)}</ErrorMessage>
+      )}
     </FileInputWrapper>
   );
 };

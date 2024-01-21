@@ -97,6 +97,7 @@ type Props<T extends FieldValues> = {
 
 const SmallSelect = <T extends FieldValues>({
   type,
+
   ...controllerProps
 }: Props<T>) => {
   const { isTablet } = useBreakpoints();
