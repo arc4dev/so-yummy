@@ -3,6 +3,7 @@ import AsyncSelect from 'react-select/async';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import _ from 'lodash';
 import { getIngredientsByQuery } from '../../services/recipesApi';
+import { ControllerProps, FieldValues, useController } from 'react-hook-form';
 
 const styles = (isTablet: boolean) => ({
   control: () => ({
@@ -95,10 +96,13 @@ const styles = (isTablet: boolean) => ({
   }),
 });
 
-type Props = {};
-
-const IngredientSelect = React.forwardRef(({}: Props, ref) => {
+const IngredientSelect = <T extends FieldValues>({
+  ...controllerProps
+}: ControllerProps<T>) => {
   const { isTablet } = useBreakpoints();
+  const {
+    field: { onChange },
+  } = useController(controllerProps);
 
   const convertData = async (value: string) => {
     const { data } = await getIngredientsByQuery(value);
@@ -118,7 +122,8 @@ const IngredientSelect = React.forwardRef(({}: Props, ref) => {
 
   return (
     <AsyncSelect
-      loadOptions={_.debounce(promiseOptions, 500)}
+      onChange={(newValue: any) => onChange(newValue?.value)}
+      loadOptions={_.debounce(promiseOptions, 400)}
       placeholder="Ingredient"
       noOptionsMessage={({ inputValue }) =>
         !inputValue ? 'Start typing...' : 'Ingredients not found'
@@ -126,6 +131,6 @@ const IngredientSelect = React.forwardRef(({}: Props, ref) => {
       styles={styles(isTablet)}
     />
   );
-});
+};
 
 export default IngredientSelect;

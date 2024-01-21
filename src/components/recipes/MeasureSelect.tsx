@@ -1,7 +1,9 @@
-import Select, { StylesConfig } from 'react-select';
+import Select from 'react-select';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import styled from 'styled-components';
 import { measures } from '../../utils/data';
+import React, { useState } from 'react';
+import { ControllerProps, FieldValues, useController } from 'react-hook-form';
 
 const styles = (isTablet: boolean) => ({
   container: () => ({
@@ -132,17 +134,40 @@ const Input = styled.input`
   }
 `;
 
-const MeasureSelect = () => {
+const MeasureSelect = <T extends FieldValues>({
+  ...controllerProps
+}: ControllerProps<T>) => {
   const { isTablet } = useBreakpoints();
+  const {
+    field: { onChange },
+  } = useController(controllerProps);
+
+  const [inputValue, setInputValue] = useState('0');
+  const [selectValue, setSelectValue] = useState('');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    onChange(`${e.target.value} ${selectValue}`);
+  };
 
   return (
     <StyledMeasure>
-      <Input placeholder="0" type="number" autoComplete="off" maxLength={4} />
+      <Input
+        value={inputValue}
+        onChange={handleInputChange}
+        type="number"
+        placeholder="0"
+        autoComplete="off"
+      />
       <Select
         options={measures}
+        placeholder="tbs"
         isSearchable={false}
         styles={styles(isTablet)}
-        placeholder="tbs"
+        onChange={(newValue) => {
+          setSelectValue(newValue?.value as string);
+          onChange(`${inputValue} ${newValue?.value}`);
+        }}
       />
     </StyledMeasure>
   );

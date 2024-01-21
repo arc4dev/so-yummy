@@ -1,7 +1,11 @@
-import React from 'react';
 import Select from 'react-select';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import { categories, cookingTime } from '../../utils/data';
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from 'react-hook-form';
 
 const styles = (isTablet: boolean) => ({
   dropdownIndicator: () => ({
@@ -87,24 +91,32 @@ const styles = (isTablet: boolean) => ({
   }),
 });
 
-type Props = {
+type Props<T extends FieldValues> = {
   type: 'category' | 'cookingTime';
-  // value: string;
-  // name: string;
-  // onChange: (value: string) => void;
-};
+} & UseControllerProps<T>;
 
-const SmallSelect = React.forwardRef(({ type }: Props, ref) => {
+const SmallSelect = <T extends FieldValues>({
+  type,
+  ...controllerProps
+}: Props<T>) => {
   const { isTablet } = useBreakpoints();
+  const {
+    field: { onChange },
+  } = useController(controllerProps);
 
   return (
     <Select
+      onChange={
+        type === 'category'
+          ? (newValue) => onChange(newValue?.value)
+          : (newValue) => onChange(parseInt(newValue?.value))
+      }
       placeholder={type === 'category' ? 'Breakfast' : '15 min'}
       options={type === 'category' ? categories : cookingTime}
       isSearchable={false}
       styles={styles(isTablet)}
     />
   );
-});
+};
 
 export default SmallSelect;
