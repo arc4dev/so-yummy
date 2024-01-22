@@ -23,19 +23,23 @@ export const getRecipeById = async (id: string, isSearchPrivate: boolean) => {
   }
 };
 
-export const getRecipeByQuery = async (q: string, searchBy: string) => {
+export const getRecipeByQuery = async (
+  q: string,
+  searchBy: string,
+  page = 1
+) => {
   let query: Promise<AxiosResponse<DatabaseResponseMany<Recipe>>> | null = null;
 
   if (searchBy.toLowerCase() === 'title') {
-    query = axios.get(`/recipes/search/${q}`);
+    query = axios.get(`/recipes/search/${q}?page=${page}`);
   } else if (searchBy.toLowerCase() === 'ingredient') {
-    query = axios.get(`/recipes/ingredient/${q}`);
+    query = axios.get(`/recipes/ingredient/${q}?page=${page}`);
   } else return null;
 
   try {
     const res = await query;
 
-    return res.data.data;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
