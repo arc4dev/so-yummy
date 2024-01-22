@@ -62,7 +62,7 @@ const RecipeDescription = styled.p`
   letter-spacing: -0.24px;
 
   @media screen and (min-width: 768px) {
-    font-size: 18px;
+    font-size: 1.1rem;
     line-height: calc(24 / 18);
   }
 

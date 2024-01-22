@@ -1,15 +1,14 @@
-import {
-  FaAngleLeft,
-  FaAngleRight,
-  FaMinus,
-  FaPlus,
-  FaXmark,
-} from 'react-icons/fa6';
+import { FaAngleLeft, FaAngleRight, FaMinus, FaPlus } from 'react-icons/fa6';
+import { IoCloseOutline } from 'react-icons/io5';
 import styled, { css } from 'styled-components';
 
 const variants = {
   x: css`
-    font-size: 1.28rem;
+    font-size: 2rem;
+
+    &:hover {
+      transform: rotate(90deg);
+    }
   `,
   minus: css``,
   plus: css``,
@@ -42,7 +41,7 @@ type Props = {
 const ButtonIcon = ({ variant, ...props }: Props) => {
   return (
     <StyledButtonIcon $variant={variant} {...props}>
-      {variant === 'x' && <FaXmark />}
+      {variant === 'x' && <IoCloseOutline />}
       {variant === 'minus' && <FaMinus />}
       {variant === 'plus' && <FaPlus />}
       {variant === 'arrowLeft' && <FaAngleLeft />}

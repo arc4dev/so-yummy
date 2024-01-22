@@ -4,6 +4,8 @@ import AppNav from '../common/AppNav';
 import ThemeSwitch from '../common/ThemeSwitch';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import { useAuth } from '../../contexts/authContext';
+import AppNavModal from './AppNavModal';
+import { useState } from 'react';
 
 const StyledHeader = styled.header`
   position: sticky;
@@ -53,6 +55,8 @@ const Header = () => {
   const { isDesktop } = useBreakpoints();
   const { user } = useAuth();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <StyledHeader>
       <Logo />
@@ -78,7 +82,7 @@ const Header = () => {
               <span>{user?.name}</span>
             </UserInfo>
 
-            <button>
+            <button onClick={() => setIsModalOpen(!isModalOpen)}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="28"
@@ -97,6 +101,8 @@ const Header = () => {
           </Container>
         </>
       )}
+
+      <AppNavModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </StyledHeader>
   );
 };

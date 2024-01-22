@@ -1,6 +1,6 @@
 import { FiSearch } from 'react-icons/fi';
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Nav = styled.nav`
   display: flex;
@@ -9,19 +9,33 @@ const Nav = styled.nav`
   grid-area: nav;
 `;
 
-const NavList = styled.ul<{ orientation: OrientationType }>`
+const styles = {
+  regular: css``,
+  modal: css`
+    font-size: 1.28rem;
+    gap: 2rem;
+  `,
+};
+
+const NavList = styled.ul<{
+  $orientation: OrientationType;
+  $color: ColorType;
+  $variant: VariantType;
+}>`
   display: flex;
   align-items: center;
 
-  color: ${(props) =>
-    props.orientation === 'vertical' ? 'var(--color-white-2)' : 'inherit'};
-  gap: ${(props) => (props.orientation === 'vertical' ? '1em' : '2em')};
-  flex-direction: ${(props) =>
-    props.orientation === 'vertical' ? 'column' : 'row'};
+  gap: ${({ $orientation }) => ($orientation === 'vertical' ? '1em' : '2em')};
+  flex-direction: ${({ $orientation }) =>
+    $orientation === 'vertical' ? 'column' : 'row'};
+  color: ${({ $color }) =>
+    $color === 'black' ? 'inherit' : 'var(--color-white-2)'};
+
+  ${({ $variant }) => styles[$variant]}
 
   li:last-child {
-    display: ${(props) =>
-      props.orientation === 'vertical' ? 'none' : 'block'};
+    display: ${({ $orientation, $variant }) =>
+      $orientation === 'horizontal' || $variant === 'modal' ? 'block' : 'none'};
   }
 `;
 
@@ -41,36 +55,52 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 type OrientationType = 'vertical' | 'horizontal';
+type ColorType = 'black' | 'white';
+type VariantType = 'regular' | 'modal';
 
 type Props = {
   orientation?: OrientationType;
+  color?: ColorType;
+  variant?: VariantType;
+  onClickLink?: () => void;
 };
 
-const AppNav = ({ orientation = 'horizontal' }: Props) => {
+const AppNav = ({
+  orientation = 'horizontal',
+  color = 'black',
+  variant = 'regular',
+  onClickLink,
+}: Props) => {
   return (
     <Nav>
-      <NavList orientation={orientation}>
+      <NavList $orientation={orientation} $color={color} $variant={variant}>
         <li>
-          <StyledNavLink to="categories">Categories</StyledNavLink>
+          <StyledNavLink onClick={onClickLink} to="categories">
+            Categories
+          </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink end to="recipes/new">
+          <StyledNavLink onClick={onClickLink} end to="recipes/new">
             Add recipes
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink end to="recipes/all">
+          <StyledNavLink onClick={onClickLink} end to="recipes/all">
             My recipes
           </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="recipes/favourites">Favourites</StyledNavLink>
+          <StyledNavLink onClick={onClickLink} to="recipes/favourites">
+            Favourites
+          </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="cart">Shopping List</StyledNavLink>
+          <StyledNavLink onClick={onClickLink} to="cart">
+            Shopping List
+          </StyledNavLink>
         </li>
         <li>
-          <StyledNavLink to="search">
+          <StyledNavLink onClick={onClickLink} to="search">
             <FiSearch size={20} />
           </StyledNavLink>
         </li>
