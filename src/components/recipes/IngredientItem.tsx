@@ -13,7 +13,7 @@ const StyledIngredientItem = styled.li<{ $type: IngredientTableVariant }>`
   border-radius: 8px;
 
   background-color: ${({ $type }) =>
-    $type === 'recipe' ? 'var(--color-action)' : 'var(--color-white-2)'};
+    $type === 'recipe' ? 'var(--color-action-light)' : 'var(--color-white-2)'};
   border-bottom: ${({ $type }) =>
     $type === 'shopping-list' && '1px solid var(--color-line)'};
 
