@@ -13,11 +13,12 @@ const SVG = styled.svg`
 
 type Props = {
   variant?: 'primary' | 'secondary';
+  onClick?: () => void;
 };
 
-const Logo = ({ variant = 'primary' }: Props) => {
+const Logo = ({ variant = 'primary', onClick }: Props) => {
   return (
-    <Link to="/home">
+    <Link to="/home" onClick={onClick}>
       <SVG viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           width="40"

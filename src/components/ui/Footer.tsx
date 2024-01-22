@@ -172,7 +172,7 @@ const Footer = () => {
           </StyledFooterList>
         </Container>
 
-        <AppNav orientation="vertical" />
+        <AppNav orientation="vertical" color="white" />
 
         <NewsletterForm>
           <NewsletterHeader>Subscribe to out Newsletter</NewsletterHeader>
