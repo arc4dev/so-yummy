@@ -41,13 +41,13 @@ export const getRecipeByQuery = async (q: string, searchBy: string) => {
   }
 };
 
-export const getRecipesByCategory = async (category: string) => {
+export const getRecipesByCategory = async (category: string, page = 1) => {
   try {
     const res = await axios.get<DatabaseResponseMany<Recipe>>(
-      `/recipes?category=${category}`
+      `/recipes?category=${category}&page=${page}`
     );
 
-    return res.data.data;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
