@@ -99,9 +99,9 @@ export const getRecipesHomeCategories = async () => {
 
 // Own recipes
 
-export const getOwnRecipes = async () => {
+export const getOwnRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    '/users/my-recipes'
+    `/users/my-recipes?page=${page}`
   );
 
   return res.data;
@@ -131,9 +131,9 @@ export const deleteOwnRecipe = async (recipeId: string) => {
 
 // Favourite recipes
 
-export const getFavouriteRecipes = async () => {
+export const getFavouriteRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    '/users/favourite-recipes'
+    `/users/favourite-recipes?page=${page}`
   );
 
   return res.data;

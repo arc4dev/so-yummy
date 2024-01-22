@@ -54,7 +54,12 @@ const Pagination = ({ totalPages, currentPage, onPageChange }: Props) => {
   return (
     <PaginationContainer>
       <StyledPagination>
-        <ButtonIcon variant="minus" />
+        <ButtonIcon
+          variant="minus"
+          onClick={() =>
+            onPageChange(currentPage - 1 < 1 ? 1 : currentPage - 1)
+          }
+        />
         <PageList>
           {Array.from({ length: totalPages }, (_, i) => (
             <PageListItem
@@ -65,7 +70,14 @@ const Pagination = ({ totalPages, currentPage, onPageChange }: Props) => {
             </PageListItem>
           ))}
         </PageList>
-        <ButtonIcon variant="plus" />
+        <ButtonIcon
+          variant="plus"
+          onClick={() =>
+            onPageChange(
+              currentPage + 1 > totalPages ? totalPages : currentPage + 1
+            )
+          }
+        />
       </StyledPagination>
     </PaginationContainer>
   );

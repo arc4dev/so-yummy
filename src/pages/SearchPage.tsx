@@ -21,6 +21,8 @@ const StyledSearchPage = styled.div`
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams({
     s: 'title',
+    q: '',
+    p: '1',
   });
   const query = searchParams.get('q');
   const searchBy = searchParams.get('s');

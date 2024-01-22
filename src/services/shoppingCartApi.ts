@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-export const getShoppingCart = async () => {
+export const getShoppingCart = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<IngredientItem>>(
-    '/shopping-list'
+    `/shopping-list?page=${page}`
   );
 
   return res.data;

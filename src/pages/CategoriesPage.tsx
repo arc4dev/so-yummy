@@ -56,7 +56,10 @@ const Category = styled.li<{ $isActive: boolean }>`
 `;
 
 const CategoriesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({
+    c: 'Beef',
+    p: '1',
+  });
   const categoryParam = searchParams.get('c');
   const pageParam = searchParams.get('p');
 
@@ -70,16 +73,9 @@ const CategoriesPage = () => {
   const { data, isLoading: isLoadingRecipes } = useQuery({
     queryKey: ['recipes', categoryParam, pageParam],
     queryFn: () =>
-      getRecipesByCategory(categoryParam || 'Beef', Number(pageParam) || 1),
-    enabled: !!categoryParam, // Enable query only if categoryParam is present
+      getRecipesByCategory(categoryParam || 'Beef', Number(pageParam)),
+    enabled: !!categoryParam,
   });
-
-  useEffect(() => {
-    // Set default query parameters if they don't exist in the URL
-    if (!categoryParam || !pageParam) {
-      setSearchParams({ c: 'Beef', p: '1' });
-    }
-  }, [categoryParam, pageParam, setSearchParams]);
 
   if (isLoadingCategories) return <Loader />;
 
