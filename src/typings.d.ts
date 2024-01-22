@@ -88,3 +88,5 @@ type ResponseError = {
 };
 
 type OwnRecipeListVariant = 'primary' | 'secondary';
+
+type IngredientTableVariant = 'shopping-list' | 'recipe';

@@ -78,7 +78,9 @@ export const getRecipesHomeCategories = async () => {
 
     // Create an array of promises to fetch recipes by category
     const recipesPromiseArr = filteredCategories.map((category) =>
-      axios.get<DatabaseResponseMany<Recipe>>(`/recipes?category=${category}`)
+      axios.get<DatabaseResponseMany<Recipe>>(
+        `/recipes?category=${category}&limit=4`
+      )
     );
     // Resolve all promises to get an array of recipes by categories
     const recipesByCategories = await Promise.all(recipesPromiseArr);
