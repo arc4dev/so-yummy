@@ -52,7 +52,7 @@ const IngredientsList = styled.ul`
 
 type Props = {
   ingredients: IngredientItem[];
-  type: 'shopping-list' | 'recipe';
+  type: IngredientTableVariant;
 };
 
 const IngredientsTable = ({ ingredients, type }: Props) => {

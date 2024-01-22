@@ -1,18 +1,21 @@
-import { FaXmark } from 'react-icons/fa6';
 import styled from 'styled-components';
 
 import useShoppingCart from '../../hooks/useShoppingCart';
 import { useState } from 'react';
 import ButtonIcon from '../common/ButtonIcon';
 
-const StyledIngredientItem = styled.li`
+const StyledIngredientItem = styled.li<{ $type: IngredientTableVariant }>`
   display: grid;
   grid-template-columns: 1fr auto auto;
   align-items: center;
-  background-color: var(--color-action-light);
   padding: 0.85rem 1rem;
   padding-right: 2rem;
   border-radius: 8px;
+
+  background-color: ${({ $type }) =>
+    $type === 'recipe' ? 'var(--color-action-light)' : 'var(--color-white-2)'};
+  border-bottom: ${({ $type }) =>
+    $type === 'shopping-list' && '1px solid var(--color-line)'};
 
   @media screen and (min-width: 768px) {
     padding: 1rem 3rem;
@@ -129,7 +132,7 @@ type Props = {
   name: string;
   measure: string;
   id: string;
-  type: 'shopping-list' | 'recipe';
+  type: IngredientTableVariant;
 };
 
 function IngredientItem({ name, measure, id, type }: Props) {
@@ -162,7 +165,7 @@ function IngredientItem({ name, measure, id, type }: Props) {
   };
 
   return (
-    <StyledIngredientItem>
+    <StyledIngredientItem $type={type}>
       <IngredientNameWrapper>
         <IngredientImage
           src={`https://www.themealdb.com/images/ingredients/${name}.png`}

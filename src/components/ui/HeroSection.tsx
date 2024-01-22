@@ -128,6 +128,10 @@ const HeroDescription = styled.p`
   }
 `;
 
+const ActionSpan = styled.span`
+  color: var(--color-action);
+`;
+
 const HeroSection = () => {
   const navigate = useNavigate();
 
@@ -138,7 +142,7 @@ const HeroSection = () => {
       {isMobile && (
         <>
           <HeroHeader>
-            <span style={{ color: 'var(--color-action)' }}>So</span>Yummy
+            <ActionSpan>So</ActionSpan>Yummy
           </HeroHeader>
 
           <HeroDescription>
@@ -150,11 +154,8 @@ const HeroSection = () => {
             <HomeImage src="../../public/heroImage.png" alt="" />
             <HomeImageDescriptionBox>
               <p>
-                <span style={{ color: 'var(--color-action)' }}>
-                  Delicious and healthy
-                </span>{' '}
-                way to enjoy a variety of fresh ingredients in one satisfying
-                meal
+                <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
+                variety of fresh ingredients in one satisfying meal
               </p>
               <StyledRecipesLink to="/categories">
                 See recipes <FaArrowRight />
@@ -181,7 +182,7 @@ const HeroSection = () => {
         <>
           <div style={{ flex: '1' }}>
             <HeroHeader>
-              <span style={{ color: 'var(--color-action)' }}>So</span>Yummy
+              <ActionSpan>So</ActionSpan>Yummy
             </HeroHeader>
 
             <HeroDescription>
@@ -208,11 +209,8 @@ const HeroSection = () => {
             <HomeImage src="../../public/heroImage.png" alt="" />
             <HomeImageDescriptionBox>
               <p>
-                <span style={{ color: 'var(--color-action)' }}>
-                  Delicious and healthy
-                </span>{' '}
-                way to enjoy a variety of fresh ingredients in one satisfying
-                meal
+                <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
+                variety of fresh ingredients in one satisfying meal
               </p>
               <StyledRecipesLink to="/recipes/all">
                 See recipes <FaArrowRight />

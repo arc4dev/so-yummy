@@ -13,6 +13,7 @@ import RecipePreviewCard from '../components/recipes/RecipePreviewCard';
 import Loader from '../components/common/Loader';
 import RecipesList from '../components/recipes/RecipesList';
 import PageContainer from '../components/common/PageContainer';
+import Pagination from '../components/common/Pagination';
 
 const StyledCategoriesPage = styled.div`
   display: grid;
@@ -55,8 +56,12 @@ const Category = styled.li<{ $isActive: boolean }>`
 `;
 
 const CategoriesPage = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams({
+    c: 'Beef',
+    p: '1',
+  });
   const categoryParam = searchParams.get('c');
+  const pageParam = searchParams.get('p');
 
   // Get all categories
   const { data: categories, isLoading: isLoadingCategories } = useQuery({
@@ -65,18 +70,12 @@ const CategoriesPage = () => {
   });
 
   // Get recipes by a category from the URL
-  const { data: recipes, isLoading: isLoadingRecipes } = useQuery({
-    queryKey: ['recipes', categoryParam], // Include categoryParam in the queryKey
-    queryFn: () => getRecipesByCategory(categoryParam || 'Beef'),
-    enabled: !!categoryParam, // Enable query only if categoryParam is present
+  const { data, isLoading: isLoadingRecipes } = useQuery({
+    queryKey: ['recipes', categoryParam, pageParam],
+    queryFn: () =>
+      getRecipesByCategory(categoryParam || 'Beef', Number(pageParam)),
+    enabled: !!categoryParam,
   });
-
-  useEffect(() => {
-    // Set default query parameters if they don't exist in the URL
-    if (!searchParams.get('c')) {
-      setSearchParams({ c: 'Beef' });
-    }
-  }, [searchParams, setSearchParams]);
 
   if (isLoadingCategories) return <Loader />;
 
@@ -92,7 +91,9 @@ const CategoriesPage = () => {
             <Category
               key={category}
               $isActive={categoryParam === category}
-              onClick={() => setSearchParams({ c: category })}>
+              onClick={() => {
+                setSearchParams({ c: category, p: '1' });
+              }}>
               {category}
             </Category>
           ))}
@@ -102,7 +103,7 @@ const CategoriesPage = () => {
           {isLoadingRecipes ? (
             <Loader />
           ) : (
-            recipes?.map((recipe) => (
+            data?.data?.map((recipe) => (
               <RecipePreviewCard
                 key={recipe._id}
                 title={recipe.strMeal}
@@ -112,6 +113,15 @@ const CategoriesPage = () => {
             ))
           )}
         </RecipesList>
+
+        <Pagination
+          currentPage={data?.page || 1}
+          totalPages={data?.totalPages || 1}
+          onPageChange={(page) => {
+            searchParams.set('p', String(page));
+            setSearchParams(searchParams);
+          }}
+        />
       </StyledCategoriesPage>
     </PageContainer>
   );

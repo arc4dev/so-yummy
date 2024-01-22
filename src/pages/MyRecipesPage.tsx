@@ -5,11 +5,18 @@ import PageContainer from '../components/common/PageContainer';
 import Loader from '../components/common/Loader';
 import { getOwnRecipes } from '../services/recipesApi';
 import SectionHeading from '../components/common/SectionHeading';
+import Pagination from '../components/common/Pagination';
+import { useSearchParams } from 'react-router-dom';
 
 const MyRecipesPage = () => {
+  const [searchParams, setSearchParams] = useSearchParams({
+    p: '1',
+  });
+  const page = searchParams.get('p');
+
   const { data, isLoading } = useQuery({
-    queryKey: ['my-recipes'],
-    queryFn: () => getOwnRecipes(),
+    queryKey: ['my-recipes', page],
+    queryFn: () => getOwnRecipes(Number(page)),
   });
 
   if (isLoading) return <Loader />;
@@ -18,6 +25,14 @@ const MyRecipesPage = () => {
     <PageContainer>
       <SectionHeading>My recipes</SectionHeading>
       <OwnRecipeList recipes={data?.data || []} page="own" />
+      <Pagination
+        currentPage={data?.page || 1}
+        totalPages={data?.totalPages || 1}
+        onPageChange={(page) => {
+          searchParams.set('p', String(page));
+          setSearchParams(searchParams);
+        }}
+      />
     </PageContainer>
   );
 };

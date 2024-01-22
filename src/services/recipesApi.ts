@@ -23,31 +23,35 @@ export const getRecipeById = async (id: string, isSearchPrivate: boolean) => {
   }
 };
 
-export const getRecipeByQuery = async (q: string, searchBy: string) => {
+export const getRecipeByQuery = async (
+  q: string,
+  searchBy: string,
+  page = 1
+) => {
   let query: Promise<AxiosResponse<DatabaseResponseMany<Recipe>>> | null = null;
 
   if (searchBy.toLowerCase() === 'title') {
-    query = axios.get(`/recipes/search/${q}`);
+    query = axios.get(`/recipes/search/${q}?page=${page}`);
   } else if (searchBy.toLowerCase() === 'ingredient') {
-    query = axios.get(`/recipes/ingredient/${q}`);
+    query = axios.get(`/recipes/ingredient/${q}?page=${page}`);
   } else return null;
 
   try {
     const res = await query;
 
-    return res.data.data;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
 };
 
-export const getRecipesByCategory = async (category: string) => {
+export const getRecipesByCategory = async (category: string, page = 1) => {
   try {
     const res = await axios.get<DatabaseResponseMany<Recipe>>(
-      `/recipes?category=${category}`
+      `/recipes?category=${category}&page=${page}`
     );
 
-    return res.data.data;
+    return res.data;
   } catch (err) {
     console.log(err);
   }
@@ -74,7 +78,9 @@ export const getRecipesHomeCategories = async () => {
 
     // Create an array of promises to fetch recipes by category
     const recipesPromiseArr = filteredCategories.map((category) =>
-      axios.get<DatabaseResponseMany<Recipe>>(`/recipes?category=${category}`)
+      axios.get<DatabaseResponseMany<Recipe>>(
+        `/recipes?category=${category}&limit=4`
+      )
     );
     // Resolve all promises to get an array of recipes by categories
     const recipesByCategories = await Promise.all(recipesPromiseArr);
@@ -95,9 +101,9 @@ export const getRecipesHomeCategories = async () => {
 
 // Own recipes
 
-export const getOwnRecipes = async () => {
+export const getOwnRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    '/users/my-recipes'
+    `/users/my-recipes?page=${page}`
   );
 
   return res.data;
@@ -127,9 +133,9 @@ export const deleteOwnRecipe = async (recipeId: string) => {
 
 // Favourite recipes
 
-export const getFavouriteRecipes = async () => {
+export const getFavouriteRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    '/users/favourite-recipes'
+    `/users/favourite-recipes?page=${page}`
   );
 
   return res.data;

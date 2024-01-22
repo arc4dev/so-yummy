@@ -10,6 +10,7 @@ import RecipePreviewCard from '../components/recipes/RecipePreviewCard';
 import RecipesList from '../components/recipes/RecipesList';
 import PageContainer from '../components/common/PageContainer';
 import ErrorComponent from '../components/common/ErrorComponent';
+import Pagination from '../components/common/Pagination';
 
 const StyledSearchPage = styled.div`
   display: grid;
@@ -20,9 +21,12 @@ const StyledSearchPage = styled.div`
 const SearchPage = () => {
   const [searchParams, setSearchParams] = useSearchParams({
     s: 'title',
+    q: '',
+    p: '1',
   });
   const query = searchParams.get('q');
   const searchBy = searchParams.get('s');
+  const page = searchParams.get('p');
 
   const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -33,16 +37,14 @@ const SearchPage = () => {
     setSearchParams({
       ...Object.fromEntries(searchParams),
       q: q.toLowerCase(),
+      p: '1',
     });
   };
 
-  const {
-    data: recipes,
-    isLoading,
-    isError,
-  } = useQuery({
-    queryKey: ['recipes', query, searchBy],
-    queryFn: () => getRecipeByQuery(query || '', searchBy || ''),
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['recipes', query, searchBy, page],
+    queryFn: () =>
+      getRecipeByQuery(query || '', searchBy || '', Number(page) || 1),
     enabled: !!query,
   });
 
@@ -60,16 +62,17 @@ const SearchPage = () => {
             setSearchParams({
               ...Object.fromEntries(searchParams),
               s: e.target.value.toLowerCase(),
+              p: '1',
             })
           }
         />
 
         <RecipesList>
           {isLoading && <Loader />}
-          {(!isLoading || isError) && (!recipes || !recipes?.length) ? (
+          {(!isLoading || isError) && (!data?.data || !data?.data?.length) ? (
             <ErrorComponent>Try looking for something else..</ErrorComponent>
           ) : (
-            recipes?.map((recipe) => (
+            data?.data.map((recipe) => (
               <RecipePreviewCard
                 key={recipe._id}
                 title={recipe.strMeal}
@@ -79,6 +82,15 @@ const SearchPage = () => {
             ))
           )}
         </RecipesList>
+
+        <Pagination
+          currentPage={data?.page || 1}
+          totalPages={data?.totalPages || 1}
+          onPageChange={(page) => {
+            searchParams.set('p', String(page));
+            setSearchParams(searchParams);
+          }}
+        />
       </StyledSearchPage>
     </PageContainer>
   );
