@@ -1,8 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
 
-axios.defaults.baseURL =
-  'https://so-yummy-back-end-d3fb63604733.herokuapp.com/';
-
 // General recipes
 
 export const getRecipeById = async (id: string, isSearchPrivate: boolean) => {

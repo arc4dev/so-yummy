@@ -1,7 +1,9 @@
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  'https://so-yummy-back-end-d3fb63604733.herokuapp.com/api';
+  process.env.NODE_ENV === 'production'
+    ? 'https://so-yummy-back-end-d3fb63604733.herokuapp.com/api'
+    : 'http://localhost:3001/api';
 
 const setAuthToken = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;

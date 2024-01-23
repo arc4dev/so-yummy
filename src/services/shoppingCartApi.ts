@@ -1,8 +1,5 @@
 import axios from 'axios';
 
-axios.defaults.baseURL =
-  'https://so-yummy-back-end-d3fb63604733.herokuapp.com/';
-
 export const getShoppingCart = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<IngredientItem>>(
     `/shopping-list?page=${page}`
