@@ -15,6 +15,7 @@ export const transformErrorMessage = (message: string | undefined) => {
 
   // Replace field names with custom names in the error message
   let transformedMessage = message;
+
   Object.keys(fieldMapping).forEach((fieldName) => {
     transformedMessage = transformedMessage.replace(
       new RegExp(fieldName, 'g'),

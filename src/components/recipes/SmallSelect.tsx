@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Select from 'react-select';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import { categories, cookingTime } from '../../utils/data';
@@ -42,7 +43,7 @@ const styles = (isTablet: boolean) => ({
     color: 'var(--color-primary)',
     fontWeight: '400',
   }),
-  option: (baseStyles, state) => ({
+  option: (_, state) => ({
     fontSize: isTablet ? '14px' : '12px',
     lineHeight: '1.5',
     marginBottom: '4px',
@@ -64,7 +65,7 @@ const styles = (isTablet: boolean) => ({
     ...baseStyles,
 
     width: isTablet ? '132px' : '123px',
-    height: isTablet ? '162px' : '144px',
+    height: isTablet ? '162px' : '14 4px',
     padding: isTablet ? '8px 18px' : '8px 14px',
     borderColor: 'transparent',
     backgroundColor: '#ffffff',
@@ -110,7 +111,7 @@ const SmallSelect = <T extends FieldValues>({
       onChange={
         type === 'category'
           ? (newValue) => onChange(newValue?.value)
-          : (newValue) => onChange(parseInt(newValue?.value))
+          : (newValue) => onChange(parseInt(newValue?.value as string))
       }
       placeholder={type === 'category' ? 'Breakfast' : '15 min'}
       options={type === 'category' ? categories : cookingTime}
