@@ -3,6 +3,7 @@ import SearchInput from '../common/SearchInput';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
 import useBreakpoints from '../../hooks/useBreakpoints';
+import heroImage from '../../assets/images/heroImage.png';
 
 const StyledRecipesLink = styled(Link)`
   justify-self: end;
@@ -151,7 +152,7 @@ const HeroSection = () => {
           </HeroDescription>
 
           <HomeImageContainer>
-            <HomeImage src="../../public/heroImage.png" alt="" />
+            <HomeImage src={heroImage} alt="" />
             <HomeImageDescriptionBox>
               <p>
                 <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
