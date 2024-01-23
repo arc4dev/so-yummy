@@ -110,7 +110,7 @@ export const getOwnRecipes = async (page = 1) => {
 };
 
 export const addOwnRecipe = async (data: FormData) => {
-  const res = await axios.post<DatabaseResponse<RecipeFormData>>(
+  const res = await axios.post<DatabaseResponse<OwnRecipeDetails>>(
     '/users/my-recipes',
     data,
     {
