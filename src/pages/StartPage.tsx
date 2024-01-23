@@ -66,10 +66,10 @@ const StartPage = () => {
         your own recipes at any time.
       </StartDescription>
       <ButtonWrapper>
-        <Button to="/register" size="primary">
+        <Button variant="skew" to="/register" size="primary">
           Register
         </Button>
-        <Button to="/login" size="primary">
+        <Button variant="skew" to="/login" size="primary">
           Sign in
         </Button>
       </ButtonWrapper>

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Select from 'react-select';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import styled from 'styled-components';

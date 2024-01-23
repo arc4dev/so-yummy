@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import AsyncSelect from 'react-select/async';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import _ from 'lodash';

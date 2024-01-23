@@ -37,11 +37,6 @@ type Recipe = {
   favouritedBy: string[];
 };
 
-type OwnRecipePreview = Recipe & {
-  cookingTime: number;
-  strDescription: string;
-};
-
 type RecipeDetails = Recipe & {
   strInstructions: string;
   strDescription: string;
@@ -49,6 +44,13 @@ type RecipeDetails = Recipe & {
   ingredients: IngredientItem[];
   category: Category;
 };
+
+type OwnRecipePreview = Recipe & {
+  cookingTime: number;
+  strDescription: string;
+};
+
+type RecipeWithoutId = Omit<RecipeDetails, '_id'>;
 
 type OwnRecipeDetails = RecipeDetails & {
   visibility: 'public' | 'private';
