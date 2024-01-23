@@ -207,7 +207,7 @@ const HeroSection = () => {
           </div>
 
           <HomeImageContainer>
-            <HomeImage src="../../public/heroImage.png" alt="" />
+            <HomeImage src={heroImage} alt="" />
             <HomeImageDescriptionBox>
               <p>
                 <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a

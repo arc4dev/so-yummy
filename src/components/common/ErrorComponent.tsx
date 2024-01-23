@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import searchTry from '../../assets/images/searchTry.png';
 
 const StyledErrorComponent = styled.div`
   display: grid;
@@ -34,7 +35,7 @@ type Props = {
 const ErrorComponent = ({ children, style }: Props) => {
   return (
     <StyledErrorComponent style={style}>
-      <ErrorImage src="/searchTry.png" alt="Vegetables cart" />
+      <ErrorImage src={searchTry} alt="Vegetables cart" />
       <ErrorText>{children}</ErrorText>
     </StyledErrorComponent>
   );

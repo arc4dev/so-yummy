@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { FiClock } from 'react-icons/fi';
 import styled from 'styled-components';
+import recipeDetailsImage from '../assets/images/recipeDetails.png';
 
 import { getRecipeById } from '../services/recipesApi';
 
@@ -33,7 +34,7 @@ const RecipeHeroSection = styled.section`
   gap: 1.6rem;
   padding: 144px 36px 90px;
   text-align: center;
-  background: url('/recipeDetails.png') center/cover no-repeat;
+  background: url(${recipeDetailsImage}) center/cover no-repeat;
 
   @media screen and (min-width: 768px) {
     padding: 136px 131px 32px;
