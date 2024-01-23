@@ -1,9 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL =
-  import.meta.env.MODE === 'development'
-    ? import.meta.env.VITE_RECIPES_API_URL_DEV
-    : import.meta.env.VITE_RECIPES_API_URL;
+  'https://so-yummy-back-end-d3fb63604733.herokuapp.com/api';
 
 const setAuthToken = (token: string) => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
