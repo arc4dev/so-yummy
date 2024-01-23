@@ -1,13 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 
 axios.defaults.baseURL =
-  import.meta.env.MODE === 'development'
-    ? import.meta.env.VITE_RECIPES_API_URL_DEV
-    : import.meta.env.VITE_RECIPES_API_URL;
-
-axios.defaults.headers.common['Authorization'] = `Bearer ${
-  import.meta.env.VITE_TEST_API_KEY
-}`;
+  'https://so-yummy-back-end-d3fb63604733.herokuapp.com/';
 
 // General recipes
 
