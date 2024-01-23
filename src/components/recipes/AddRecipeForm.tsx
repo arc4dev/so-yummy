@@ -204,7 +204,7 @@ const AddRecipeForm = () => {
   const onAddRecipe = async (data: yup.InferType<typeof schema>) => {
     try {
       const formData = new FormData();
-      formData.append('image', data.strMealThumb);
+      formData.append('image', data.strMealThumb as File);
       formData.append('strMeal', data.strMeal);
       formData.append('strDescription', data.strDescription);
       formData.append('strInstructions', data.strInstructions);

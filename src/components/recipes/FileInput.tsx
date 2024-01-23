@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import cameraFrame from '../../assets/camera-frame.svg';
-import { ControllerProps, FieldValues, useController } from 'react-hook-form';
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from 'react-hook-form';
 import { useState } from 'react';
 import { ErrorMessage } from './AddRecipeForm';
 import { transformErrorMessage } from '../../utils/transformErrorMessage';
@@ -40,7 +44,7 @@ const FileImage = styled(CameraImage)`
 
 const FileInput = <T extends FieldValues>({
   ...controllerProps
-}: ControllerProps<T>) => {
+}: UseControllerProps<T>) => {
   const {
     field: { onChange },
     fieldState: { error },

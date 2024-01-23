@@ -3,7 +3,11 @@ import AsyncSelect from 'react-select/async';
 import useBreakpoints from '../../hooks/useBreakpoints';
 import _ from 'lodash';
 import { getIngredientsByQuery } from '../../services/recipesApi';
-import { ControllerProps, FieldValues, useController } from 'react-hook-form';
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from 'react-hook-form';
 import styled from 'styled-components';
 
 const styles = (isTablet: boolean) => ({
@@ -108,7 +112,7 @@ type SelectOption = {
 
 const IngredientSelect = <T extends FieldValues>({
   ...controllerProps
-}: ControllerProps<T>) => {
+}: UseControllerProps<T>) => {
   const { isTablet } = useBreakpoints();
   const {
     field: { onChange },

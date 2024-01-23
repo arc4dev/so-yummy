@@ -109,7 +109,7 @@ export const getOwnRecipes = async (page = 1) => {
   return res.data;
 };
 
-export const addOwnRecipe = async (data: RecipeWithoutId) => {
+export const addOwnRecipe = async (data: FormData) => {
   const res = await axios.post<DatabaseResponse<OwnRecipeDetails>>(
     '/users/my-recipes',
     data,
