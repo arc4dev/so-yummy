@@ -50,8 +50,6 @@ type OwnRecipePreview = Recipe & {
   strDescription: string;
 };
 
-type RecipeWithoutId = Omit<RecipeDetails, '_id'>;
-
 type OwnRecipeDetails = RecipeDetails & {
   visibility: 'public' | 'private';
 };

@@ -4,7 +4,11 @@ import useBreakpoints from '../../hooks/useBreakpoints';
 import styled from 'styled-components';
 import { measures } from '../../utils/data';
 import React, { useState } from 'react';
-import { ControllerProps, FieldValues, useController } from 'react-hook-form';
+import {
+  FieldValues,
+  UseControllerProps,
+  useController,
+} from 'react-hook-form';
 
 const styles = (isTablet: boolean) => ({
   container: () => ({
@@ -137,7 +141,7 @@ const Input = styled.input`
 
 const MeasureSelect = <T extends FieldValues>({
   ...controllerProps
-}: ControllerProps<T>) => {
+}: UseControllerProps<T>) => {
   const { isTablet } = useBreakpoints();
   const {
     field: { onChange },
