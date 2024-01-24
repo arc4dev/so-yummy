@@ -27,8 +27,8 @@ const Main = styled.main`
 `;
 
 const StyledAppLayout = styled.div`
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  /* display: grid; */
+  /* grid-template-rows: auto 1fr auto; */
   min-height: 100vh;
 `;
 

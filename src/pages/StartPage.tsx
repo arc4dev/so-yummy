@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import Button from '../components/common/Button';
 import Logo from '../components/common/Logo';
 import startBg from '../assets/images/start-bg.png';
+import startBgTablet from '../assets/images/start-bg-tablet.png';
+import startBgDesktop from '../assets/images/start-bg-desktop.png';
 
 const StyledStartPage = styled.div`
   display: flex;
@@ -14,15 +16,24 @@ const StyledStartPage = styled.div`
   gap: 28px;
 
   &::before {
+    --bg: url(${startBg});
+
     content: '';
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: url(${startBg}) no-repeat;
-    background-size: cover;
+    background: var(--bg) center/cover no-repeat;
     z-index: -1;
+
+    @media screen and (min-width: 768px) {
+      --bg: url(${startBgTablet});
+    }
+
+    @media screen and (min-width: 1440px) {
+      --bg: url(${startBgDesktop});
+    }
   }
 `;
 
