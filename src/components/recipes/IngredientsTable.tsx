@@ -70,9 +70,9 @@ const IngredientsTable = ({ ingredients, type }: Props) => {
         </ErrorComponent>
       ) : (
         <IngredientsList>
-          {ingredients.map((item) => (
+          {ingredients.map((item, i) => (
             <IngredientItem
-              key={item.ingredient._id}
+              key={`Ingredient ${i}-${item.ingredient._id}`}
               id={item.ingredient._id}
               name={item.ingredient.name}
               measure={item.ingredientMeasure}

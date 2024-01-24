@@ -2,7 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { FiClock } from 'react-icons/fi';
 import styled from 'styled-components';
-import recipeDetailsImage from '../assets/images/recipeDetails.png';
+import recipeInfo from '../assets/images/recipe-info.png';
+import recipeInfoTablet from '../assets/images/recipe-info-tablet.png';
+import recipeInfoDesktop from '../assets/images/recipe-info-desktop.png';
 
 import { getRecipeById } from '../services/recipesApi';
 
@@ -23,7 +25,9 @@ const StyledRecipePage = styled.div`
 `;
 
 const RecipeHeroSection = styled.section`
-  height: 455px;
+  --bg: url(${recipeInfo});
+
+  height: 485px;
   position: absolute;
   left: 0;
   top: 0;
@@ -34,14 +38,17 @@ const RecipeHeroSection = styled.section`
   gap: 1.6rem;
   padding: 144px 36px 90px;
   text-align: center;
-  background: url(${recipeDetailsImage}) center/cover no-repeat;
+  background: var(--bg) center/cover no-repeat;
 
   @media screen and (min-width: 768px) {
+    --bg: url(${recipeInfoTablet});
+    height: 495px;
     padding: 136px 131px 32px;
   }
 
   @media screen and (min-width: 1440px) {
-    height: 505px;
+    --bg: url(${recipeInfoDesktop});
+    height: 550px;
     padding: 164px 392px 32px;
   }
 `;
@@ -60,6 +67,7 @@ const RecipeTitle = styled.h1`
 const RecipeDescription = styled.p`
   font-size: 0.86rem;
   line-height: 1.33;
+  max-width: 600px;
   letter-spacing: -0.24px;
 
   @media screen and (min-width: 768px) {
@@ -210,7 +218,9 @@ const RecipePage = () => {
       <StyledRecipePage>
         <RecipeHeroSection>
           <RecipeTitle>{recipe?.strMeal}</RecipeTitle>
-          <RecipeDescription>{recipe?.strDescription}</RecipeDescription>
+          <RecipeDescription>
+            {recipe?.strDescription.split('.').slice(0, 3).join('.')}.
+          </RecipeDescription>
 
           {!isPrivate && (
             <Button

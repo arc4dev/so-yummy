@@ -28,15 +28,19 @@ const StyledHeroSection = styled.section`
   align-items: center;
   flex-direction: column;
   gap: 2.2rem;
-
   margin-bottom: 140px;
 
   @media screen and (min-width: 768px) {
+    max-width: 900px;
     margin-bottom: 170px;
     flex-direction: row;
     padding: 0;
     gap: 2rem;
     justify-content: space-between;
+  }
+
+  @media screen and (min-width: 1440px) {
+    max-width: 1440px;
   }
 `;
 
@@ -56,8 +60,7 @@ const HomeImage = styled.div`
   height: 295px;
   width: 320px;
   margin-bottom: 24px;
-  background: var(--bg) no-repeat center;
-  background-size: contain;
+  background: var(--bg) center/contain no-repeat;
 
   @media screen and (min-width: 768px) {
     --bg: url(${heroImageTablet});
