@@ -29,8 +29,8 @@ const UserImage = styled.img`
   width: 34px;
   height: 34px;
   border-radius: 100%;
-  background-position: center;
-  background-size: cover;
+  object-fit: cover;
+  object-position: center;
 
   @media screen and (min-width: 768px) {
     width: 44px;

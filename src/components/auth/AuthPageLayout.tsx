@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import authFrame from '../../assets/auth-frame.svg';
 import authBg from '../../assets/auth-bg.svg';
-import authBgTablet from '../../assets/auth-bg-tablet.svg';
-import authBgDesktop from '../../assets/auth-bg-desktop.svg';
 
 const StyledAuthPage = styled.div`
   display: flex;
@@ -15,28 +13,28 @@ const StyledAuthPage = styled.div`
   position: relative;
   overflow: hidden;
 
-  --authBg: url(${authBg});
-
   &::before {
     content: '';
     position: absolute;
-    top: 450px;
-    left: 0;
+    bottom: 0;
     width: 100%;
-    height: 100%;
-    background: var(--authBg) no-repeat center bottom;
+    height: 450px;
+    background: url(${authBg}) no-repeat;
+    background-position: center bottom;
     background-size: cover;
     z-index: -1;
-  }
 
-  @media screen and (min-width: 768px) {
-    --authBg: url(${authBgTablet});
+    @media screen and (min-width: 768px) {
+      height: 420px;
+    }
+
+    @media screen and (min-width: 1440px) {
+    }
   }
 
   @media screen and (min-width: 1440px) {
     flex-direction: row;
     gap: 115px;
-    --authBg: url(${authBgDesktop});
   }
 `;
 

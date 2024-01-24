@@ -1,9 +1,11 @@
 import { FaArrowRight } from 'react-icons/fa6';
-import SearchInput from '../common/SearchInput';
 import styled from 'styled-components';
 import { Link, useNavigate } from 'react-router-dom';
-import useBreakpoints from '../../hooks/useBreakpoints';
-import heroImage from '../../assets/images/heroImage.png';
+
+import SearchInput from '../common/SearchInput';
+import heroImage from '../../assets/images/hero-image.png';
+import heroImageTablet from '../../assets/images/hero-image-tablet.png';
+import heroImageDesktop from '../../assets/images/hero-image-desktop.png';
 
 const StyledRecipesLink = styled(Link)`
   justify-self: end;
@@ -25,6 +27,7 @@ const StyledHeroSection = styled.section`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  gap: 2.2rem;
 
   margin-bottom: 140px;
 
@@ -32,6 +35,7 @@ const StyledHeroSection = styled.section`
     margin-bottom: 170px;
     flex-direction: row;
     padding: 0;
+    gap: 2rem;
     justify-content: space-between;
   }
 `;
@@ -46,16 +50,25 @@ const HomeImageContainer = styled.div`
   }
 `;
 
-const HomeImage = styled.img`
+const HomeImage = styled.div`
+  --bg: url(${heroImage});
+
+  height: 295px;
   width: 320px;
   margin-bottom: 24px;
+  background: var(--bg) no-repeat center;
+  background-size: contain;
 
   @media screen and (min-width: 768px) {
+    --bg: url(${heroImageTablet});
     width: 378px;
+    height: 351px;
   }
 
   @media screen and (min-width: 1440px) {
+    --bg: url(${heroImageDesktop});
     width: 578px;
+    height: 539px;
   }
 `;
 
@@ -129,6 +142,12 @@ const HeroDescription = styled.p`
   }
 `;
 
+const HeaderContainer = styled.div`
+  @media screen and (min-width: 768px) {
+    flex: 1;
+  }
+`;
+
 const ActionSpan = styled.span`
   color: var(--color-action);
 `;
@@ -136,90 +155,44 @@ const ActionSpan = styled.span`
 const HeroSection = () => {
   const navigate = useNavigate();
 
-  const { isMobile, isTablet } = useBreakpoints();
-
   return (
     <StyledHeroSection>
-      {isMobile && (
-        <>
-          <HeroHeader>
-            <ActionSpan>So</ActionSpan>Yummy
-          </HeroHeader>
+      <HeaderContainer>
+        <HeroHeader>
+          <ActionSpan>So</ActionSpan>Yummy
+        </HeroHeader>
 
-          <HeroDescription>
-            "What to cook?" is not only a recipe app, it is, in fact, your
-            cookbook. You can add your own recipes to save them for the future.
-          </HeroDescription>
+        <HeroDescription>
+          "What to cook?" is not only a recipe app, it is, in fact, your
+          cookbook. You can add your own recipes to save them for the future.
+        </HeroDescription>
 
-          <HomeImageContainer>
-            <HomeImage src={heroImage} alt="" />
-            <HomeImageDescriptionBox>
-              <p>
-                <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
-                variety of fresh ingredients in one satisfying meal
-              </p>
-              <StyledRecipesLink to="/categories">
-                See recipes <FaArrowRight />
-              </StyledRecipesLink>
-            </HomeImageDescriptionBox>
-          </HomeImageContainer>
+        <SearchInput
+          type="search"
+          btnColor="primary"
+          onSubmit={(e) => {
+            e.preventDefault();
 
-          <SearchInput
-            btnColor="primary"
-            type="search"
-            onSubmit={(e) => {
-              e.preventDefault();
+            const formData = new FormData(e.currentTarget);
+            const q = formData.get('query') as string;
 
-              const formData = new FormData(e.currentTarget);
-              const q = formData.get('query') as string;
+            navigate(`/search?q=${q}`);
+          }}
+        />
+      </HeaderContainer>
 
-              navigate(`/search?q=${q}`);
-            }}
-          />
-        </>
-      )}
-
-      {isTablet && (
-        <>
-          <div style={{ flex: '1' }}>
-            <HeroHeader>
-              <ActionSpan>So</ActionSpan>Yummy
-            </HeroHeader>
-
-            <HeroDescription>
-              "What to cook?" is not only a recipe app, it is, in fact, your
-              cookbook. You can add your own recipes to save them for the
-              future.
-            </HeroDescription>
-
-            <SearchInput
-              type="search"
-              btnColor="primary"
-              onSubmit={(e) => {
-                e.preventDefault();
-
-                const formData = new FormData(e.currentTarget);
-                const q = formData.get('query') as string;
-
-                navigate(`/search?q=${q}`);
-              }}
-            />
-          </div>
-
-          <HomeImageContainer>
-            <HomeImage src={heroImage} alt="" />
-            <HomeImageDescriptionBox>
-              <p>
-                <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
-                variety of fresh ingredients in one satisfying meal
-              </p>
-              <StyledRecipesLink to="/recipes/all">
-                See recipes <FaArrowRight />
-              </StyledRecipesLink>
-            </HomeImageDescriptionBox>
-          </HomeImageContainer>
-        </>
-      )}
+      <HomeImageContainer>
+        <HomeImage />
+        <HomeImageDescriptionBox>
+          <p>
+            <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
+            variety of fresh ingredients in one satisfying meal
+          </p>
+          <StyledRecipesLink to="/recipes/all">
+            See recipes <FaArrowRight />
+          </StyledRecipesLink>
+        </HomeImageDescriptionBox>
+      </HomeImageContainer>
     </StyledHeroSection>
   );
 };
