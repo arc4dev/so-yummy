@@ -1,18 +1,29 @@
 import styled from 'styled-components';
+import errorImage from '../../assets/images/error-image.png';
+import errorImageTablet from '../../assets/images/error-image-tablet.png';
 
 const StyledErrorComponent = styled.div`
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
+  padding-top: 6rem;
 `;
 
-const ErrorImage = styled.img`
+const ErrorImage = styled.div`
+  --bg: url(${errorImage});
+
   width: 208px;
+  height: 133px;
   margin-bottom: 1.8rem;
+  background: var(--bg) center/contain no-repeat;
 
   @media screen and (min-width: 768px) {
+    --bg: url(${errorImageTablet});
     width: 350px;
+    height: 225px;
   }
 `;
 
@@ -34,7 +45,7 @@ type Props = {
 const ErrorComponent = ({ children, style }: Props) => {
   return (
     <StyledErrorComponent style={style}>
-      <ErrorImage src="/searchTry.png" alt="Vegetables cart" />
+      <ErrorImage />
       <ErrorText>{children}</ErrorText>
     </StyledErrorComponent>
   );
