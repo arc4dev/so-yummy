@@ -2,13 +2,18 @@ import AppNav from '../common/AppNav';
 import ButtonIcon from '../common/ButtonIcon';
 import Logo from '../common/Logo';
 import styled from 'styled-components';
-import Modal from 'react-modal';
+
 import ThemeSwitch from '../common/ThemeSwitch';
 import { useEffect } from 'react';
+import Modal from '../common/Modal';
 
-const ModalContainer = styled.div`
-  width: 100%;
-  height: 100%;
+const ModalContainer = styled.div.attrs({ className: 'app-nav-modal' })`
+  z-index: 20;
+  width: 100dvw;
+  height: 100dvh;
+  inset: 0px;
+  border: none;
+  background: var(--color-action-light);
   padding: 18px 16px;
   display: flex;
   flex-direction: column;
@@ -43,22 +48,7 @@ const AppNavModal = ({ isOpen, onClose }: Props) => {
       isOpen={isOpen}
       onRequestClose={onClose}
       contentLabel="App nav modal"
-      appElement={document.getElementById('root')!}
-      style={{
-        overlay: {
-          position: 'fixed',
-          inset: '0px',
-          zIndex: 100,
-        },
-        content: {
-          width: '100dvw',
-          height: '100dvh',
-          inset: '0px',
-          border: 'none',
-          background: 'var(--color-action-light)',
-          padding: 0,
-        },
-      }}>
+      className="app-nav-modal">
       <ModalContainer>
         <Wrapper>
           <Logo onClick={onClose} />

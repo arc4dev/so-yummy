@@ -54,14 +54,21 @@ const colors = {
     background: var(--color-black);
     color: var(--color-white-2);
   `,
+  gray: css`
+    background: var(--color-gray-4);
+    color: var(--color-primary);
+  `,
 };
 
 const StyledButton = styled.button<{
   size: ButtonSize;
   $variant: ButtonVariant;
   $btncolor: ButtonColor;
+  $stretch: boolean;
 }>`
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   border-radius: 6px;
   font-weight: 300;
@@ -70,16 +77,18 @@ const StyledButton = styled.button<{
   ${({ $btncolor }) => colors[$btncolor]}
   ${({ size }) => sizes[size]}
   ${({ $variant }) => $variant === 'skew' && 'border-radius: 24px 44px;'}
+  ${({ $stretch }) => $stretch && 'width: 100%;'}
 `;
 
 type ButtonSize = 'small' | 'smallStatic' | 'primary' | 'stretch';
 type ButtonVariant = 'primary' | 'skew';
-type ButtonColor = 'primary' | 'secondary' | 'black';
+type ButtonColor = 'primary' | 'secondary' | 'black' | 'gray';
 
 type Props = {
   children: React.ReactNode;
   variant?: ButtonVariant;
   size?: ButtonSize;
+  stretch?: boolean;
   btnColor?: ButtonColor;
   to?: string;
 } & React.ComponentProps<'button'>;
@@ -89,6 +98,7 @@ const Button = ({
   size = 'primary',
   variant = 'primary',
   btnColor = 'primary',
+  stretch = false,
   to,
   ...props
 }: Props) => {
@@ -99,7 +109,8 @@ const Button = ({
           as="span"
           size={size}
           $variant={variant}
-          $btncolor={btnColor}>
+          $btncolor={btnColor}
+          $stretch={stretch}>
           {children}
         </StyledButton>
       </Link>
@@ -110,6 +121,7 @@ const Button = ({
       size={size}
       $variant={variant}
       $btncolor={btnColor}
+      $stretch={stretch}
       {...props}>
       {children}
     </StyledButton>

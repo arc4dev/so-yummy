@@ -6,6 +6,10 @@ import useBreakpoints from '../../hooks/useBreakpoints';
 import { useAuth } from '../../contexts/authContext';
 import AppNavModal from './AppNavModal';
 import { useState } from 'react';
+import hamburgerIcon from '../../assets/svg/hamburger-menu.svg';
+import OptionsPopup from '../common/OptionsPopup';
+import UserPopup from '../common/UserEditPopup';
+import LogoutPopup from '../common/LogoutPopup';
 
 const StyledHeader = styled.header`
   position: sticky;
@@ -39,12 +43,14 @@ const UserImage = styled.img`
 `;
 
 const Container = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 1.4em;
 `;
 
 const UserInfo = styled.div`
+  cursor: pointer;
   display: flex;
   align-items: center;
   gap: 0.8em;
@@ -56,6 +62,9 @@ const Header = () => {
   const { user } = useAuth();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isOptionsPopupOpen, setIsOptionsPopupOpen] = useState(false);
+  const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
+  const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
   return (
     <StyledHeader>
@@ -66,7 +75,8 @@ const Header = () => {
           <AppNav />
 
           <Container>
-            <UserInfo>
+            <UserInfo
+              onClick={() => setIsOptionsPopupOpen(!isOptionsPopupOpen)}>
               <UserImage src={user?.image} alt={`Image of ${user?.image}`} />
               <span>{user?.name}</span>
             </UserInfo>
@@ -77,31 +87,33 @@ const Header = () => {
       ) : (
         <>
           <Container>
-            <UserInfo>
+            <UserInfo
+              onClick={() => setIsOptionsPopupOpen(!isOptionsPopupOpen)}>
               <UserImage src={user?.image} alt={`Image of ${user?.image}`} />
               <span>{user?.name}</span>
             </UserInfo>
 
             <button onClick={() => setIsModalOpen(!isModalOpen)}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="28"
-                height="28"
-                viewBox="0 0 28 28"
-                fill="none">
-                <path
-                  d="M3.5 14H24.5M3.5 7H24.5M3.5 21H17.5"
-                  stroke="#22252A"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
+              <img src={hamburgerIcon} alt="Hamburger icon" />
             </button>
           </Container>
         </>
       )}
 
+      <UserPopup
+        isOpen={isEditProfileModalOpen}
+        onClose={() => setIsEditProfileModalOpen(false)}
+      />
+      <LogoutPopup
+        isOpen={isLogoutModalOpen}
+        onClose={() => setIsLogoutModalOpen(false)}
+      />
+      <OptionsPopup
+        isOpen={isOptionsPopupOpen}
+        onClose={() => setIsOptionsPopupOpen(false)}
+        onEditProfile={() => setIsEditProfileModalOpen(true)}
+        onLogout={() => setIsLogoutModalOpen(true)}
+      />
       <AppNavModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
     </StyledHeader>
   );
