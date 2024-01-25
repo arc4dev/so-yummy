@@ -9,7 +9,8 @@ type AuthAction =
   | { type: 'REGISTER' }
   | { type: 'LOGIN'; payload: { user: User } }
   | { type: 'REFRESH'; payload: { user: User } }
-  | { type: 'LOGOUT' };
+  | { type: 'LOGOUT' }
+  | { type: 'UPDATE'; payload: { user: User } };
 
 interface AuthContextType {
   user: User | null;
@@ -40,6 +41,11 @@ const authReducer = (state: AuthState, action: AuthAction): AuthState => {
         ...state,
         user: null,
         isAuthenticated: false,
+      };
+    case 'UPDATE':
+      return {
+        ...state,
+        user: action.payload.user,
       };
     default:
       return state;

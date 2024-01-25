@@ -26,15 +26,18 @@ const StyledOwnRecipeItem = styled.li`
 
 const RecipeImage = styled.img`
   width: 124px;
+  height: 124px;
   border-radius: 0.5rem;
   object-fit: cover;
 
   @media screen and (min-width: 768px) {
     width: 228px;
+    height: 228px;
   }
 
   @media screen and (min-width: 1440px) {
     width: 318px;
+    height: 318px;
   }
 `;
 
@@ -86,10 +89,11 @@ const DetailsContainer = styled.div`
 
   @media screen and (min-width: 768px) {
     gap: 1rem;
+    grid-template-rows: 1fr minmax(auto, 100px) 1fr;
   }
 
   @media screen and (min-width: 1440px) {
-    gap: 2rem;
+    grid-template-rows: 1fr minmax(auto, 160px) 1fr;
   }
 `;
 

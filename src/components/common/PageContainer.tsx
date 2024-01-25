@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import useScrollToTheTop from '../../hooks/useScrollToTheTop';
 
 const StyledPageContainer = styled.div`
   height: 100%;
@@ -22,11 +21,7 @@ type Props = {
 };
 
 const PageContainer = ({ children }: Props) => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+  useScrollToTheTop();
 
   return <StyledPageContainer>{children}</StyledPageContainer>;
 };

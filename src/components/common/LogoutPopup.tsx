@@ -84,7 +84,7 @@ const LogoutPopup = ({ isOpen, onClose }: Props) => {
       className="logout-popup">
       <StyledLogoutPopup>
         <ButtonCloseWrapper>
-          <ButtonIcon variant="x" />
+          <ButtonIcon onClick={onClose} variant="x" />
         </ButtonCloseWrapper>
 
         <LogoutDescription>Are you sure you want to log out?</LogoutDescription>

@@ -148,7 +148,7 @@ const InputWrapper = styled.div`
 const schema = yup.object({
   strMealThumb: yup.mixed().required(),
   strMeal: yup.string().min(3).max(30).required(),
-  strDescription: yup.string().min(8).max(200).required(),
+  strDescription: yup.string().min(10).max(250).required(),
   category: yup.string().required(),
   cookingTime: yup.number().required(),
   ingredients: yup

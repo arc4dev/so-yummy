@@ -18,6 +18,11 @@ const ShoppingListPage = () => {
     queryFn: () => getShoppingCart(Number(page)),
   });
 
+  if (data?.results === 0) {
+    searchParams.set('p', String(Number(page) - 1 || 1));
+    setSearchParams(searchParams);
+  }
+
   if (isLoading) return <Loader />;
 
   return (
@@ -31,6 +36,7 @@ const ShoppingListPage = () => {
         totalPages={data?.totalPages || 1}
         onPageChange={(page) => {
           searchParams.set('p', String(page));
+
           setSearchParams(searchParams);
         }}
       />

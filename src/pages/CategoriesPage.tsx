@@ -20,6 +20,7 @@ const StyledCategoriesPage = styled.div`
 
 const CategoriesList = styled.ul`
   display: flex;
+  justify-content: center;
   scrollbar-width: none;
   overflow-x: auto;
   margin-bottom: 32px;
