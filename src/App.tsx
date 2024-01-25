@@ -21,7 +21,7 @@ import RestrictedRoute from './components/auth/RestrictedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { refreshUser } from './services/userApi';
 
 const queryClient = new QueryClient({
