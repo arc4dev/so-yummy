@@ -19,6 +19,11 @@ const MyRecipesPage = () => {
     queryFn: () => getOwnRecipes(Number(page)),
   });
 
+  if (data?.results === 0) {
+    searchParams.set('p', String(Number(page) - 1 || 1));
+    setSearchParams(searchParams);
+  }
+
   if (isLoading) return <Loader />;
 
   return (

@@ -94,7 +94,7 @@ export const getRecipesHomeCategories = async () => {
 
 export const getOwnRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    `/users/my-recipes?page=${page}`
+    `/users/my-recipes?page=${page}&limit=4`
   );
 
   return res.data;
@@ -126,7 +126,7 @@ export const deleteOwnRecipe = async (recipeId: string) => {
 
 export const getFavouriteRecipes = async (page = 1) => {
   const res = await axios.get<DatabaseResponseMany<OwnRecipePreview>>(
-    `/users/favourite-recipes?page=${page}`
+    `/users/favourite-recipes?page=${page}&limit=4`
   );
 
   return res.data;

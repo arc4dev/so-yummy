@@ -21,7 +21,7 @@ import RestrictedRoute from './components/auth/RestrictedRoute';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import StartPage from './pages/StartPage';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { refreshUser } from './services/userApi';
 
 const queryClient = new QueryClient({
@@ -34,7 +34,7 @@ const queryClient = new QueryClient({
 
 function App() {
   const { dispatch } = useAuth();
-  const [lastUrl, setLastUrl] = useState('/home');
+  // const [lastUrl, setLastUrl] = useState('/home');
 
   useEffect(() => {
     const refresh = async () => {
@@ -52,18 +52,18 @@ function App() {
     refresh();
   }, [dispatch]);
 
-  useEffect(() => {
-    window.onbeforeunload = () => {
-      localStorage.setItem(
-        'lastUrl',
-        window.location.pathname === '/login'
-          ? '/home'
-          : window.location.pathname
-      );
-    };
+  // useEffect(() => {
+  //   window.onbeforeunload = () => {
+  //     localStorage.setItem(
+  //       'lastUrl',
+  //       window.location.pathname === '/login'
+  //         ? '/home'
+  //         : window.location.pathname
+  //     );
+  //   };
 
-    setLastUrl(localStorage.getItem('lastUrl') || '/home');
-  }, []);
+  //   setLastUrl(localStorage.getItem('lastUrl') || '/home');
+  // }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -95,20 +95,20 @@ function App() {
           <Route
             path="/"
             element={
-              <RestrictedRoute redirectTo={lastUrl} component={<StartPage />} />
+              <RestrictedRoute redirectTo="/home" component={<StartPage />} />
             }
           />
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo={lastUrl} component={<LoginPage />} />
+              <RestrictedRoute redirectTo="/home" component={<LoginPage />} />
             }
           />
           <Route
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={lastUrl}
+                redirectTo="/home"
                 component={<RegisterPage />}
               />
             }

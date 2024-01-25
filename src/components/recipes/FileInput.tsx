@@ -12,6 +12,7 @@ import { transformErrorMessage } from '../../utils/transformErrorMessage';
 const FileInputWrapper = styled.div`
   width: 279px;
   height: 268px;
+  overflow: hidden;
   border-radius: 8px;
   position: relative;
 `;

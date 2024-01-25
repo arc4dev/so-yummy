@@ -49,3 +49,13 @@ export const refreshUser = async () => {
 
   return res.data.data;
 };
+
+export const updateUser = async (data: FormData) => {
+  const res = await axios.patch('/users/update-me', data, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  });
+
+  return res.data.user;
+};
