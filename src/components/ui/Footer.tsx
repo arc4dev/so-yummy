@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 import AppNav from '../common/AppNav';
-import Button from '../common/Button';
 import SocialLinks from '../common/SocialLinks';
 import LogoContainer from '../common/LogoContainer';
-import Input from '../common/Input';
 import NewsletterForm from '../recipes/NewsletterForm';
 
 const StyledFooter = styled.footer`
