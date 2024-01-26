@@ -28,22 +28,22 @@ const SocialLinks = () => {
   return (
     <SocialsList>
       <SocialItem>
-        <Link to="https://www.facebook.com">
+        <Link to="https://www.facebook.com" aria-label="Facebook link">
           <FaFacebook />
         </Link>
       </SocialItem>
       <SocialItem>
-        <Link to="https://www.youtube.com">
+        <Link to="https://www.youtube.com" aria-label="Youtube link">
           <FaYoutube />
         </Link>
       </SocialItem>
       <SocialItem>
-        <Link to="https://www.twitter.com">
+        <Link to="https://www.twitter.com" aria-label="Twitter link">
           <FaTwitter />
         </Link>
       </SocialItem>
       <SocialItem>
-        <Link to="https://www.instagram.com">
+        <Link to="https://www.instagram.com" aria-label="Instagram link">
           <FaInstagram />
         </Link>
       </SocialItem>

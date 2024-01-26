@@ -18,7 +18,7 @@ type Props = {
 
 const Logo = ({ variant = 'primary', onClick }: Props) => {
   return (
-    <Link to="/home" onClick={onClick}>
+    <Link to="/home" onClick={onClick} aria-label="Home link">
       <SVG viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect
           width="40"
