@@ -78,7 +78,7 @@ function App() {
             duration: 3000,
           },
           error: {
-            duration: 2500,
+            duration: 3000,
           },
           style: {
             fontSize: '1.1rem',
@@ -90,7 +90,7 @@ function App() {
         }}
       />
 
-      <BrowserRouter>
+      <BrowserRouter bas>
         <Routes>
           <Route
             path="/"
