@@ -12,6 +12,7 @@ import FileInput from './FileInput';
 import { transformErrorMessage } from '../../utils/transformErrorMessage';
 import useOwnRecipes from '../../hooks/useOwnRecipes';
 import { useNavigate } from 'react-router-dom';
+import LoaderAction from '../common/LoaderAction';
 
 export const ErrorMessage = styled.span`
   position: absolute;
@@ -358,7 +359,7 @@ const AddRecipeForm = () => {
           btnColor="black"
           type="submit"
           disabled={!isValid || isPending}>
-          Add
+          {isPending ? <LoaderAction /> : 'Add recipe'}
         </Button>
       </RecipePreparationContainer>
     </StyledAddRecipeForm>

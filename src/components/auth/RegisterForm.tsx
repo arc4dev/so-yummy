@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { registerUser } from '../../services/userApi';
 import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
+import LoaderAction from '../common/LoaderAction';
 
 export const AuthForm = styled.form`
   width: 335px;
@@ -144,7 +145,7 @@ const RegisterForm = () => {
       </InputWrapper>
 
       <Button disabled={isPending} size="stretch">
-        Register
+        {isPending ? <LoaderAction /> : 'Register'}
       </Button>
     </AuthForm>
   );

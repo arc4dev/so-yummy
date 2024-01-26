@@ -17,7 +17,7 @@ const GlobalStyles = createGlobalStyle`
   --color-gray-2: #E0E0E0; // categories;
   --color-gray-3: #3E4462; 
   --color-gray-4: #D9D9D9;
-  --color-gray-4-26: #D9D9D926;
+  --color-gray-5: #C4C4C4;
 
   --color-line: #E0E0E0; // line
 

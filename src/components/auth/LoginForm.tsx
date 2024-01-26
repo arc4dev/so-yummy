@@ -7,6 +7,7 @@ import { loginUser } from '../../services/userApi';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
 import { useAuth } from '../../contexts/authContext';
+import LoaderAction from '../common/LoaderAction';
 
 const LoginForm = () => {
   const {
@@ -83,7 +84,7 @@ const LoginForm = () => {
       </InputWrapper>
 
       <Button disabled={isPending} size="stretch">
-        Sign in
+        {isPending ? <LoaderAction /> : 'Sign in'}
       </Button>
     </AuthForm>
   );
