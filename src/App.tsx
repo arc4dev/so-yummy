@@ -90,7 +90,7 @@ function App() {
         }}
       />
 
-      <BrowserRouter bas>
+      <BrowserRouter>
         <Routes>
           <Route
             path="/"
