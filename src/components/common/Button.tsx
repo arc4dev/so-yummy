@@ -45,18 +45,35 @@ const colors = {
   primary: css`
     background: var(--color-action);
     color: var(--color-white-2);
+
+    &:hover {
+      opacity: 0.85;
+    }
   `,
   secondary: css`
     background: transparent;
     border: 1.5px solid var(--color-action);
+
+    &:hover {
+      background: var(--color-action);
+      color: var(--color-white-2);
+    }
   `,
   black: css`
     background: var(--color-black);
     color: var(--color-white-2);
+
+    &:hover {
+      background: var(--color-action);
+    }
   `,
   gray: css`
     background: var(--color-gray-4);
     color: var(--color-primary);
+
+    &:hover {
+      opacity: 0.85;
+    }
   `,
 };
 
@@ -73,11 +90,16 @@ const StyledButton = styled.button<{
   border-radius: 6px;
   font-weight: 300;
   line-height: 1.12;
+  transition: all 150ms ease-in-out;
 
   ${({ $btncolor }) => colors[$btncolor]}
   ${({ size }) => sizes[size]}
   ${({ $variant }) => $variant === 'skew' && 'border-radius: 24px 44px;'}
   ${({ $stretch }) => $stretch && 'width: 100%;'}
+
+  &:disabled {
+    background-color: var(--color-secondary);
+  }
 `;
 
 type ButtonSize = 'small' | 'smallStatic' | 'primary' | 'stretch';

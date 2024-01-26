@@ -1,9 +1,8 @@
 import styled from 'styled-components';
 import AppNav from '../common/AppNav';
-import Button from '../common/Button';
 import SocialLinks from '../common/SocialLinks';
 import LogoContainer from '../common/LogoContainer';
-import Input from '../common/Input';
+import NewsletterForm from '../recipes/NewsletterForm';
 
 const StyledFooter = styled.footer`
   background-color: var(--color-black);
@@ -60,60 +59,6 @@ const StyledFooterList = styled.ul`
 
   @media screen and (min-width: 1440px) {
     font-size: 1.1rem;
-  }
-`;
-
-const NewsletterForm = styled.form`
-  grid-area: newsletter;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-
-  color: var(--color-white);
-
-  @media screen and (min-width: 1440px) {
-    justify-self: end;
-    flex-direction: column;
-    width: 338px;
-  }
-`;
-
-const NewsletterContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  gap: 0.5em;
-
-  @media screen and (min-width: 768px) {
-    flex-direction: row;
-  }
-
-  @media screen and (min-width: 1440px) {
-    flex-direction: column;
-    width: 338px;
-    gap: 0.8em;
-  }
-`;
-
-const NewsletterHeader = styled.h4`
-  font-weight: 600;
-  display: none;
-  font-size: 1.28rem;
-
-  @media screen and (min-width: 1440px) {
-    display: block;
-  }
-`;
-
-const NewsletterDescription = styled.p`
-  display: none;
-  line-height: 1.28;
-  font-weight: 300;
-  letter-spacing: -0.28px;
-  margin-bottom: 0.4em;
-
-  @media screen and (min-width: 1440px) {
-    display: block;
   }
 `;
 
@@ -174,18 +119,7 @@ const Footer = () => {
 
         <AppNav orientation="vertical" color="white" />
 
-        <NewsletterForm>
-          <NewsletterHeader>Subscribe to out Newsletter</NewsletterHeader>
-          <NewsletterDescription>
-            Subscribe up to our newsletter. Be in touch with latest news and
-            special offers, etc.
-          </NewsletterDescription>
-
-          <NewsletterContainer>
-            <Input variant="Newsletter" sizee="stretch" />
-            <Button size="primary">Subscribe</Button>
-          </NewsletterContainer>
-        </NewsletterForm>
+        <NewsletterForm />
 
         <SocialLinks />
       </MainFooter>

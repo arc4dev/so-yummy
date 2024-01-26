@@ -103,6 +103,10 @@ const styles = (isTablet: boolean) => ({
 
 const IngredientSelectContainer = styled.div`
   position: relative;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
 type SelectOption = {

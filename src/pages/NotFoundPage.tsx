@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import PageContainer from '../components/common/PageContainer';
-import errorFrame from '../assets/error-frame.svg';
+import errorFrame from '../assets/svg/error-frame.svg';
 
 const ErrorImage = styled.img`
   width: 259px;

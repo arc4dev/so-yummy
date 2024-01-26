@@ -51,9 +51,18 @@ const StyledButton = styled.button<{ $bgcolor: ButtonBgColorTypes }>`
   right: 0;
   padding: 1.1rem 2.28rem;
   border-radius: 24px 44px;
+  color: var(--color-white-2);
+  transition: all 150ms ease-in-out;
+
   background-color: ${({ $bgcolor }) =>
     $bgcolor === 'secondary' ? 'var(--color-action)' : 'var(--color-black)'};
-  color: var(--color-white-2);
+
+  &:hover {
+    background-color: ${({ $bgcolor }) =>
+      $bgcolor === 'secondary'
+        ? 'var(--color-primary)'
+        : 'var(--color-action)'};
+  }
 
   @media screen and (min-width: 768px) {
     padding: 1.38rem 2.28rem;
