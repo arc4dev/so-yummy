@@ -101,7 +101,7 @@ const AppNav = ({
         </li>
         <li>
           <StyledNavLink onClick={onClickLink} to="search">
-            <FiSearch size={20} />
+            <FiSearch size={20} aria-label="Search icon" />
           </StyledNavLink>
         </li>
       </NavList>

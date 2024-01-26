@@ -34,7 +34,6 @@ const queryClient = new QueryClient({
 
 function App() {
   const { dispatch } = useAuth();
-  // const [lastUrl, setLastUrl] = useState('/home');
 
   useEffect(() => {
     const refresh = async () => {
@@ -51,19 +50,6 @@ function App() {
     };
     refresh();
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   window.onbeforeunload = () => {
-  //     localStorage.setItem(
-  //       'lastUrl',
-  //       window.location.pathname === '/login'
-  //         ? '/home'
-  //         : window.location.pathname
-  //     );
-  //   };
-
-  //   setLastUrl(localStorage.getItem('lastUrl') || '/home');
-  // }, []);
 
   return (
     <QueryClientProvider client={queryClient}>
