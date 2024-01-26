@@ -16,7 +16,14 @@ const UserFileInputWrapper = styled.div`
   position: relative;
   margin: 0 auto;
 
+  &:hover {
+    &::after {
+      transform: scale(1.1);
+    }
+  }
+
   &::after {
+    transition: all 150ms ease-in-out;
     content: '+';
     z-index: 1;
     position: absolute;

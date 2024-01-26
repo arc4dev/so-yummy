@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import cameraFrame from '../../assets/camera-frame.svg';
+import cameraFrame from '../../assets/svg/camera-frame.svg';
 import {
   FieldValues,
   UseControllerProps,
@@ -15,6 +15,11 @@ const FileInputWrapper = styled.div`
   overflow: hidden;
   border-radius: 8px;
   position: relative;
+
+  @media screen and (min-width: 768px) {
+    width: 357px;
+    height: 344px;
+  }
 `;
 
 const ImageWrapper = styled.div`

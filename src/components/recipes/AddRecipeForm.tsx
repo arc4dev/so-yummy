@@ -44,6 +44,10 @@ const TextLabel = styled.label`
   padding-bottom: 1.3rem;
   font-weight: 300;
   width: 100%;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.1rem;
+  }
 `;
 
 const IngredientsAddingContainer = styled.div`
@@ -125,6 +129,10 @@ const FormInput = styled.input`
   padding-bottom: 1.3rem;
   font-weight: 300;
   width: 100%;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.1rem;
+  }
 
   &::placeholder {
     color: #878787;
@@ -346,7 +354,12 @@ const AddRecipeForm = () => {
         <SectionHeading type="secondary">Recipe preparation</SectionHeading>
 
         <InputWrapper>
-          <FormTextarea cols={50} rows={7} {...register('strInstructions')} />
+          <FormTextarea
+            cols={50}
+            rows={7}
+            {...register('strInstructions')}
+            placeholder="Enter recipe preparation..."
+          />
           {errors.strInstructions && (
             <ErrorMessage>
               {transformErrorMessage(errors.strInstructions.message)}

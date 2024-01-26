@@ -20,10 +20,14 @@ const StyledCategoriesPage = styled.div`
 
 const CategoriesList = styled.ul`
   display: flex;
-  justify-content: center;
+
   scrollbar-width: none;
   overflow-x: auto;
   margin-bottom: 32px;
+
+  @media screen and (min-width: 1200px) {
+    justify-content: center;
+  }
 
   &::-webkit-scrollbar {
     display: none;

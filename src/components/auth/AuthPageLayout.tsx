@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import authFrame from '../../assets/auth-frame.svg';
-import authBg from '../../assets/auth-bg.svg';
+import authFrame from '../../assets/svg/auth-frame.svg';
 
 const StyledAuthPage = styled.div`
   display: flex;
@@ -19,9 +18,7 @@ const StyledAuthPage = styled.div`
     bottom: 0;
     width: 100%;
     height: 450px;
-    background: url(${authBg}) no-repeat;
-    background-position: center bottom;
-    background-size: cover;
+    background-color: #1e1f28;
     z-index: -1;
 
     @media screen and (min-width: 768px) {

@@ -4,7 +4,9 @@ import Button from './Button';
 import styled from 'styled-components';
 import Modal from './Modal';
 
-const StyledOptionsPopup = styled.div.attrs({ className: 'options-popup' })`
+const StyledOptionsPopup = styled.div.attrs({
+  className: 'options-popup',
+})`
   position: absolute;
   border: 1px solid var(--color-gray-2);
   top: 70px;
@@ -27,6 +29,11 @@ const EditProfileButton = styled.button`
   align-items: center;
   line-height: 1.6;
   margin-bottom: 1.8rem;
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    color: var(--color-action);
+  }
 
   @media screen and (min-width: 768px) {
     font-size: 1rem;

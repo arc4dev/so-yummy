@@ -112,7 +112,21 @@ const TrashButton = styled.button<{ $variant: 'primary' | 'secondary' }>`
   align-self: flex-start;
   border-radius: 4px;
   padding: 0.5rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
+  transition: all 150ms ease-in-out;
+
+  @media screen and (min-width: 768px) {
+    font-size: 1.28rem;
+  }
+
+  @media screen and (min-width: 1440px) {
+    font-size: 1.5rem;
+  }
+
+  &:hover {
+    transform: scale(1.1);
+    opacity: 0.9;
+  }
 
   ${({ $variant }) =>
     $variant === 'primary'

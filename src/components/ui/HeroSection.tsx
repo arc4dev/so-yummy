@@ -17,6 +17,12 @@ const StyledRecipesLink = styled(Link)`
   font-weight: 300;
   line-height: 1.2;
   letter-spacing: 0.2px;
+  transition: all 150ms ease-in-out;
+
+  &:hover {
+    color: var(--color-action);
+    gap: 6px;
+  }
 `;
 
 const StyledHeroSection = styled.section`
@@ -191,7 +197,7 @@ const HeroSection = () => {
             <ActionSpan>Delicious and healthy</ActionSpan> way to enjoy a
             variety of fresh ingredients in one satisfying meal
           </p>
-          <StyledRecipesLink to="/recipes/all">
+          <StyledRecipesLink to="/categories?c=Seafood">
             See recipes <FaArrowRight />
           </StyledRecipesLink>
         </HomeImageDescriptionBox>
