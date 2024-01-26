@@ -3,9 +3,9 @@ import { HashLoader } from 'react-spinners';
 const LoaderAction = () => {
   return (
     <HashLoader
-      color={`var(--color-action)`}
+      color={`var(--color-white-2)`}
       cssOverride={{ margin: '0 auto' }}
-      size="30px"
+      size="16px"
     />
   );
 };

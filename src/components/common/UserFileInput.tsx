@@ -1,36 +1,64 @@
 import styled from 'styled-components';
-import cameraFrame from '../../assets/camera-frame.svg';
+import { FiUser } from 'react-icons/fi';
 import {
   FieldValues,
   UseControllerProps,
   useController,
 } from 'react-hook-form';
 import { useState } from 'react';
-import { ErrorMessage } from './AddRecipeForm';
+
+import { ErrorMessage } from '../recipes/AddRecipeForm';
 import { transformErrorMessage } from '../../utils/transformErrorMessage';
 
-const FileInputWrapper = styled.div`
-  width: 279px;
-  height: 268px;
-  overflow: hidden;
-  border-radius: 8px;
+const UserFileInputWrapper = styled.div`
+  width: 103px;
+  height: 103px;
   position: relative;
+  margin: 0 auto;
+
+  &::after {
+    content: '+';
+    z-index: 1;
+    position: absolute;
+    bottom: -1px;
+    right: 10px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    font-weight: 300;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.65rem;
+    border-radius: 50%;
+    color: var(--color-white-2);
+    background-color: var(--color-action);
+  }
+`;
+
+const UserIcon = styled(FiUser)`
+  font-size: 3.2rem;
+  color: var(--color-gray-5);
 `;
 
 const ImageWrapper = styled.div`
   width: 100%;
   height: 100%;
-  background-color: var(--color-action);
+  display: flex;
+  overflow: hidden;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-gray-4);
   position: relative;
 `;
 
-const StyledFileInput = styled.input`
+const StyledUserFileInput = styled.input`
   width: 100%;
   height: 100%;
   position: absolute;
+  cursor: pointer;
   opacity: 0;
   z-index: 2;
-  cursor: pointer;
 `;
 
 const CameraImage = styled.img`
@@ -44,7 +72,7 @@ const FileImage = styled(CameraImage)`
   z-index: 1;
 `;
 
-const FileInput = <T extends FieldValues>({
+const UserFileInput = <T extends FieldValues>({
   ...controllerProps
 }: UseControllerProps<T>) => {
   const {
@@ -55,8 +83,8 @@ const FileInput = <T extends FieldValues>({
   const [file, setFile] = useState('');
 
   return (
-    <FileInputWrapper>
-      <StyledFileInput
+    <UserFileInputWrapper>
+      <StyledUserFileInput
         type="file"
         accept="image/*,.png,.jpg,.web"
         onChange={(e) => {
@@ -70,13 +98,13 @@ const FileInput = <T extends FieldValues>({
 
       <ImageWrapper>
         {file && <FileImage src={file} alt="Uploaded file" />}
-        <CameraImage src={cameraFrame} alt="Camera frame" />
+        <UserIcon />
       </ImageWrapper>
       {error && (
         <ErrorMessage>{transformErrorMessage(error.message)}</ErrorMessage>
       )}
-    </FileInputWrapper>
+    </UserFileInputWrapper>
   );
 };
 
-export default FileInput;
+export default UserFileInput;

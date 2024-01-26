@@ -10,7 +10,6 @@ const InputContainer = styled.div`
 
 const Icon = styled.div`
   position: absolute;
-  color: rgba(255, 255, 255, 0.7);
   transition: all 200ms ease-in-out;
   top: 1.15rem;
   left: 1.2rem;
@@ -49,51 +48,78 @@ const sizees = {
     }
   `,
 };
-const StyledInput = styled.input<{ $sizee: InputSizee }>`
+
+const colors = {
+  light: css`
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+
+    & + ${Icon} {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-white);
+
+      + ${Icon} {
+        color: var(--color-white);
+      }
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  `,
+  dark: css`
+    border: 1px solid var(--color-gray-4);
+    color: var(--color-primary);
+
+    & + ${Icon} {
+      color: var(--color-gray);
+    }
+
+    &:hover,
+    &:focus {
+      border-color: var(--color-black-3);
+
+      + ${Icon} {
+        color: var(--color-black-3);
+      }
+    }
+
+    &::placeholder {
+      color: var(--color-gray);
+    }
+  `,
+};
+
+const StyledInput = styled.input<{ $sizee: InputSizee; $colors: InputColors }>`
   padding: 1.1em 2em 1.1em 3.4em;
   background: none;
   outline: none;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: var(--color-white);
   border-radius: 6px;
   letter-spacing: -0.36px;
   font-weight: 300;
   transition: all 200ms ease-in-out;
 
   ${({ $sizee }) => sizees[$sizee]}
-
-  &:hover {
-    border-color: var(--color-white);
-
-    + ${Icon} {
-      color: var(--color-white);
-    }
-  }
-
-  &::placeholder {
-    color: rgba(255, 255, 255, 0.7);
-  }
-
-  &:focus {
-    border-color: var(--color-white);
-
-    + ${Icon} {
-      color: var(--color-white);
-    }
-  }
+  ${({ $colors }) => colors[$colors]}
 `;
 
 type InputSizee = 'stretch' | 'primary';
 type InputVariant = 'Email' | 'Password' | 'Name' | 'Newsletter';
+type InputColors = 'light' | 'dark';
 
 type Props = {
   variant: InputVariant;
   sizee: InputSizee;
   error?: FieldError;
+  colors?: InputColors;
 } & React.ComponentProps<'input'>;
 
 const Input = forwardRef<HTMLInputElement, Props>(
-  ({ variant, sizee, error, ...props }, ref) => {
+  ({ variant, sizee, error, colors = 'light', ...props }, ref) => {
     let placeholder = '';
     if (variant === 'Newsletter') placeholder = 'Enter your email address';
     else placeholder = variant;
@@ -118,6 +144,7 @@ const Input = forwardRef<HTMLInputElement, Props>(
       <InputContainer>
         <StyledInput
           type={type}
+          $colors={colors}
           placeholder={placeholder}
           $sizee={sizee}
           style={

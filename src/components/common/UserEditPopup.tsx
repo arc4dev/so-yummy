@@ -11,6 +11,8 @@ import { useMutation } from '@tanstack/react-query';
 import { updateUser } from '../../services/userApi';
 import toast from 'react-hot-toast';
 import { AxiosError } from 'axios';
+import UserFileInput from './UserFileInput';
+import LoaderAction from './LoaderAction';
 
 const StyledUserPopup = styled.div.attrs({ className: 'user-popup' })`
   z-index: 20;
@@ -55,6 +57,7 @@ const UserPopup = ({ isOpen, onClose }: Props) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm<yup.InferType<typeof schema>>({
     mode: 'all',
@@ -76,7 +79,7 @@ const UserPopup = ({ isOpen, onClose }: Props) => {
   const onSubmitEditProfile = async (data: yup.InferType<typeof schema>) => {
     const formData = new FormData();
 
-    formData.append('avatar', data.avatar[0] as File);
+    formData.append('avatar', data.avatar as File);
     formData.append('name', data.name as string);
 
     const user = await mutateAsync(formData);
@@ -105,16 +108,17 @@ const UserPopup = ({ isOpen, onClose }: Props) => {
         <EditProfileForm
           onSubmit={handleSubmit(onSubmitEditProfile)}
           autoComplete="off">
-          <input type="file" {...register('avatar')} />
+          <UserFileInput control={control} name="avatar" />
           {errors?.avatar && <span>{errors?.avatar?.message?.toString()}</span>}
           <Input
             variant="Name"
             sizee="stretch"
+            colors="dark"
             {...register('name')}
             error={errors?.name}
           />
           <Button type="submit" disabled={isPending} stretch={true}>
-            Save changes
+            {isPending ? <LoaderAction /> : 'Save changes'}
           </Button>
         </EditProfileForm>
       </StyledUserPopup>
