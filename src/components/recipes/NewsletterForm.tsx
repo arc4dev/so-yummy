@@ -28,7 +28,7 @@ const NewsletterContainer = styled.div`
   }
 
   @media screen and (min-width: 1440px) {
-    flex-direction: column;
+    grid-template-columns: 1fr;
     width: 338px;
     gap: 0.8em;
   }
